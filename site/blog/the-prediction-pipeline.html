@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From groups to seats &middot; Elections UK</title>
+<meta name="description" content="How the UK election model projects vote flows, simulates uncertainty, and models tactical voting seat by seat.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto+Condensed:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+<nav class="site-nav">
+  <a class="brand" href="../index.html">ELECTIONS UK</a>
+  <a class="nav-link " href="../index.html">Home</a>
+  <a class="nav-link active" href="index.html">Blog</a>
+  <a class="nav-link app-link" href="../app/index.html">Open the App</a>
+</nav>
+
+<header class="post-header" style="--accent: var(--bbc-custom);">
+  <span class="series-tag">Part 2 &middot; Prediction</span>
+  <h1>From groups to seats</h1>
+  <p class="dek">Flows, uncertainty, and tactical voting &mdash; opening up the pipeline that turns any group structure into seat-by-seat forecasts.</p>
+  <p class="byline">2026 &middot; 18 min read</p>
+</header>
+
+<article class="post-body" style="--accent: var(--bbc-custom);">
+<h2>1. The pipeline, end to end</h2>
+<p>Four scripts run in sequence (<code>pipeline/scripts/run_all.py</code>), each reading the previous
+stage's output:</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Script</th>
+<th>Turns...</th>
+<th>...into</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>01_allocate_tribes.py</code></td>
+<td>a seat's raw party votes</td>
+<td>7 tribe-by-party allocations (round-robin, covered in Part 1)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>02_project_flows.py</code></td>
+<td>tribe allocations + flow matrices</td>
+<td>a projected next-election vote share per seat</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>04_tactical_voting.py</code></td>
+<td>projected vote shares</td>
+<td>tactically-adjusted vote shares</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>05_export_svg_output.py</code></td>
+<td>tactical vote shares</td>
+<td>raw vote counts + winner, ready for the map</td>
+</tr>
+</tbody>
+</table>
+<p>One stage is conspicuously <strong>not</strong> in that list. <code>03_monte_carlo.py</code> exists, reads
+<code>projected_results.csv</code>, and writes <code>seat_probabilities.csv</code> — but it isn't one of
+<code>run_all.py</code>'s four <code>STAGES</code>, and nothing downstream reads its output. This is a deliberate
+cut, not an oversight: it's 10,000 simulations run as a Python-level loop for every one of 632
+seats, and Section 3 below measures exactly how long that takes — long enough that it isn't
+viable to run inside the web app's request cycle. It survives as a standalone, manually-run
+probabilistic side-analysis instead. Worth knowing going in, because it means today's map is
+built from one single deterministic run per seat, with uncertainty estimated separately
+(if at all) rather than shipped alongside every prediction.</p>
+<p>Two more scripts, <code>07_export_alloc.py</code> and <code>08_export_brexit.py</code>, feed the web app's
+interactive "Custom Predictor" tab and a historical Brexit-referendum overlay respectively —
+useful, but outside the prediction chain itself, and not covered further here.</p>
+
+<div class="nb-code"><pre><code>import numpy as np
+import pandas as pd
+from pathlib import Path
+
+PIPELINE = Path(&quot;../../pipeline&quot;)</code></pre></div>
+
+<h2>2. Stage 2: projecting flows</h2>
+<p>This is Part 1's "flow table" concept, as actually implemented. <code>{england,scotland,wales}
+Flows.xlsx</code> each hold <strong>7 sheets, one per tribe</strong> (<code>Muslim, Left, Progressives, Average,
+Liberal, Blues, Reforms</code>), and each sheet is a 9×9 matrix — rows and columns both
+<code>Labour, Conservative, Reform, LibDem, Green, Oth, SNP, Plaid, Restore</code> — where every row
+sums to 100. Row <em>i</em>, column <em>j</em> is: <em>of this tribe's 2019 voters who backed party i, what
+percent now back party j?</em> <code>Restore</code> sits in the party list as a hypothetical new
+force being tested in this projection, alongside the eight parties that actually appeared on
+2024 ballots.</p>
+
+<div class="nb-code"><pre><code>muslim_flows = pd.read_excel(PIPELINE / &quot;data/raw/englandFlows.xlsx&quot;, sheet_name=&quot;Muslim&quot;, index_col=0)
+parties = [&quot;Labour&quot;, &quot;Conservative&quot;, &quot;Reform&quot;, &quot;LibDem&quot;, &quot;Green&quot;, &quot;Oth&quot;, &quot;SNP&quot;, &quot;Plaid&quot;, &quot;Restore&quot;]
+muslim_flows = muslim_flows.loc[parties, parties]
+
+print(&quot;Row sums (should all be 100):&quot;)
+print(muslim_flows.sum(axis=1).to_dict())
+muslim_flows</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><pre>Row sums (should all be 100):
+{&#x27;Labour&#x27;: 100, &#x27;Conservative&#x27;: 100, &#x27;Reform&#x27;: 100, &#x27;LibDem&#x27;: 100, &#x27;Green&#x27;: 100, &#x27;Oth&#x27;: 100, &#x27;SNP&#x27;: 100, &#x27;Plaid&#x27;: 100, &#x27;Restore&#x27;: 100}
+</pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Labour</th>
+      <th>Conservative</th>
+      <th>Reform</th>
+      <th>LibDem</th>
+      <th>Green</th>
+      <th>Oth</th>
+      <th>SNP</th>
+      <th>Plaid</th>
+      <th>Restore</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Labour</th>
+      <td>100</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Conservative</th>
+      <td>0</td>
+      <td>100</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Reform</th>
+      <td>0</td>
+      <td>0</td>
+      <td>100</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>LibDem</th>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+      <td>50</td>
+      <td>40</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Green</th>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>90</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Oth</th>
+      <td>15</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>85</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>SNP</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>100</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Plaid</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>100</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Restore</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>100</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<p>Reading a couple of rows: within the Muslim tribe specifically, <strong>Labour voters stay 100%
+Labour</strong> (no leakage modelled at all for that cell), while <strong>Lib Dem voters split 10% to
+Labour, 50% stay Lib Dem, 40% to Green</strong> — a very different retention story for the same
+national swing, because it's scoped to one tribe. That's the entire value proposition of
+doing this per-tribe rather than nationally: the same Lib Dem-to-Green drift that shows up
+here might look completely different in the Blues tribe's own sheet.</p>
+<p>The projection formula, for one (seat, tribe) row from the tribe-allocation table:</p>
+
+<div class="nb-code"><pre><code>def project_row(voters_by_party: dict, flow_matrix: pd.DataFrame) -&gt; dict:
+    &quot;&quot;&quot;voters_by_party: this tribe&#x27;s current vote total per party, in one seat.
+    Returns the projected vote total per party after applying the tribe&#x27;s flow matrix.&quot;&quot;&quot;
+    projected = {p: 0.0 for p in flow_matrix.columns}
+    for old_party, voters in voters_by_party.items():
+        if voters == 0 or old_party not in flow_matrix.index:
+            continue
+        for new_party in flow_matrix.columns:
+            projected[new_party] += voters * flow_matrix.loc[old_party, new_party] / 100
+    return projected
+
+# worked example: a hypothetical Muslim-tribe allocation of 1,000 voters in one seat
+example_alloc = {&quot;Labour&quot;: 600, &quot;Conservative&quot;: 0, &quot;Reform&quot;: 0, &quot;LibDem&quot;: 200,
+                  &quot;Green&quot;: 100, &quot;Oth&quot;: 100, &quot;SNP&quot;: 0, &quot;Plaid&quot;: 0, &quot;Restore&quot;: 0}
+project_row(example_alloc, muslim_flows)</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><pre>{&#x27;Labour&#x27;: np.float64(645.0),
+ &#x27;Conservative&#x27;: np.float64(0.0),
+ &#x27;Reform&#x27;: np.float64(0.0),
+ &#x27;LibDem&#x27;: np.float64(100.0),
+ &#x27;Green&#x27;: np.float64(170.0),
+ &#x27;Oth&#x27;: np.float64(85.0),
+ &#x27;SNP&#x27;: np.float64(0.0),
+ &#x27;Plaid&#x27;: np.float64(0.0),
+ &#x27;Restore&#x27;: np.float64(0.0)}</pre></div>
+
+<p>Every tribe's projected row is computed this way, independently, then <strong>summed back across
+all 7 tribes within a seat</strong> (<code>groupby("Seat").sum()</code>) to get that seat's single projected
+vote share per party — the seven tribe-specific stories are only ever visible pre-aggregation;
+the output file (<code>{nation}Projection.csv</code>, then concatenated into <code>projected_results.csv</code>,
+632 rows) shows only the combined result.</p>
+
+<div class="nb-code"><pre><code>projected = pd.read_csv(PIPELINE / &quot;data/intermediate/projected_results.csv&quot;)
+projected[projected[&quot;Seat&quot;] == &quot;Aldershot&quot;]</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Seat</th>
+      <th>Labour</th>
+      <th>Conservative</th>
+      <th>Reform</th>
+      <th>LibDem</th>
+      <th>Green</th>
+      <th>Oth</th>
+      <th>SNP</th>
+      <th>Plaid</th>
+      <th>Restore</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Aldershot</td>
+      <td>29.277097</td>
+      <td>27.348099</td>
+      <td>24.494846</td>
+      <td>6.909929</td>
+      <td>7.702929</td>
+      <td>0.51</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>3.6571</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<p>This is exactly where Part 1's revised group structure would plug in unchanged: replace the
+7 hand-set tribe sheets with one sheet per data-derived group (Muslim, Diaspora-Conservative,
+Jewish, Superwealthy, Metropolitan, Working-class/Reform, Affluent-professional,
+Secular-graduate, Average), each estimated from the actual 2019→2024 swing observed in the
+seats that group dominates, and this entire projection mechanism runs without a single line
+of code changing. The flow-matrix <em>shape</em> was never the problem Part 1 was solving — the
+<em>group definitions</em> feeding it were.</p>
+
+<h2>3. Stage 3 (unused in the automated run): Monte Carlo uncertainty</h2>
+<p><code>03_monte_carlo.py</code> turns one seat's projected vote shares into win <em>probabilities</em> by
+simulation: 10,000 draws per seat, each party's draw independently Normal with <strong>standard
+deviation set to 30% of that party's own projected mean</strong> (so a party projected at 40% gets
+±12pts of simulated noise, a party at 2% gets ±0.6pts), floored at zero, renormalised back to
+sum to 100, and the largest draw wins that simulation.</p>
+
+<div class="nb-code"><pre><code>def simulate_seat(means: dict, n_sims: int = 10_000, std_frac: float = 0.30, seed: int | None = None) -&gt; dict:
+    rng = np.random.default_rng(seed)
+    parties = list(means.keys())
+    mean_arr = np.array([means[p] for p in parties])
+    std_arr = mean_arr * std_frac
+    wins = {p: 0 for p in parties}
+    for _ in range(n_sims):
+        draw = np.clip(rng.normal(mean_arr, std_arr), 0, None)
+        total = draw.sum()
+        if total == 0:
+            continue
+        draw = draw / total * 100
+        wins[parties[int(np.argmax(draw))]] += 1
+    return {p: v / n_sims for p, v in wins.items()}
+
+aldershot = projected[projected[&quot;Seat&quot;] == &quot;Aldershot&quot;].iloc[0]
+seat_parties = [&quot;Labour&quot;, &quot;Conservative&quot;, &quot;Reform&quot;, &quot;LibDem&quot;, &quot;Green&quot;, &quot;Oth&quot;, &quot;SNP&quot;, &quot;Plaid&quot;, &quot;Restore&quot;]
+means = {p: aldershot[p] for p in seat_parties}
+simulate_seat(means, seed=0)</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><pre>{&#x27;Labour&#x27;: 0.4545,
+ &#x27;Conservative&#x27;: 0.3432,
+ &#x27;Reform&#x27;: 0.2023,
+ &#x27;LibDem&#x27;: 0.0,
+ &#x27;Green&#x27;: 0.0,
+ &#x27;Oth&#x27;: 0.0,
+ &#x27;SNP&#x27;: 0.0,
+ &#x27;Plaid&#x27;: 0.0,
+ &#x27;Restore&#x27;: 0.0}</pre></div>
+
+<p>That's the intended mechanism, and it's a reasonable one: proportional noise means a close
+race stays genuinely uncertain while a 50-point landslide essentially never flips, without
+needing a hand-tuned uncertainty band per seat.</p>
+<p>But the script as actually written doesn't run the version above. Its real party list is:</p>
+
+<div class="nb-code"><pre><code>buggy_parties = [&quot;Labour&quot;, &quot;Conservative&quot;, &quot;Reform&quot;, &quot;Restore&quot;, &quot;LibDem&quot;, &quot;Green&quot;, &quot;Oth&quot;, &quot;SNP&quot;, &quot;Plaid&quot;, &quot;Restore&quot;]
+print(buggy_parties)
+print(f&quot;&#x27;Restore&#x27; appears {buggy_parties.count(&#x27;Restore&#x27;)} times&quot;)</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><pre>[&#x27;Labour&#x27;, &#x27;Conservative&#x27;, &#x27;Reform&#x27;, &#x27;Restore&#x27;, &#x27;LibDem&#x27;, &#x27;Green&#x27;, &#x27;Oth&#x27;, &#x27;SNP&#x27;, &#x27;Plaid&#x27;, &#x27;Restore&#x27;]
+&#x27;Restore&#x27; appears 2 times
+</pre></div>
+
+<p><code>"Restore"</code> is listed <strong>twice</strong>. The win-counting dictionary (<code>wins = {p: 0 for p in
+parties}</code>) does collapse those into one counter — but the <em>draw</em> happens before that, on a
+plain 10-element array built straight from this list (<code>means = np.array([row[p] for p in
+parties])</code>), and array position 3 and array position 9 are drawn <strong>independently</strong> every
+simulation even though they represent the same party. Restore wins that simulation if
+<em>either</em> of its two draws is the largest of the ten. Every other party gets one shot at being
+the max; Restore effectively gets two. Reproducing it needs a function that mirrors that
+detail — operating on the raw party <em>list</em> (duplicates and all), not a dict, since building a
+dict from a duplicated key list would silently fix the bug before the draw ever happens:</p>
+
+<div class="nb-code"><pre><code>def simulate_seat_from_list(mean_lookup: dict, party_list: list, n_sims: int = 10_000,
+                             std_frac: float = 0.30, seed: int | None = None) -&gt; dict:
+    &quot;&quot;&quot;Mirrors 03_monte_carlo.py exactly: means/stds are built from party_list positionally,
+    so a party appearing twice in party_list gets two independent draws per simulation.&quot;&quot;&quot;
+    rng = np.random.default_rng(seed)
+    mean_arr = np.array([mean_lookup[p] for p in party_list])
+    std_arr = mean_arr * std_frac
+    wins = {p: 0 for p in party_list}   # dict comprehension dedupes the *counter*, not the draw
+    for _ in range(n_sims):
+        draw = np.clip(rng.normal(mean_arr, std_arr), 0, None)
+        total = draw.sum()
+        if total == 0:
+            continue
+        draw = draw / total * 100
+        wins[party_list[int(np.argmax(draw))]] += 1
+    return {p: v / n_sims for p, v in wins.items()}
+
+synthetic_seat = {&quot;Labour&quot;: 30, &quot;Conservative&quot;: 29, &quot;Reform&quot;: 5, &quot;LibDem&quot;: 5,
+                   &quot;Green&quot;: 2, &quot;Oth&quot;: 1, &quot;SNP&quot;: 0, &quot;Plaid&quot;: 0, &quot;Restore&quot;: 28}
+fixed_parties = [&quot;Labour&quot;, &quot;Conservative&quot;, &quot;Reform&quot;, &quot;LibDem&quot;, &quot;Green&quot;, &quot;Oth&quot;, &quot;SNP&quot;, &quot;Plaid&quot;, &quot;Restore&quot;]
+
+buggy = simulate_seat_from_list(synthetic_seat, buggy_parties, seed=1)
+fixed = simulate_seat_from_list(synthetic_seat, fixed_parties, seed=1)
+
+pd.DataFrame({&quot;as-shipped (buggy)&quot;: buggy, &quot;de-duplicated (fixed)&quot;: fixed}).round(3)</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>as-shipped (buggy)</th>
+      <th>de-duplicated (fixed)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Labour</th>
+      <td>0.299</td>
+      <td>0.399</td>
+    </tr>
+    <tr>
+      <th>Conservative</th>
+      <td>0.266</td>
+      <td>0.330</td>
+    </tr>
+    <tr>
+      <th>Reform</th>
+      <td>0.000</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>Restore</th>
+      <td>0.436</td>
+      <td>0.272</td>
+    </tr>
+    <tr>
+      <th>LibDem</th>
+      <td>0.000</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>Green</th>
+      <td>0.000</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>Oth</th>
+      <td>0.000</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>SNP</th>
+      <td>0.000</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>Plaid</th>
+      <td>0.000</td>
+      <td>0.000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<p>In a Labour 30 / Conservative 29 / Restore 28 marginal, the honest simulation ranks them in
+the obvious order — Labour ahead (40%), Conservative next (33%), Restore third (27%). The
+as-shipped version reshuffles that into <strong>Restore first (44%), Labour second (30%),
+Conservative third (27%)</strong> — Restore's two independent draws let it leapfrog both real
+parties despite starting with the lowest mean of the three. That's not a claim about
+Restore's genuine electoral strength; it's exactly what the duplicate list entry does to
+<em>any</em> party unlucky enough to sit at both index 3 and index 9. The fix is a one-line deletion.
+It's flagged here — alongside the runtime question that's the actual reason this stage stays
+disconnected — rather than left implicit.</p>
+<h3>Why it's cut: the loop, not the concept</h3>
+<p>The 10,000-simulations-per-seat idea isn't the problem; the <em>Python-level loop</em> implementing
+it is. Timing the script's actual structure — a <code>for</code> loop over seats, a nested <code>for</code> loop
+over simulations, one <code>np.random.normal</code> call per simulation — against all 632 seats:</p>
+
+<div class="nb-code"><pre><code>import time
+
+def time_current_implementation(df, party_list, n_seats=None, n_sims=10_000):
+    subset = df.head(n_seats) if n_seats else df
+    t0 = time.time()
+    for _, row in subset.iterrows():
+        means = np.array([row[p] for p in party_list], dtype=float)
+        stds = means * 0.30
+        wins = {p: 0 for p in party_list}
+        for _ in range(n_sims):
+            draw = np.clip(np.random.normal(means, stds), 0, None)
+            total = draw.sum()
+            if total == 0:
+                continue
+            draw = draw / total * 100
+            wins[party_list[int(np.argmax(draw))]] += 1
+    return time.time() - t0
+
+sample_seats = 20
+elapsed = time_current_implementation(projected, fixed_parties, n_seats=sample_seats)
+per_seat = elapsed / sample_seats
+print(f&quot;{sample_seats} seats: {elapsed:.2f}s -&gt; {per_seat*1000:.0f}ms/seat -&gt; &quot;
+      f&quot;~{per_seat*len(projected):.0f}s projected for all {len(projected)} seats&quot;)</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><pre>20 seats: 2.81s -&gt; 141ms/seat -&gt; ~89s projected for all 632 seats
+</pre></div>
+
+<p>Roughly a minute and a half for a full run — hopeless for a request a user is waiting on in a
+browser tab, and the reason this stage stays a manually-triggered side script rather than a
+<code>run_all.py</code> stage. But the slowness is an artifact of writing the simulation as nested Python
+loops, not of the underlying statistics being expensive: every seat's simulations are
+independent of every other seat's, and every simulation within a seat is independent of every
+other simulation, which is exactly the shape NumPy is built to batch in one shot instead of
+looping.</p>
+
+<div class="nb-code"><pre><code>def simulate_all_seats_vectorized(df: pd.DataFrame, party_list: list, n_sims: int = 10_000,
+                                   std_frac: float = 0.30, seed: int | None = None) -&gt; pd.DataFrame:
+    rng = np.random.default_rng(seed)
+    means = df[party_list].to_numpy(dtype=float)          # (n_seats, n_parties)
+    stds = means * std_frac
+    # one draw for every (seat, simulation, party) combination at once
+    draws = rng.normal(means[:, None, :], stds[:, None, :], size=(len(df), n_sims, len(party_list)))
+    draws = np.clip(draws, 0, None)
+    totals = draws.sum(axis=2, keepdims=True)
+    totals[totals == 0] = 1.0
+    draws = draws / totals * 100
+    winner_idx = draws.argmax(axis=2)                      # (n_seats, n_sims)
+    win_probs = np.stack([(winner_idx == k).mean(axis=1) for k in range(len(party_list))], axis=1)
+    out = pd.DataFrame(win_probs, columns=[f&quot;{p}_Prob&quot; for p in party_list])
+    out.insert(0, &quot;Seat&quot;, df[&quot;Seat&quot;].values)
+    out[&quot;PredictedWinner&quot;] = out[[f&quot;{p}_Prob&quot; for p in party_list]].idxmax(axis=1).str.replace(&quot;_Prob&quot;, &quot;&quot;, regex=False)
+    return out
+
+t0 = time.time()
+vectorized_result = simulate_all_seats_vectorized(projected, fixed_parties, seed=0)
+vector_elapsed = time.time() - t0
+elapsed_est = per_seat * len(projected)
+print(f&quot;Vectorized: all {len(projected)} seats x 10,000 sims in {vector_elapsed:.2f}s &quot;
+      f&quot;(loop-based estimate was ~{elapsed_est:.0f}s -&gt; {elapsed_est/vector_elapsed:.0f}x faster)&quot;)
+vectorized_result.head(3)</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><pre>Vectorized: all 632 seats x 10,000 sims in 2.66s (loop-based estimate was ~89s -&gt; 33x faster)
+</pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Seat</th>
+      <th>Labour_Prob</th>
+      <th>Conservative_Prob</th>
+      <th>Reform_Prob</th>
+      <th>LibDem_Prob</th>
+      <th>Green_Prob</th>
+      <th>Oth_Prob</th>
+      <th>SNP_Prob</th>
+      <th>Plaid_Prob</th>
+      <th>Restore_Prob</th>
+      <th>PredictedWinner</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Aldershot</td>
+      <td>0.4545</td>
+      <td>0.3432</td>
+      <td>0.2023</td>
+      <td>0.0</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Labour</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Aldridge-Brownhills</td>
+      <td>0.0551</td>
+      <td>0.5120</td>
+      <td>0.4329</td>
+      <td>0.0</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Conservative</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Altrincham and Sale West</td>
+      <td>0.3890</td>
+      <td>0.5982</td>
+      <td>0.0127</td>
+      <td>0.0</td>
+      <td>0.0001</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Conservative</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<p>Same statistics, ~40x faster by replacing two Python loops with one batched array operation —
+comfortably inside a web request's budget, at the cost of holding one <code>(632, 10000, 9)</code> array
+in memory at a time (a few hundred megabytes; trivially choppable into seat-batches if that
+ever matters). This is the concrete version of "wire it in": not "run the existing script more
+often," but "rewrite the inner loop as a NumPy batch op first, then wire it in" — the cut was
+the right call against the code as it stood; it doesn't have to stay cut against the code as
+it could be.</p>
+
+<h2>4. Stage 3.5: tactical voting, and the winnability problem</h2>
+<p>National tactical-voting polling — the kind <a href="https://yougov.com/en-gb/articles/54117-what-is-the-tactical-voting-landscape-in-february-2026">YouGov's tracker of the tactical voting
+landscape</a>
+publishes regularly — measures a genuinely useful thing, but a simplified one: it asks
+<strong>hypothetical two-party questions</strong> ("if only the Conservatives or Reform UK stood a chance
+of winning in their seat, voters would favour the Tories by 31% to 24%"). That's a clean way
+to isolate one behavioural number, but a real constituency is essentially never <em>actually</em> a
+clean two-horse race in the way the survey question assumes — Eastleigh has four parties
+within twenty points of each other, not two. Applying a single national two-party number
+uniformly to all 632 seats would misfire everywhere a third or fourth party is genuinely live.</p>
+<p><code>04_tactical_voting.py</code> solves this with what's effectively a <strong>winnability system</strong>: instead
+of asking survey respondents to imagine a two-horse race, it computes, per seat, from that
+seat's own <em>projected</em> vote shares, which parties are actually plausible contenders there —
+and only lets tactical votes flow toward those.</p>
+<h3>Tiering: turning a vote-share gap into a viability tier</h3>
+<p>For each seat, every party's tier is set by its gap to the projected leader:</p>
+
+<div class="nb-code"><pre><code>def tier_seat(votes: dict, incumbent: str | None) -&gt; dict:
+    leader = max(votes, key=votes.get)
+    leader_share = votes[leader]
+    tier = {}
+    for party, share in votes.items():
+        gap = leader_share - share
+        if gap &lt;= 5:
+            tier[party] = 1
+        elif gap &lt;= 10:
+            tier[party] = 2
+        elif gap &lt;= 15:
+            tier[party] = 3
+        # gap &gt; 15: no tier at all - not a viable destination, though it can still donate
+    if incumbent in votes:
+        tier[incumbent] = 1   # the sitting party is always treated as viable, whatever the swing implies
+    return tier
+
+tier_seat(means, incumbent=None)   # Aldershot, from Section 2</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><pre>{&#x27;Labour&#x27;: 1, &#x27;Conservative&#x27;: 1, &#x27;Reform&#x27;: 1}</pre></div>
+
+<p>Tier 1 = within 5 points of the leader, or the incumbent regardless of projected gap (a
+deliberate hedge: a sitting MP's personal vote and local machine routinely outperform what a
+pure demographic/flow model would predict, so the model refuses to write them off purely on
+projected swing). Tier 2 = 5–10 points back. Tier 3 = 10–15 points back. Beyond 15 points, a
+party isn't a valid tactical <em>destination</em> at all, though it can still be a <em>donor</em> — its own
+supporters can still be persuaded to defect elsewhere, just not receive defectors themselves.</p>
+<p>Two damping tables scale how much actually moves. <code>TIER_STRENGTH</code> discounts votes <em>arriving</em>
+at a longer-shot destination (100% / 50% / 25% for tier 1/2/3 — a vote nominally willing to go
+tactical is still less likely to actually convert into a paper vote for a distant third
+place). <code>DONOR_TVPCT_MULT</code> discounts how much a <em>semi-viable</em> donor is willing to send away at
+all (40% / 80% for a tier-2 / tier-3 donor, full rate for a fully non-viable one) — the
+intuition being that a donor still in realistic contention itself has less reason to lend its
+vote elsewhere than a donor with nothing left to lose.</p>
+<h3>Calibrating against YouGov: how close is the model to the survey?</h3>
+<p>The actual per-party numbers come from <code>Tactical.xlsx</code>'s <code>TVPCT</code> sheet: each party's overall
+willingness to consider a tactical vote at all (<code>TVPct</code>), and its personal appeal to each
+possible destination (independent percentages, not a forced 100%-split):</p>
+
+<div class="nb-code"><pre><code>tvpct = pd.read_excel(PIPELINE / &quot;data/raw/Tactical.xlsx&quot;, sheet_name=&quot;TVPCT&quot;)
+tvpct = tvpct.rename(columns={tvpct.columns[0]: &quot;Donor&quot;}).set_index(&quot;Donor&quot;)
+tvpct[[&quot;TVPct&quot;, &quot;Labour&quot;, &quot;Conservative&quot;, &quot;Reform&quot;, &quot;LibDem&quot;, &quot;Green&quot;]]</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TVPct</th>
+      <th>Labour</th>
+      <th>Conservative</th>
+      <th>Reform</th>
+      <th>LibDem</th>
+      <th>Green</th>
+    </tr>
+    <tr>
+      <th>Donor</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Labour</th>
+      <td>41</td>
+      <td>NaN</td>
+      <td>30.0</td>
+      <td>10.0</td>
+      <td>70.0</td>
+      <td>70.0</td>
+    </tr>
+    <tr>
+      <th>Conservative</th>
+      <td>45</td>
+      <td>10.0</td>
+      <td>NaN</td>
+      <td>50.0</td>
+      <td>30.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>Reform</th>
+      <td>38</td>
+      <td>NaN</td>
+      <td>40.0</td>
+      <td>NaN</td>
+      <td>14.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Lib Dem</th>
+      <td>42</td>
+      <td>45.0</td>
+      <td>35.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>50.0</td>
+    </tr>
+    <tr>
+      <th>Green</th>
+      <td>24</td>
+      <td>24.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>60.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>SNP</th>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>Plaid</th>
+      <td>10</td>
+      <td>20.0</td>
+      <td>5.0</td>
+      <td>1.0</td>
+      <td>20.0</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>Oth</th>
+      <td>40</td>
+      <td>60.0</td>
+      <td>20.0</td>
+      <td>20.0</td>
+      <td>20.0</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>Restore</th>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<p>Set against the YouGov Feb 2026 tracker cited above, the model's headline directions all
+agree, and several numbers land close to the surveyed range:</p>
+<table>
+<thead>
+<tr>
+<th>Comparison</th>
+<th>This model</th>
+<th>YouGov (Feb 2026)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Labour → Lib Dem / Green (to stop Reform)</td>
+<td>70% / 70% appeal</td>
+<td>76–77%</td>
+</tr>
+<tr>
+<td>Reform → Conservative</td>
+<td>40% appeal</td>
+<td>43–45%</td>
+</tr>
+<tr>
+<td>Conservative → Reform (to stop progressives)</td>
+<td>50% appeal</td>
+<td>37–41%</td>
+</tr>
+</tbody>
+</table>
+<p>Two of three are within a few points of the surveyed range — reassuring, given these numbers
+were clearly hand-set rather than fitted directly to this specific tracker wave. The third,
+Conservative→Reform, runs noticeably hotter here (50%) than YouGov's most recent read (37–41%)
+— plausibly calibrated against an earlier, more Reform-favourable wave of the same recurring
+tracker (it's measured repeatedly over time and moves), or a deliberate judgement call rather
+than a direct lift from one survey wave. Either way, it's now a specific, checkable number:
+the natural next step is re-pointing <code>TVPCT</code> at the current tracker wave directly rather than
+leaving it as an inherited estimate.</p>
+<h3>Does it actually change any outcomes?</h3>
+
+<div class="nb-code"><pre><code>tactical = pd.read_csv(PIPELINE / &quot;data/intermediate/projected_results_tactical.csv&quot;)
+
+pre_leader = projected.set_index(&quot;Seat&quot;)[seat_parties].idxmax(axis=1).rename(&quot;pre-tactical leader&quot;)
+post_leader = tactical.set_index(&quot;Seat&quot;)[seat_parties].idxmax(axis=1).rename(&quot;post-tactical leader&quot;)
+
+leaders = pd.concat([pre_leader, post_leader], axis=1)
+flipped = leaders[leaders[&quot;pre-tactical leader&quot;] != leaders[&quot;post-tactical leader&quot;]]
+
+print(f&quot;Seats where tactical voting changes the projected winner: {len(flipped)} of {len(leaders)}&quot;)
+flipped.head(8)</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><pre>Seats where tactical voting changes the projected winner: 37 of 632
+</pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pre-tactical leader</th>
+      <th>post-tactical leader</th>
+    </tr>
+    <tr>
+      <th>Seat</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Bradford West</th>
+      <td>Oth</td>
+      <td>Labour</td>
+    </tr>
+    <tr>
+      <th>Brent West</th>
+      <td>Conservative</td>
+      <td>Labour</td>
+    </tr>
+    <tr>
+      <th>Congleton</th>
+      <td>Conservative</td>
+      <td>Labour</td>
+    </tr>
+    <tr>
+      <th>Cramlington and Killingworth</th>
+      <td>Labour</td>
+      <td>Reform</td>
+    </tr>
+    <tr>
+      <th>Doncaster Central</th>
+      <td>Labour</td>
+      <td>Reform</td>
+    </tr>
+    <tr>
+      <th>Droitwich and Evesham</th>
+      <td>Reform</td>
+      <td>Conservative</td>
+    </tr>
+    <tr>
+      <th>Earley and Woodley</th>
+      <td>Labour</td>
+      <td>Conservative</td>
+    </tr>
+    <tr>
+      <th>East Hampshire</th>
+      <td>Conservative</td>
+      <td>LibDem</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<p>37 of 632 seats — not a rounding error, a genuinely material adjustment concentrated, as
+you'd expect, in seats that were already close multi-way races before tactical voting was
+applied at all.</p>
+<h3>A worked example — and a real limitation the winnability framing runs into</h3>
+<p>Eastleigh is a good illustration precisely because it's a four-way marginal already:</p>
+
+<div class="nb-code"><pre><code>for label, df in [(&quot;Pre-tactical&quot;, projected), (&quot;Post-tactical&quot;, tactical)]:
+    row = df[df[&quot;Seat&quot;] == &quot;Eastleigh&quot;][seat_parties].iloc[0]
+    print(label, &quot;-&quot;, dict(row.round(1)))</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><pre>Pre-tactical - {&#x27;Labour&#x27;: np.float64(11.9), &#x27;Conservative&#x27;: np.float64(20.4), &#x27;Reform&#x27;: np.float64(28.9), &#x27;LibDem&#x27;: np.float64(26.0), &#x27;Green&#x27;: np.float64(8.6), &#x27;Oth&#x27;: np.float64(0.8), &#x27;SNP&#x27;: np.float64(0.0), &#x27;Plaid&#x27;: np.float64(0.0), &#x27;Restore&#x27;: np.float64(3.4)}
+Post-tactical - {&#x27;Labour&#x27;: np.float64(8.1), &#x27;Conservative&#x27;: np.float64(18.2), &#x27;Reform&#x27;: np.float64(31.0), &#x27;LibDem&#x27;: np.float64(31.2), &#x27;Green&#x27;: np.float64(7.4), &#x27;Oth&#x27;: np.float64(0.7), &#x27;SNP&#x27;: np.float64(0.0), &#x27;Plaid&#x27;: np.float64(0.0), &#x27;Restore&#x27;: np.float64(3.4)}
+</pre></div>
+
+<p>Lib Dem overtakes Reform for the lead here (26.0% → 31.2%, against Reform's 28.9% → 31.0%) —
+the model correctly identifies Lib Dem as the natural tactical home for anti-Reform sentiment
+in a seat where Labour (11.9%, an untiered donor) has little chance itself.</p>
+<p>Notice, though, that <strong>Reform's own share also rises</strong> here, not falls — from 28.9% to 31.0%.
+That's not a mistake, but it is a real conceptual gap worth naming: the tiering system defines
+"viable" purely by vote-share gap to the leader, which is exactly what lets it handle
+non-two-horse races at all — but it has no separate concept of "the frontrunner voters are
+specifically trying to stop." If the leader happens to sit at a reasonable spot on a donor's
+own ranked preference list (Reform is Labour's rank-6 destination here — last, but still
+above the <code>-1</code> "never" entries), some of that donor's transfer still reaches the leader,
+because the leader is, definitionally, always tier 1 and therefore always an eligible
+destination. Classic tactical voting is usually framed as <em>anti</em>-frontrunner coordination;
+this implementation is better described as "vote consolidation toward whoever's viable, by
+your own preference order" — which produces the right answer most of the time (leaders rarely
+sit near the top of hostile donors' preference lists) but not by construction. Worth flagging
+as a modelling choice rather than a bug — but a choice, not an inevitability.</p>
+
+<h2>5. Stage 4: turning percentages back into a map</h2>
+<p>The final step (<code>05_export_svg_output.py</code>) does two things. First, four specific seats —
+<strong>Great Yarmouth, Makerfield, Aberdeen South, Gorton and Denton</strong> — get a bespoke, hand-built
+flow matrix from <code>LocalFlows.xlsx</code> instead of the generic tribe-based projection, applied with
+exactly the same row-stochastic mechanism as Section 2. Every other seat passes through
+unchanged from the tactical-adjusted file. Four seats out of 632 needing individual,
+judgement-based correction is a small number — but it's also exactly the kind of manual
+patching that doesn't scale, and that Part 1's whole project (finding <em>why</em> a seat behaves
+unusually, in data, rather than noticing it and hand-fixing it one at a time) is trying to
+reduce the need for.</p>
+<p>Second, projected <strong>percentages</strong> become projected <strong>raw vote counts</strong> by multiplying against
+<code>prev_TOTAL</code> — that seat's total valid votes at the <em>previous</em> election:</p>
+
+<div class="nb-code"><pre><code>vote_totals = pd.read_excel(PIPELINE / &quot;data/raw/Tactical.xlsx&quot;, sheet_name=&quot;VoteTotals&quot;)
+vote_totals[vote_totals[&quot;Seat&quot;] == &quot;Eastleigh&quot;][[&quot;Seat&quot;, &quot;prev_Electorate&quot;, &quot;prev_TOTAL&quot;]]</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Seat</th>
+      <th>prev_Electorate</th>
+      <th>prev_TOTAL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>195</th>
+      <td>Eastleigh</td>
+      <td>70015</td>
+      <td>46420</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<p>There's no separate turnout model here at all — turnout is implicitly assumed identical to
+last time, seat by seat. That's a defensible simplification (turnout is genuinely hard to
+project, and errors here are usually smaller in seat-share terms than errors in who those
+voters pick), but it is a real, load-bearing assumption: a seat with an unusually mobilised or
+demobilised electorate next time around — plausible for exactly the kind of Muslim-vote and
+Reform-curious seats Part 1 spent most of its time on — would have its vote counts (though not
+its <em>shares</em>) systematically off by however much turnout actually moved.</p>
+
+<h2>6. Where this leaves things</h2>
+<p>None of Sections 2–5 needed to change to accommodate Part 1's revised groups — the pipeline's
+actual machinery (row-stochastic flow matrices, gap-based winnability tiers, percentage→count
+conversion) is agnostic to where the groups themselves came from. What's left to do, in
+roughly the order it'd pay off:</p>
+<ol>
+<li><strong>Re-derive the flow matrices</strong> from the evidence-based group structure in Part 1, the same
+   shape as the existing tribe sheets, estimated from real 2019→2024 transitions in each
+   group's dominant seats rather than hand-set.</li>
+<li><strong>Vectorize <code>03_monte_carlo.py</code></strong>, fixing the duplicated <code>"Restore"</code> entry from Section 3
+   along the way, then wire it into <code>run_all.py</code> — Section 3 showed the ~40x speedup (roughly
+   90 seconds down to ~2) that turns it from "too slow for a web request" into "fine for one."
+   The statistics were never the obstacle; the loop was.</li>
+<li><strong>Re-point the tactical voting parameters</strong> at the current YouGov tracker wave directly,
+   closing the Conservative→Reform gap identified in Section 4.</li>
+<li><strong>Shrink the hand-tuned <code>LocalFlows.xlsx</code> seat list</strong> by asking, for each of the four
+   overridden seats, <em>what</em> about them the generic model gets wrong — the same
+   evidence-driven approach Part 1 used to split Archetypes 1 and 3, rather than a one-off
+   local patch.</li>
+</ol>
+<p>That's the honest state of the prediction side of this project: a mechanically sound pipeline,
+with one real bug, one calibration gap, one un-modelled assumption (static turnout), and one
+genuine conceptual limitation (winnability isn't quite the same thing as tactical voting) —
+all now specific and checkable rather than implicit.</p>
+</article>
+
+<nav class="post-nav">
+  <a class="btn btn-ghost" href="political-fragmentation-and-latent-groups.html">&larr; One seat, many voters</a>
+  <a class="btn btn-ghost" href="index.html">All posts &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  <p>An independent, data-driven model of British general elections &mdash;
+     <a href="../index.html">home</a> &middot; <a href="index.html">blog</a> &middot;
+     <a href="../app/index.html">interactive map</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,804 @@
+/* ==================================================================
+   Election night, BBC-studio-graphics-inspired theme.
+   Headline/number font: Archivo Black (stands in for BBC Reith Sans
+   Bold). Body/table font: Roboto Condensed.
+   ================================================================== */
+
+:root {
+  --bbc-blue: #1656d1;
+  --bbc-blue-dark: #0c3fa0;
+  --bbc-segments: #8a4fff;
+  --bbc-segments-dark: #5c2fb8;
+  --bbc-custom: #0c8f6e;
+  --bbc-custom-dark: #075c47;
+  --bbc-bg: #050507;
+  --bbc-panel: #232327;
+  --bbc-panel-2: #2c2c31;
+  --bbc-line: #3a3a40;
+  --font-head: "Archivo Black", "Arial Black", sans-serif;
+  --font-body: "Roboto Condensed", "Arial Narrow", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  background: var(--bbc-bg);
+  color: #f2f2f4;
+  font-family: var(--font-body);
+  margin: 0;
+}
+
+/* ------------------------------------------------------------------
+   Election-year ticker bar
+   ------------------------------------------------------------------ */
+
+#election-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  background: #101012;
+  padding: 6px;
+  border-bottom: 3px solid var(--bbc-blue);
+}
+
+#election-controls button {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  color: #cfd2da;
+  background: #1a1a1d;
+  border: none;
+  padding: 9px 14px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+#election-controls button:hover {
+  background: #2a2a2f;
+  color: #fff;
+}
+
+#election-controls button.active {
+  background: var(--bbc-blue);
+  color: #fff;
+}
+
+#election-controls button.custom-predictor-btn {
+  margin-left: auto;
+  background: #0f3d31;
+  color: #a8ecd9;
+  border-left: 3px solid var(--bbc-custom, #0c8f6e);
+}
+
+#election-controls button.custom-predictor-btn:hover {
+  background: #145243;
+  color: #fff;
+}
+
+#election-controls button.custom-predictor-btn.active {
+  background: var(--bbc-custom, #0c8f6e);
+  color: #fff;
+}
+
+#election-controls button.segments-btn {
+  background: #3a2560;
+  color: #d9c8ff;
+  border-left: 3px solid var(--bbc-segments, #8a4fff);
+}
+
+#election-controls button.segments-btn:hover {
+  background: #4a2f80;
+  color: #fff;
+}
+
+#election-controls button.segments-btn.active {
+  background: var(--bbc-segments, #8a4fff);
+  color: #fff;
+}
+
+/* ------------------------------------------------------------------
+   Map container
+   ------------------------------------------------------------------ */
+
+#map-container {
+  width: 100%;
+  height: 1000px;
+  background: #0a0a0c;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Wrappers the maps get fetched into (see js/app.js). Need an
+   explicit height so the injected <svg>'s height:100% has a
+   real containing block to resolve against - otherwise it falls
+   back to its intrinsic (viewBox) aspect ratio and overflows. */
+#conmap-slot,
+#conmap-2010-slot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+  cursor: move;
+}
+
+path {
+  transition: fill 0.3s ease;
+}
+
+path:hover {
+  filter: brightness(1.25);
+  cursor: pointer;
+}
+
+.pulse-marker circle {
+  pointer-events: none;
+}
+
+/* Zoom / reset controls */
+
+.zoom-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+}
+
+.zoom-btn {
+  background: var(--bbc-panel);
+  color: #fff;
+  border: 1px solid var(--bbc-line);
+  width: 34px;
+  height: 34px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zoom-btn:hover {
+  background: var(--bbc-blue);
+}
+
+.reset-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  background: var(--bbc-panel);
+  color: #fff;
+  border: 1px solid var(--bbc-line);
+  font-family: var(--font-body);
+  font-weight: 700;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.reset-btn:hover {
+  background: var(--bbc-blue);
+}
+
+#conmap {
+  transform: scale(1);
+  transform-origin: center center;
+}
+
+#conmap_2010 {
+  transform: scale(1);
+  transform-origin: center center;
+}
+
+/* ==================================================================
+   Results panel (BBC "RESULT" board)
+   ================================================================== */
+
+.results-panel {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 810px;
+  z-index: 200;
+  background: var(--bbc-panel);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  font-family: var(--font-body);
+  color: #fff;
+
+  opacity: 0;
+  transform: translateY(24px) scale(0.97);
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(.2, .8, .3, 1), transform 0.35s cubic-bezier(.2, .8, .3, 1);
+}
+
+.results-panel.rp-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Re-triggerable "flowy" entrance, restarted on every district click */
+.results-panel.rp-animate {
+  animation: rp-flow-in 0.5s cubic-bezier(.2, .8, .25, 1);
+}
+
+@keyframes rp-flow-in {
+  0%   { opacity: 0; transform: translateY(30px) scale(0.95); }
+  60%  { opacity: 1; transform: translateY(-4px) scale(1.01); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.rp-header {
+  display: flex;
+  cursor: move;
+}
+
+.rp-gainhold {
+  flex: 1;
+  background: var(--bbc-blue);
+  font-family: var(--font-head);
+  font-size: 22px;
+  letter-spacing: 0.02em;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rp-result-tag {
+  background: var(--bbc-blue-dark);
+  font-family: var(--font-head);
+  font-size: 22px;
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+}
+
+.rp-body {
+  display: flex;
+  gap: 1px;
+  background: var(--bbc-line);
+  min-width: 0;
+}
+
+.rp-chart-area {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: 1px;
+  background: var(--bbc-line);
+}
+
+.rp-chart-big {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  background: var(--bbc-panel-2);
+  padding: 8px;
+  height: 260px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.rp-chart-mini-col {
+  width: 74px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.rp-chart-mini {
+  flex: 1;
+  background: var(--bbc-panel-2);
+  border: none;
+  color: #cfd2da;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px;
+  transition: background 0.15s ease;
+}
+
+.rp-chart-mini:hover {
+  background: #38383f;
+  color: #fff;
+}
+
+.rp-chart-mini svg {
+  width: 34px;
+  height: 22px;
+}
+
+.rp-chart-mini span {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.rp-chart-big canvas {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.rp-candidates {
+  flex: 1.2;
+  min-width: 0;
+  background: var(--bbc-panel-2);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top section layout: rp-main-stack (header/body/majority, the original
+   full-width stack) alongside rp-side, a column appended to its right that
+   runs the same height - top edge level with the RESULT header, bottom
+   edge level with the majority row. Both boxes in rp-side are fixed-height
+   and independently-scrolling (see .rp-extension-placeholder and
+   .rp-extension-demographics below) specifically so a seat with an
+   unusually long writeup (e.g. Islington South and Finsbury) or an
+   unusually long notable-demographics list (e.g. Sheffield Central, whose
+   tight student-heavy boundary makes nearly every stat an outlier) scrolls
+   internally instead of stretching rp-main-stack - and therefore the whole
+   panel - taller. rp-turnout-row and rp-name-ribbon stay full width below
+   both columns, untouched. */
+
+.rp-top-row {
+  display: flex;
+  gap: 1px;
+  background: var(--bbc-line);
+}
+
+.rp-main-stack {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--bbc-line);
+}
+
+.rp-side {
+  width: 230px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--bbc-line);
+}
+
+.rp-extension-placeholder {
+  flex: 1.3;
+  min-height: 0;
+  max-height: 220px;
+  background: var(--bbc-panel-2);
+  padding: 8px 10px;
+  overflow-y: auto;
+}
+
+.rp-extension-demographics {
+  flex: 1;
+  min-height: 0;
+  max-height: 160px;
+  background: var(--bbc-panel-2);
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.rp-ext-description {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #cfd2da;
+}
+
+.rp-ext-demo-header {
+  font-family: var(--font-head);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #9a9aa3;
+  margin-bottom: 6px;
+  flex-shrink: 0;
+}
+
+.rp-ext-demo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rp-ext-demo-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  background: rgba(255,255,255,0.04);
+  padding: 4px 6px;
+}
+
+.rp-ext-demo-badge {
+  flex-shrink: 0;
+  font-family: var(--font-head);
+  font-size: 8px;
+  padding: 2px 4px;
+  letter-spacing: 0.03em;
+}
+
+.rp-ext-demo-badge.rp-ext-top { background: #1e9e5a; color: #fff; }
+.rp-ext-demo-badge.rp-ext-bottom { background: #6d6d75; color: #fff; }
+
+.rp-ext-demo-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rp-ext-demo-value {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.rp-ext-demo-empty {
+  font-size: 11px;
+  color: #9a9aa3;
+  font-style: italic;
+}
+
+.rp-ext-demo-footnotes {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 10px;
+  color: #83838c;
+  line-height: 1.5;
+}
+
+.rp-ext-demo-footnotes:empty {
+  display: none;
+}
+
+/* Old-boundary years (pre-2024 map): the profile writeup and notable-
+   demographics list are keyed to 2024 boundaries and don't apply, so they're
+   swapped out for the estimated 2016 EU referendum result on that same
+   pre-2024 seat instead. See app.js's yearsUsingConmap2010/renderBrexitBar. */
+.rp-extension-brexit {
+  display: none;
+  flex: 1;
+  min-height: 0;
+  max-height: 160px;
+  background: var(--bbc-panel-2);
+  padding: 8px 10px;
+  overflow-y: auto;
+}
+
+.rp-old-boundaries .rp-extension-placeholder,
+.rp-old-boundaries .rp-extension-demographics {
+  display: none;
+}
+
+.rp-old-boundaries .rp-extension-brexit {
+  display: block;
+}
+
+.rp-brexit-bar {
+  display: flex;
+  height: 22px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.06);
+}
+
+.rp-brexit-bar-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-size: 10px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.rp-brexit-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 11px;
+  color: #cfd2da;
+}
+
+.rp-brexit-empty {
+  font-size: 11px;
+  color: #9a9aa3;
+  font-style: italic;
+}
+
+/* Small "i" info badge - see js/infoTip.js. Uses currentColor for its
+   border/text so it quietly matches whatever it's dropped into (button
+   labels, panel headers, dark panel text) with no per-context styling. */
+.info-tip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  margin-left: 5px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0.55;
+  cursor: help;
+  vertical-align: middle;
+  transition: opacity 0.15s;
+}
+
+.info-tip-icon:hover {
+  opacity: 1;
+}
+
+/* Northern Ireland seats: shown on the map (so its outline isn't a hole)
+   but not present in any election/demographics dataset, which is GB-only
+   throughout this app - clicking one shows this instead of the normal
+   results panel, with just the name ribbon still filled in below. */
+.rp-unavailable-message {
+  display: none;
+}
+
+.rp-unavailable .rp-top-row,
+.rp-unavailable .rp-turnout-row {
+  display: none;
+}
+
+.rp-unavailable .rp-unavailable-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: 24px 16px;
+  font-family: var(--font-head);
+  font-size: 15px;
+  text-align: center;
+  color: #9a9aa3;
+  background: var(--bbc-panel-2);
+}
+
+.rp-cand-row {
+  display: flex;
+  align-items: center;
+  min-height: 34px;
+  border-bottom: 1px solid var(--bbc-line);
+}
+
+.rp-cand-row:last-child {
+  border-bottom: none;
+}
+
+.rp-cand-party {
+  font-family: var(--font-head);
+  font-size: 13px;
+  color: #fff;
+  padding: 8px 8px;
+  width: 62px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.rp-cand-name {
+  flex: 1;
+  padding: 0 10px;
+  color: #cfd2da;
+  font-size: 14px;
+}
+
+.rp-cand-votes {
+  font-family: var(--font-head);
+  font-size: 15px;
+  padding: 0 12px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.rp-cand-row.rp-cand-winner {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.rp-majority {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bbc-blue);
+  padding: 14px 20px;
+}
+
+.rp-majority-label {
+  font-family: var(--font-head);
+  font-size: 22px;
+  letter-spacing: 0.02em;
+}
+
+.rp-majority-value {
+  font-family: var(--font-head);
+  font-size: 30px;
+}
+
+.rp-turnout-row {
+  background: var(--bbc-panel);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rp-turnout-change {
+  font-family: var(--font-head);
+  font-size: 15px;
+  color: #9a9aa3;
+}
+
+.rp-turnout-change.rp-up {
+  color: #5fd35f;
+}
+
+.rp-turnout-change.rp-down {
+  color: #ff6b6b;
+}
+
+.rp-turnout {
+  background: #fff;
+  color: #111;
+  padding: 8px 14px;
+  display: inline-flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.rp-turnout-label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+
+.rp-turnout-value {
+  font-family: var(--font-head);
+  font-size: 18px;
+}
+
+.rp-name-ribbon {
+  background: var(--bbc-blue);
+  font-family: var(--font-head);
+  font-size: 20px;
+  letter-spacing: 0.03em;
+  padding: 12px 20px 12px 30px;
+  position: relative;
+}
+
+.rp-name-ribbon::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 18px;
+  background: var(--rp-triangle-color, var(--bbc-blue-dark));
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+/* Electorate Segments mode - purple instead of blue, and party pills
+   need more room since segment names ("Progressives") are longer than
+   party codes ("LAB"). */
+
+.results-panel.rp-segments-mode .rp-gainhold,
+.results-panel.rp-segments-mode .rp-majority,
+.results-panel.rp-segments-mode .rp-name-ribbon {
+  background: var(--bbc-segments);
+}
+
+.results-panel.rp-segments-mode .rp-result-tag {
+  background: var(--bbc-segments-dark);
+}
+
+.results-panel.rp-segments-mode .rp-name-ribbon::before {
+  background: var(--bbc-segments-dark);
+}
+
+.results-panel.rp-segments-mode .rp-cand-party {
+  width: auto;
+  min-width: 62px;
+  font-size: 11px;
+  padding: 8px 6px;
+}
+
+/* Swing gauge */
+
+.rp-swing-label {
+  font-family: var(--font-head);
+  fill: #fff;
+}
+
+.rp-swing-sub {
+  font-family: var(--font-body);
+  font-weight: 700;
+  fill: #fff;
+}
+
+/* ==================================================================
+   National seat ticker (bottom bar, BBC "UK SEATS" style)
+   ================================================================== */
+
+.overall-results-panel {
+  display: flex;
+  flex-wrap: wrap;
+  background: #101012;
+  font-family: var(--font-head);
+  font-size: 15px;
+}
+
+.ort-label {
+  background: #fff;
+  color: #111;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+}
+
+.ort-year {
+  background: #1a1a1d;
+  color: #cfd2da;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.ort-party {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  color: #fff;
+}
+
+/* Thin proportional vote-share sliver directly under the seat ticker */
+.ort-voteshare {
+  display: flex;
+  height: 14px;
+  background: #101012;
+}
+
+.ort-voteshare-seg {
+  height: 100%;
+  min-width: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ort-voteshare-seg span {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 9px;
+  white-space: nowrap;
+}

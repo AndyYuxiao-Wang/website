@@ -1,0 +1,43 @@
+{
+  "nation": "wales",
+  "adjusted_rand_index": 0.271,
+  "n_seats": 32,
+  "n_disagreements": 3,
+  "contingency_table": {
+    "Segment_1": {
+      "Average": 6,
+      "Left": 0,
+      "Reforms": 2
+    },
+    "Segment_2": {
+      "Average": 22,
+      "Left": 1,
+      "Reforms": 0
+    },
+    "Segment_3": {
+      "Average": 0,
+      "Left": 0,
+      "Reforms": 1
+    }
+  },
+  "disagreement_seats": [
+    {
+      "Seat": "Aberafan Maesteg",
+      "DominantTribe": "Reforms",
+      "GMM_label": 1,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Cardiff South and Penarth",
+      "DominantTribe": "Left",
+      "GMM_label": 2,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Rhondda and Ogmore",
+      "DominantTribe": "Reforms",
+      "GMM_label": 1,
+      "SegmentMajorityTribe": "Average"
+    }
+  ]
+}

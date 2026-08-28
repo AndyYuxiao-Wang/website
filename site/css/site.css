@@ -1,0 +1,444 @@
+/* ==================================================================
+   Personal site chrome - shares the election map app's BBC-studio
+   theme (see web/css/style.css) so Home / Blog / App feel like one
+   product rather than three. Same tokens, same two fonts.
+   ================================================================== */
+
+:root {
+  --bbc-blue: #1656d1;
+  --bbc-blue-dark: #0c3fa0;
+  --bbc-segments: #8a4fff;
+  --bbc-segments-dark: #5c2fb8;
+  --bbc-custom: #0c8f6e;
+  --bbc-custom-dark: #075c47;
+  --bbc-bg: #050507;
+  --bbc-panel: #232327;
+  --bbc-panel-2: #2c2c31;
+  --bbc-line: #3a3a40;
+  --text-1: #f2f2f4;
+  --text-2: #cfd2da;
+  --text-3: #9a9aa3;
+  --font-head: "Archivo Black", "Arial Black", sans-serif;
+  --font-body: "Roboto Condensed", "Arial Narrow", Arial, sans-serif;
+  --font-mono: "Roboto Mono", "Consolas", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  background: var(--bbc-bg);
+  color: var(--text-1);
+  font-family: var(--font-body);
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+a { color: inherit; }
+
+::selection { background: var(--bbc-blue); color: #fff; }
+
+/* ------------------------------------------------------------------
+   Site nav - same visual language as #election-controls
+   ------------------------------------------------------------------ */
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+  background: #101012;
+  padding: 6px;
+  border-bottom: 3px solid var(--bbc-blue);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.site-nav .brand {
+  font-family: var(--font-head);
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: #fff;
+  padding: 9px 16px 9px 10px;
+  margin-right: auto;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-nav a.nav-link {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  color: var(--text-2);
+  background: #1a1a1d;
+  border: none;
+  padding: 9px 16px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+  text-transform: uppercase;
+}
+
+.site-nav a.nav-link:hover { background: #2a2a2f; color: #fff; }
+.site-nav a.nav-link.active { background: var(--bbc-blue); color: #fff; }
+
+.site-nav a.nav-link.app-link {
+  background: #0f3d31;
+  color: #a8ecd9;
+  border-left: 3px solid var(--bbc-custom);
+}
+.site-nav a.nav-link.app-link:hover { background: #145243; color: #fff; }
+
+/* ------------------------------------------------------------------
+   Layout shell
+   ------------------------------------------------------------------ */
+
+.page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 24px 100px;
+}
+
+.page-wide { max-width: 1180px; }
+
+/* ------------------------------------------------------------------
+   Hero
+   ------------------------------------------------------------------ */
+
+.hero {
+  padding: 90px 24px 70px;
+  text-align: center;
+  border-bottom: 1px solid var(--bbc-line);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(22,86,209,0.18), transparent 60%),
+    var(--bbc-bg);
+}
+
+.hero .kicker {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bbc-blue);
+}
+
+.hero h1 {
+  font-family: var(--font-head);
+  font-size: clamp(34px, 6vw, 64px);
+  line-height: 1.05;
+  margin: 14px 0 18px;
+  color: #fff;
+  text-wrap: balance;
+}
+
+.hero p.lede {
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--text-2);
+  max-width: 700px;
+  margin: 0 auto 34px;
+}
+
+.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ------------------------------------------------------------------
+   Buttons (match .zoom-btn / election-controls button language)
+   ------------------------------------------------------------------ */
+
+.btn {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 13px 24px;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary { background: var(--bbc-blue); color: #fff; }
+.btn-primary:hover { background: var(--bbc-blue-dark); }
+
+.btn-ghost { background: var(--bbc-panel); color: var(--text-1); border: 1px solid var(--bbc-line); }
+.btn-ghost:hover { background: var(--bbc-panel-2); }
+
+.btn-custom { background: var(--bbc-custom); color: #fff; }
+.btn-custom:hover { background: var(--bbc-custom-dark); }
+
+/* ------------------------------------------------------------------
+   Section headers
+   ------------------------------------------------------------------ */
+
+.section { padding: 64px 24px; }
+.section-head { text-align: center; margin-bottom: 40px; }
+.section-head .eyebrow {
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.section-head h2 {
+  font-family: var(--font-head);
+  font-size: clamp(24px, 4vw, 36px);
+  color: #fff;
+  margin: 8px 0 0;
+}
+
+/* ------------------------------------------------------------------
+   Cards (feature grid on home, post list on blog)
+   ------------------------------------------------------------------ */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--bbc-panel);
+  border: 1px solid var(--bbc-line);
+  border-top: 4px solid var(--bbc-blue);
+  padding: 26px 24px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.card:hover { background: var(--bbc-panel-2); transform: translateY(-2px); }
+.card.accent-segments { border-top-color: var(--bbc-segments); }
+.card.accent-custom { border-top-color: var(--bbc-custom); }
+
+.card .card-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.card h3 {
+  font-family: var(--font-head);
+  font-size: 20px;
+  color: #fff;
+  margin: 10px 0 10px;
+  line-height: 1.25;
+}
+.card p { color: var(--text-2); font-size: 15px; line-height: 1.5; margin: 0; }
+.card .card-meta {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--text-3);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.card .card-meta span { background: var(--bbc-panel-2); padding: 3px 9px; border: 1px solid var(--bbc-line); }
+
+/* ------------------------------------------------------------------
+   Blog post typography
+   ------------------------------------------------------------------ */
+
+.post-header {
+  padding: 70px 24px 40px;
+  border-bottom: 1px solid var(--bbc-line);
+  text-align: center;
+}
+.post-header .series-tag {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border: 1px solid var(--accent, var(--bbc-blue));
+  color: var(--accent, var(--bbc-blue));
+  margin-bottom: 18px;
+}
+.post-header h1 {
+  font-family: var(--font-head);
+  font-size: clamp(28px, 5vw, 46px);
+  color: #fff;
+  line-height: 1.15;
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
+.post-header .dek {
+  font-size: 17px;
+  color: var(--text-2);
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.55;
+}
+.post-header .byline {
+  margin-top: 22px;
+  font-size: 13px;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.post-body {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 50px 24px 100px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+.post-body h2 {
+  font-family: var(--font-head);
+  font-size: 26px;
+  color: #fff;
+  margin: 52px 0 18px;
+  padding-top: 10px;
+  border-top: 1px solid var(--bbc-line);
+}
+.post-body h1 + h2, .post-body > h2:first-child { border-top: none; padding-top: 0; }
+.post-body h3 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 19px;
+  color: #fff;
+  margin: 34px 0 12px;
+}
+.post-body p { margin: 0 0 18px; }
+.post-body ul, .post-body ol { margin: 0 0 18px; padding-left: 24px; }
+.post-body li { margin-bottom: 8px; }
+.post-body strong { color: #fff; }
+.post-body em { color: var(--text-2); }
+.post-body a { color: #7fb0ff; text-decoration: underline; text-underline-offset: 2px; }
+.post-body a:hover { color: #a8cbff; }
+.post-body hr { border: none; border-top: 1px solid var(--bbc-line); margin: 40px 0; }
+.post-body code {
+  font-family: var(--font-mono);
+  background: var(--bbc-panel);
+  padding: 2px 6px;
+  font-size: 15px;
+  color: #d9c8ff;
+}
+
+.post-body blockquote {
+  margin: 0 0 18px;
+  padding: 4px 20px;
+  border-left: 3px solid var(--accent, var(--bbc-blue));
+  color: var(--text-2);
+}
+
+/* markdown tables inside prose */
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 24px;
+  font-size: 15px;
+  display: block;
+  overflow-x: auto;
+}
+.post-body th, .post-body td {
+  border: 1px solid var(--bbc-line);
+  padding: 9px 12px;
+  text-align: left;
+}
+.post-body th {
+  background: var(--bbc-panel);
+  color: #fff;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.post-body tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+/* code cell + output */
+.nb-code {
+  background: #101012;
+  border: 1px solid var(--bbc-line);
+  border-left: 3px solid var(--accent, var(--bbc-blue));
+  margin: 0 0 4px;
+  overflow-x: auto;
+}
+.nb-code pre {
+  margin: 0;
+  padding: 16px 18px;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #e4e4e8;
+  white-space: pre;
+}
+.nb-output {
+  background: var(--bbc-panel);
+  border: 1px solid var(--bbc-line);
+  border-top: none;
+  margin: 0 0 24px;
+  overflow-x: auto;
+}
+.nb-output .nb-output-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  padding: 8px 18px 0;
+}
+.nb-output pre {
+  margin: 0;
+  padding: 6px 18px 16px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-2);
+  white-space: pre-wrap;
+}
+
+/* pandas DataFrame html output, reskinned dark */
+.nb-output table.dataframe {
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  margin: 10px 18px 18px;
+  width: calc(100% - 36px);
+}
+.nb-output table.dataframe th, .nb-output table.dataframe td {
+  border: 1px solid var(--bbc-line);
+  padding: 6px 10px;
+  text-align: right;
+  white-space: nowrap;
+}
+.nb-output table.dataframe th { background: var(--bbc-panel-2); color: #fff; font-weight: 700; }
+.nb-output table.dataframe tr:nth-child(even) td { background: rgba(255,255,255,0.015); }
+.nb-output table.dataframe td:first-child, .nb-output table.dataframe th:first-child { text-align: left; }
+
+.post-nav {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 0 24px 90px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ------------------------------------------------------------------
+   Footer
+   ------------------------------------------------------------------ */
+
+.site-footer {
+  border-top: 1px solid var(--bbc-line);
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--text-3);
+  font-size: 13px;
+}
+.site-footer a { color: var(--text-2); text-decoration: underline; text-underline-offset: 2px; }
+
+@media (max-width: 620px) {
+  .hero { padding: 60px 20px 46px; }
+  .section { padding: 48px 18px; }
+}

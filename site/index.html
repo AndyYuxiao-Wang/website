@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elections UK &middot; An independent UK election model</title>
+<meta name="description" content="An independent, data-driven model of British general elections: an interactive constituency map, and research notes on rebuilding it with clustering and matrix factorization.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto+Condensed:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="brand" href="index.html">ELECTIONS UK</a>
+  <a class="nav-link active" href="index.html">Home</a>
+  <a class="nav-link" href="blog/index.html">Blog</a>
+  <a class="nav-link app-link" href="app/index.html">Open the App</a>
+</nav>
+
+<header class="hero">
+  <div class="kicker">632 seats &middot; England, Scotland, Wales</div>
+  <h1>An independent model of<br>British general elections</h1>
+  <p class="lede">Every constituency modelled seat by seat &mdash; census demographics, vote flows,
+    tactical voting and Monte Carlo uncertainty, built into an interactive map and documented in
+    public as it's built.</p>
+  <div class="hero-actions">
+    <a class="btn btn-custom" href="app/index.html">Open the interactive map</a>
+    <a class="btn btn-ghost" href="blog/index.html">Read the research notes</a>
+  </div>
+</header>
+
+<section class="section">
+  <div class="section-head">
+    <div class="eyebrow">What's here</div>
+    <h2>Three ways into the same model</h2>
+  </div>
+  <div class="card-grid">
+    <a class="card" href="app/index.html">
+      <div class="card-tag">Interactive</div>
+      <h3>The map</h3>
+      <p>Every UK general election since 2005, a live 2029 prediction, tactical-voting and
+        "electorate segments" overlays, and a custom predictor you can drive yourself &mdash;
+        constituency by constituency.</p>
+      <div class="card-meta"><span>632 seats</span><span>2005&ndash;2029</span></div>
+    </a>
+    <a class="card accent-segments" href="blog/political-fragmentation-and-latent-groups.html">
+      <div class="card-tag">Part 1 &middot; Methodology</div>
+      <h3>One seat, many voters</h3>
+      <p>Why a single category per constituency stopped being plausible, and what unmixing
+        census composition into shared latent groups gets us instead &mdash; run live against
+        the real data.</p>
+      <div class="card-meta"><span>NMF</span><span>clustering</span><span>22 min read</span></div>
+    </a>
+    <a class="card accent-custom" href="blog/the-prediction-pipeline.html">
+      <div class="card-tag">Part 2 &middot; Prediction</div>
+      <h3>From groups to seats</h3>
+      <p>Opening up the pipeline that turns any group structure into a seat-by-seat forecast:
+        flow tables, Monte Carlo uncertainty, and a winnability-based tactical voting model.</p>
+      <div class="card-meta"><span>Monte Carlo</span><span>tactical voting</span><span>18 min read</span></div>
+    </a>
+  </div>
+</section>
+
+<section class="section" style="background:var(--bbc-panel); border-top:1px solid var(--bbc-line); border-bottom:1px solid var(--bbc-line);">
+  <div class="section-head">
+    <div class="eyebrow">The approach</div>
+    <h2>Built in the open, checked against the data</h2>
+  </div>
+  <div class="card-grid">
+    <div class="card" style="cursor:default;">
+      <div class="card-tag">Evidence, not assumption</div>
+      <h3>Every claim is checked</h3>
+      <p>Segments, correlations and formulas are tested against the real 632-seat dataset and,
+        where relevant, external research &mdash; not just plausible-sounding.</p>
+    </div>
+    <div class="card" style="cursor:default;">
+      <div class="card-tag">Real code, real output</div>
+      <h3>Nothing invented</h3>
+      <p>The research notes are executable notebooks. Every number on the page came out of a
+        code cell that ran against this project's own data.</p>
+    </div>
+    <div class="card" style="cursor:default;">
+      <div class="card-tag">Honest about limits</div>
+      <h3>Bugs get reported, not hidden</h3>
+      <p>Where the model has a real limitation &mdash; a bug, a stale assumption, a conceptual
+        gap &mdash; it's written up alongside the parts that work.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>An independent, data-driven model of British general elections &mdash;
+     <a href="blog/index.html">blog</a> &middot; <a href="app/index.html">interactive map</a></p>
+</footer>
+
+</body>
+</html>

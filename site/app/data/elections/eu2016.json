@@ -1,0 +1,5194 @@
+[
+  {
+    "Name": "Boston and Skegness",
+    "Electorate": 1000,
+    "LEAVE": 756,
+    "REMAIN": 244,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Walsall North",
+    "Electorate": 1000,
+    "LEAVE": 742,
+    "REMAIN": 258,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Clacton",
+    "Electorate": 1000,
+    "LEAVE": 730,
+    "REMAIN": 270,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South Basildon and East Thurrock",
+    "Electorate": 1000,
+    "LEAVE": 730,
+    "REMAIN": 270,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Kingston upon Hull East",
+    "Electorate": 1000,
+    "LEAVE": 728,
+    "REMAIN": 272,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Castle Point",
+    "Electorate": 1000,
+    "LEAVE": 727,
+    "REMAIN": 273,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Stoke-on-Trent North",
+    "Electorate": 1000,
+    "LEAVE": 721,
+    "REMAIN": 279,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Doncaster North",
+    "Electorate": 1000,
+    "LEAVE": 717,
+    "REMAIN": 283,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Great Yarmouth",
+    "Electorate": 1000,
+    "LEAVE": 715,
+    "REMAIN": 285,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Great Grimsby",
+    "Electorate": 1000,
+    "LEAVE": 714,
+    "REMAIN": 286,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Dudley North",
+    "Electorate": 1000,
+    "LEAVE": 714,
+    "REMAIN": 286,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Stoke-on-Trent South",
+    "Electorate": 1000,
+    "LEAVE": 711,
+    "REMAIN": 289,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South Holland and The Deepings",
+    "Electorate": 1000,
+    "LEAVE": 711,
+    "REMAIN": 289,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Barnsley East",
+    "Electorate": 1000,
+    "LEAVE": 710,
+    "REMAIN": 290,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Mansfield",
+    "Electorate": 1000,
+    "LEAVE": 709,
+    "REMAIN": 291,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Ashfield",
+    "Electorate": 1000,
+    "LEAVE": 705,
+    "REMAIN": 295,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Dudley South",
+    "Electorate": 1000,
+    "LEAVE": 704,
+    "REMAIN": 296,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bolsover",
+    "Electorate": 1000,
+    "LEAVE": 704,
+    "REMAIN": 296,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Dagenham and Rainham",
+    "Electorate": 1000,
+    "LEAVE": 703,
+    "REMAIN": 297,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Wentworth and Dearne",
+    "Electorate": 1000,
+    "LEAVE": 703,
+    "REMAIN": 297,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Thurrock",
+    "Electorate": 1000,
+    "LEAVE": 703,
+    "REMAIN": 297,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Hartlepool",
+    "Electorate": 1000,
+    "LEAVE": 696,
+    "REMAIN": 304,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Cleethorpes",
+    "Electorate": 1000,
+    "LEAVE": 695,
+    "REMAIN": 305,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Hornchurch and Upminster",
+    "Electorate": 1000,
+    "LEAVE": 695,
+    "REMAIN": 305,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North East Cambridgeshire",
+    "Electorate": 1000,
+    "LEAVE": 694,
+    "REMAIN": 306,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Romford",
+    "Electorate": 1000,
+    "LEAVE": 693,
+    "REMAIN": 307,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Normanton, Pontefract and Castleford",
+    "Electorate": 1000,
+    "LEAVE": 693,
+    "REMAIN": 307,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Louth and Horncastle",
+    "Electorate": 1000,
+    "LEAVE": 689,
+    "REMAIN": 311,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Cannock Chase",
+    "Electorate": 1000,
+    "LEAVE": 689,
+    "REMAIN": 311,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Scunthorpe",
+    "Electorate": 1000,
+    "LEAVE": 687,
+    "REMAIN": 313,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "West Bromwich West",
+    "Electorate": 1000,
+    "LEAVE": 687,
+    "REMAIN": 313,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Don Valley",
+    "Electorate": 1000,
+    "LEAVE": 685,
+    "REMAIN": 315,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Rotherham",
+    "Electorate": 1000,
+    "LEAVE": 683,
+    "REMAIN": 317,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bassetlaw",
+    "Electorate": 1000,
+    "LEAVE": 683,
+    "REMAIN": 317,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Barnsley Central",
+    "Electorate": 1000,
+    "LEAVE": 682,
+    "REMAIN": 318,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "West Bromwich East",
+    "Electorate": 1000,
+    "LEAVE": 682,
+    "REMAIN": 318,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Wolverhampton South East",
+    "Electorate": 1000,
+    "LEAVE": 681,
+    "REMAIN": 319,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Hemsworth",
+    "Electorate": 1000,
+    "LEAVE": 681,
+    "REMAIN": 319,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Kingston upon Hull West and Hessle",
+    "Electorate": 1000,
+    "LEAVE": 680,
+    "REMAIN": 320,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Blackpool South",
+    "Electorate": 1000,
+    "LEAVE": 678,
+    "REMAIN": 322,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Aldridge-Brownhills",
+    "Electorate": 1000,
+    "LEAVE": 678,
+    "REMAIN": 322,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North Warwickshire",
+    "Electorate": 1000,
+    "LEAVE": 678,
+    "REMAIN": 322,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Harlow",
+    "Electorate": 1000,
+    "LEAVE": 677,
+    "REMAIN": 323,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Wolverhampton North East",
+    "Electorate": 1000,
+    "LEAVE": 677,
+    "REMAIN": 323,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Redcar",
+    "Electorate": 1000,
+    "LEAVE": 677,
+    "REMAIN": 323,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Rayleigh and Wickford",
+    "Electorate": 1000,
+    "LEAVE": 677,
+    "REMAIN": 323,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Basildon and Billericay",
+    "Electorate": 1000,
+    "LEAVE": 671,
+    "REMAIN": 329,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Blackpool North and Cleveleys",
+    "Electorate": 1000,
+    "LEAVE": 669,
+    "REMAIN": 331,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Rother Valley",
+    "Electorate": 1000,
+    "LEAVE": 667,
+    "REMAIN": 333,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Doncaster Central",
+    "Electorate": 1000,
+    "LEAVE": 667,
+    "REMAIN": 333,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South West Norfolk",
+    "Electorate": 1000,
+    "LEAVE": 667,
+    "REMAIN": 333,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Burnley",
+    "Electorate": 1000,
+    "LEAVE": 666,
+    "REMAIN": 334,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Halesowen and Rowley Regis",
+    "Electorate": 1000,
+    "LEAVE": 666,
+    "REMAIN": 334,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Plymouth Moor View",
+    "Electorate": 1000,
+    "LEAVE": 664,
+    "REMAIN": 336,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Stockton North",
+    "Electorate": 1000,
+    "LEAVE": 663,
+    "REMAIN": 337,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Sheffield South East",
+    "Electorate": 1000,
+    "LEAVE": 663,
+    "REMAIN": 337,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Brigg and Goole",
+    "Electorate": 1000,
+    "LEAVE": 662,
+    "REMAIN": 338,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Telford",
+    "Electorate": 1000,
+    "LEAVE": 662,
+    "REMAIN": 338,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Middlesbrough",
+    "Electorate": 1000,
+    "LEAVE": 661,
+    "REMAIN": 339,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Tamworth",
+    "Electorate": 1000,
+    "LEAVE": 660,
+    "REMAIN": 340,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Easington",
+    "Electorate": 1000,
+    "LEAVE": 660,
+    "REMAIN": 340,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Hyndburn",
+    "Electorate": 1000,
+    "LEAVE": 658,
+    "REMAIN": 342,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North West Norfolk",
+    "Electorate": 1000,
+    "LEAVE": 658,
+    "REMAIN": 342,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Broxbourne",
+    "Electorate": 1000,
+    "LEAVE": 655,
+    "REMAIN": 345,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Gravesham",
+    "Electorate": 1000,
+    "LEAVE": 654,
+    "REMAIN": 346,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Sittingbourne and Sheppey",
+    "Electorate": 1000,
+    "LEAVE": 654,
+    "REMAIN": 346,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Amber Valley",
+    "Electorate": 1000,
+    "LEAVE": 653,
+    "REMAIN": 347,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Middlesbrough South and East Cleveland",
+    "Electorate": 1000,
+    "LEAVE": 653,
+    "REMAIN": 347,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bexleyheath and Crayford",
+    "Electorate": 1000,
+    "LEAVE": 653,
+    "REMAIN": 347,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South Staffordshire",
+    "Electorate": 1000,
+    "LEAVE": 652,
+    "REMAIN": 348,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North Thanet",
+    "Electorate": 1000,
+    "LEAVE": 652,
+    "REMAIN": 348,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Makerfield",
+    "Electorate": 1000,
+    "LEAVE": 649,
+    "REMAIN": 351,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Stoke-on-Trent Central",
+    "Electorate": 1000,
+    "LEAVE": 648,
+    "REMAIN": 352,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Burton",
+    "Electorate": 1000,
+    "LEAVE": 648,
+    "REMAIN": 352,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bognor Regis and Littlehampton",
+    "Electorate": 1000,
+    "LEAVE": 648,
+    "REMAIN": 352,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Staffordshire Moorlands",
+    "Electorate": 1000,
+    "LEAVE": 647,
+    "REMAIN": 353,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Nuneaton",
+    "Electorate": 1000,
+    "LEAVE": 645,
+    "REMAIN": 355,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "St Austell and Newquay",
+    "Electorate": 1000,
+    "LEAVE": 641,
+    "REMAIN": 359,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Dartford",
+    "Electorate": 1000,
+    "LEAVE": 640,
+    "REMAIN": 360,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Chatham and Aylesford",
+    "Electorate": 1000,
+    "LEAVE": 639,
+    "REMAIN": 361,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Nottingham North",
+    "Electorate": 1000,
+    "LEAVE": 638,
+    "REMAIN": 362,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Portsmouth North",
+    "Electorate": 1000,
+    "LEAVE": 637,
+    "REMAIN": 363,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Rochester and Strood",
+    "Electorate": 1000,
+    "LEAVE": 637,
+    "REMAIN": 363,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Stourbridge",
+    "Electorate": 1000,
+    "LEAVE": 637,
+    "REMAIN": 363,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "East Yorkshire",
+    "Electorate": 1000,
+    "LEAVE": 637,
+    "REMAIN": 363,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Sherwood",
+    "Electorate": 1000,
+    "LEAVE": 637,
+    "REMAIN": 363,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Gillingham and Rainham",
+    "Electorate": 1000,
+    "LEAVE": 636,
+    "REMAIN": 364,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bradford South",
+    "Electorate": 1000,
+    "LEAVE": 636,
+    "REMAIN": 364,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Waveney",
+    "Electorate": 1000,
+    "LEAVE": 634,
+    "REMAIN": 366,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Leigh",
+    "Electorate": 1000,
+    "LEAVE": 633,
+    "REMAIN": 367,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "West Suffolk",
+    "Electorate": 1000,
+    "LEAVE": 632,
+    "REMAIN": 368,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Erewash",
+    "Electorate": 1000,
+    "LEAVE": 632,
+    "REMAIN": 368,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Pendle",
+    "Electorate": 1000,
+    "LEAVE": 632,
+    "REMAIN": 368,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Wyre Forest",
+    "Electorate": 1000,
+    "LEAVE": 631,
+    "REMAIN": 369,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bolton South East",
+    "Electorate": 1000,
+    "LEAVE": 630,
+    "REMAIN": 370,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Wellingborough",
+    "Electorate": 1000,
+    "LEAVE": 630,
+    "REMAIN": 370,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Dover",
+    "Electorate": 1000,
+    "LEAVE": 630,
+    "REMAIN": 370,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Birmingham Erdington",
+    "Electorate": 1000,
+    "LEAVE": 630,
+    "REMAIN": 370,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Wigan",
+    "Electorate": 1000,
+    "LEAVE": 630,
+    "REMAIN": 370,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Wakefield",
+    "Electorate": 1000,
+    "LEAVE": 628,
+    "REMAIN": 372,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Peterborough",
+    "Electorate": 1000,
+    "LEAVE": 627,
+    "REMAIN": 373,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Havant",
+    "Electorate": 1000,
+    "LEAVE": 626,
+    "REMAIN": 374,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Torbay",
+    "Electorate": 1000,
+    "LEAVE": 625,
+    "REMAIN": 375,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Houghton and Sunderland South",
+    "Electorate": 1000,
+    "LEAVE": 624,
+    "REMAIN": 376,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Old Bexley and Sidcup",
+    "Electorate": 1000,
+    "LEAVE": 624,
+    "REMAIN": 376,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Heywood and Middleton",
+    "Electorate": 1000,
+    "LEAVE": 624,
+    "REMAIN": 376,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North Antrim",
+    "Electorate": 1000,
+    "LEAVE": 622,
+    "REMAIN": 378,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bridgwater and West Somerset",
+    "Electorate": 1000,
+    "LEAVE": 621,
+    "REMAIN": 379,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South Shields",
+    "Electorate": 1000,
+    "LEAVE": 621,
+    "REMAIN": 379,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North East Derbyshire",
+    "Electorate": 1000,
+    "LEAVE": 621,
+    "REMAIN": 379,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Blaenau Gwent",
+    "Electorate": 1000,
+    "LEAVE": 620,
+    "REMAIN": 380,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Gainsborough",
+    "Electorate": 1000,
+    "LEAVE": 620,
+    "REMAIN": 380,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Isle of Wight",
+    "Electorate": 1000,
+    "LEAVE": 619,
+    "REMAIN": 381,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Washington and Sunderland West",
+    "Electorate": 1000,
+    "LEAVE": 619,
+    "REMAIN": 381,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Gosport",
+    "Electorate": 1000,
+    "LEAVE": 618,
+    "REMAIN": 382,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Ashton-under-Lyne",
+    "Electorate": 1000,
+    "LEAVE": 618,
+    "REMAIN": 382,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Birmingham Northfield",
+    "Electorate": 1000,
+    "LEAVE": 618,
+    "REMAIN": 382,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Swansea East",
+    "Electorate": 1000,
+    "LEAVE": 618,
+    "REMAIN": 382,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Jarrow",
+    "Electorate": 1000,
+    "LEAVE": 618,
+    "REMAIN": 382,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South Thanet",
+    "Electorate": 1000,
+    "LEAVE": 617,
+    "REMAIN": 383,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Newcastle-under-Lyme",
+    "Electorate": 1000,
+    "LEAVE": 616,
+    "REMAIN": 384,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Folkestone and Hythe",
+    "Electorate": 1000,
+    "LEAVE": 616,
+    "REMAIN": 384,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Walsall South",
+    "Electorate": 1000,
+    "LEAVE": 616,
+    "REMAIN": 384,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Warley",
+    "Electorate": 1000,
+    "LEAVE": 616,
+    "REMAIN": 384,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Sleaford and North Hykeham",
+    "Electorate": 1000,
+    "LEAVE": 616,
+    "REMAIN": 384,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Braintree",
+    "Electorate": 1000,
+    "LEAVE": 615,
+    "REMAIN": 385,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Leeds East",
+    "Electorate": 1000,
+    "LEAVE": 614,
+    "REMAIN": 386,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Derby South",
+    "Electorate": 1000,
+    "LEAVE": 614,
+    "REMAIN": 386,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Scarborough and Whitby",
+    "Electorate": 1000,
+    "LEAVE": 613,
+    "REMAIN": 387,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Oldham West and Royton",
+    "Electorate": 1000,
+    "LEAVE": 613,
+    "REMAIN": 387,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Brentwood and Ongar",
+    "Electorate": 1000,
+    "LEAVE": 612,
+    "REMAIN": 388,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Epping Forest",
+    "Electorate": 1000,
+    "LEAVE": 610,
+    "REMAIN": 390,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Workington",
+    "Electorate": 1000,
+    "LEAVE": 610,
+    "REMAIN": 390,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Grantham and Stamford",
+    "Electorate": 1000,
+    "LEAVE": 610,
+    "REMAIN": 390,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Redditch",
+    "Electorate": 1000,
+    "LEAVE": 610,
+    "REMAIN": 390,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Kettering",
+    "Electorate": 1000,
+    "LEAVE": 610,
+    "REMAIN": 390,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Denton and Reddish",
+    "Electorate": 1000,
+    "LEAVE": 610,
+    "REMAIN": 390,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Maldon",
+    "Electorate": 1000,
+    "LEAVE": 610,
+    "REMAIN": 390,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Rochford and Southend East",
+    "Electorate": 1000,
+    "LEAVE": 609,
+    "REMAIN": 391,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bishop Auckland",
+    "Electorate": 1000,
+    "LEAVE": 609,
+    "REMAIN": 391,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bosworth",
+    "Electorate": 1000,
+    "LEAVE": 608,
+    "REMAIN": 392,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Torfaen",
+    "Electorate": 1000,
+    "LEAVE": 608,
+    "REMAIN": 392,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North West Leicestershire",
+    "Electorate": 1000,
+    "LEAVE": 607,
+    "REMAIN": 393,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Penistone and Stocksbridge",
+    "Electorate": 1000,
+    "LEAVE": 607,
+    "REMAIN": 393,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Carlisle",
+    "Electorate": 1000,
+    "LEAVE": 606,
+    "REMAIN": 394,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Mid Norfolk",
+    "Electorate": 1000,
+    "LEAVE": 606,
+    "REMAIN": 394,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Blyth Valley",
+    "Electorate": 1000,
+    "LEAVE": 605,
+    "REMAIN": 395,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Witham",
+    "Electorate": 1000,
+    "LEAVE": 605,
+    "REMAIN": 395,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Rhondda",
+    "Electorate": 1000,
+    "LEAVE": 604,
+    "REMAIN": 396,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Hereford and South Herefordshire",
+    "Electorate": 1000,
+    "LEAVE": 604,
+    "REMAIN": 396,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South Derbyshire",
+    "Electorate": 1000,
+    "LEAVE": 604,
+    "REMAIN": 396,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North Durham",
+    "Electorate": 1000,
+    "LEAVE": 603,
+    "REMAIN": 397,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Spelthorne",
+    "Electorate": 1000,
+    "LEAVE": 603,
+    "REMAIN": 397,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Southampton Itchen",
+    "Electorate": 1000,
+    "LEAVE": 603,
+    "REMAIN": 397,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Crewe and Nantwich",
+    "Electorate": 1000,
+    "LEAVE": 603,
+    "REMAIN": 397,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Northampton North",
+    "Electorate": 1000,
+    "LEAVE": 603,
+    "REMAIN": 397,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North Cornwall",
+    "Electorate": 1000,
+    "LEAVE": 602,
+    "REMAIN": 398,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "New Forest East",
+    "Electorate": 1000,
+    "LEAVE": 602,
+    "REMAIN": 398,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Corby",
+    "Electorate": 1000,
+    "LEAVE": 601,
+    "REMAIN": 399,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Aberavon",
+    "Electorate": 1000,
+    "LEAVE": 601,
+    "REMAIN": 399,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Birmingham Yardley",
+    "Electorate": 1000,
+    "LEAVE": 601,
+    "REMAIN": 399,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Barking",
+    "Electorate": 1000,
+    "LEAVE": 600,
+    "REMAIN": 400,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Sheffield Brightside and Hillsborough",
+    "Electorate": 1000,
+    "LEAVE": 600,
+    "REMAIN": 400,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Christchurch",
+    "Electorate": 1000,
+    "LEAVE": 600,
+    "REMAIN": 400,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Sunderland Central",
+    "Electorate": 1000,
+    "LEAVE": 599,
+    "REMAIN": 401,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Oldham East and Saddleworth",
+    "Electorate": 1000,
+    "LEAVE": 599,
+    "REMAIN": 401,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Clwyd South",
+    "Electorate": 1000,
+    "LEAVE": 599,
+    "REMAIN": 401,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Yeovil",
+    "Electorate": 1000,
+    "LEAVE": 599,
+    "REMAIN": 401,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Ashford",
+    "Electorate": 1000,
+    "LEAVE": 599,
+    "REMAIN": 401,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North Shropshire",
+    "Electorate": 1000,
+    "LEAVE": 598,
+    "REMAIN": 402,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Morley and Outwood",
+    "Electorate": 1000,
+    "LEAVE": 598,
+    "REMAIN": 402,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Worsley and Eccles South",
+    "Electorate": 1000,
+    "LEAVE": 598,
+    "REMAIN": 402,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Kingston upon Hull North",
+    "Electorate": 1000,
+    "LEAVE": 598,
+    "REMAIN": 402,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Batley and Spen",
+    "Electorate": 1000,
+    "LEAVE": 596,
+    "REMAIN": 404,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North Tyneside",
+    "Electorate": 1000,
+    "LEAVE": 595,
+    "REMAIN": 405,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South Dorset",
+    "Electorate": 1000,
+    "LEAVE": 594,
+    "REMAIN": 406,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Sedgefield",
+    "Electorate": 1000,
+    "LEAVE": 594,
+    "REMAIN": 406,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Mid Worcestershire",
+    "Electorate": 1000,
+    "LEAVE": 594,
+    "REMAIN": 406,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Newport East",
+    "Electorate": 1000,
+    "LEAVE": 593,
+    "REMAIN": 407,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "The Wrekin",
+    "Electorate": 1000,
+    "LEAVE": 593,
+    "REMAIN": 407,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Chesterfield",
+    "Electorate": 1000,
+    "LEAVE": 593,
+    "REMAIN": 407,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Stalybridge and Hyde",
+    "Electorate": 1000,
+    "LEAVE": 593,
+    "REMAIN": 407,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Copeland",
+    "Electorate": 1000,
+    "LEAVE": 592,
+    "REMAIN": 408,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Luton North",
+    "Electorate": 1000,
+    "LEAVE": 592,
+    "REMAIN": 408,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Harwich and North Essex",
+    "Electorate": 1000,
+    "LEAVE": 590,
+    "REMAIN": 410,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Northampton South",
+    "Electorate": 1000,
+    "LEAVE": 590,
+    "REMAIN": 410,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Islwyn",
+    "Electorate": 1000,
+    "LEAVE": 589,
+    "REMAIN": 411,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Rossendale and Darwen",
+    "Electorate": 1000,
+    "LEAVE": 589,
+    "REMAIN": 411,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Ogmore",
+    "Electorate": 1000,
+    "LEAVE": 589,
+    "REMAIN": 411,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Halifax",
+    "Electorate": 1000,
+    "LEAVE": 588,
+    "REMAIN": 412,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Gloucester",
+    "Electorate": 1000,
+    "LEAVE": 588,
+    "REMAIN": 412,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Meriden",
+    "Electorate": 1000,
+    "LEAVE": 588,
+    "REMAIN": 412,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Beverley and Holderness",
+    "Electorate": 1000,
+    "LEAVE": 587,
+    "REMAIN": 413,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Ribble Valley",
+    "Electorate": 1000,
+    "LEAVE": 587,
+    "REMAIN": 413,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Faversham and Mid Kent",
+    "Electorate": 1000,
+    "LEAVE": 587,
+    "REMAIN": 413,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Rugby",
+    "Electorate": 1000,
+    "LEAVE": 586,
+    "REMAIN": 414,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Daventry",
+    "Electorate": 1000,
+    "LEAVE": 586,
+    "REMAIN": 414,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Crawley",
+    "Electorate": 1000,
+    "LEAVE": 584,
+    "REMAIN": 416,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Camborne and Redruth",
+    "Electorate": 1000,
+    "LEAVE": 584,
+    "REMAIN": 416,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North Norfolk",
+    "Electorate": 1000,
+    "LEAVE": 584,
+    "REMAIN": 416,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "St Helens North",
+    "Electorate": 1000,
+    "LEAVE": 584,
+    "REMAIN": 416,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Coventry North West",
+    "Electorate": 1000,
+    "LEAVE": 584,
+    "REMAIN": 416,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Merthyr Tydfil and Rhymney",
+    "Electorate": 1000,
+    "LEAVE": 584,
+    "REMAIN": 416,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Ellesmere Port and Neston",
+    "Electorate": 1000,
+    "LEAVE": 583,
+    "REMAIN": 417,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Hayes and Harlington",
+    "Electorate": 1000,
+    "LEAVE": 582,
+    "REMAIN": 418,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Morecambe and Lunesdale",
+    "Electorate": 1000,
+    "LEAVE": 582,
+    "REMAIN": 418,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South Leicestershire",
+    "Electorate": 1000,
+    "LEAVE": 581,
+    "REMAIN": 419,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bolton North East",
+    "Electorate": 1000,
+    "LEAVE": 581,
+    "REMAIN": 419,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Darlington",
+    "Electorate": 1000,
+    "LEAVE": 581,
+    "REMAIN": 419,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South West Bedfordshire",
+    "Electorate": 1000,
+    "LEAVE": 581,
+    "REMAIN": 419,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Warrington North",
+    "Electorate": 1000,
+    "LEAVE": 581,
+    "REMAIN": 419,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Alyn and Deeside",
+    "Electorate": 1000,
+    "LEAVE": 581,
+    "REMAIN": 419,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North Herefordshire",
+    "Electorate": 1000,
+    "LEAVE": 580,
+    "REMAIN": 420,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Aldershot",
+    "Electorate": 1000,
+    "LEAVE": 579,
+    "REMAIN": 421,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Forest of Dean",
+    "Electorate": 1000,
+    "LEAVE": 579,
+    "REMAIN": 421,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Ludlow",
+    "Electorate": 1000,
+    "LEAVE": 579,
+    "REMAIN": 421,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Charnwood",
+    "Electorate": 1000,
+    "LEAVE": 579,
+    "REMAIN": 421,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Tiverton and Honiton",
+    "Electorate": 1000,
+    "LEAVE": 578,
+    "REMAIN": 422,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Coventry North East",
+    "Electorate": 1000,
+    "LEAVE": 578,
+    "REMAIN": 422,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Stockton South",
+    "Electorate": 1000,
+    "LEAVE": 578,
+    "REMAIN": 422,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bournemouth West",
+    "Electorate": 1000,
+    "LEAVE": 577,
+    "REMAIN": 423,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bexhill and Battle",
+    "Electorate": 1000,
+    "LEAVE": 577,
+    "REMAIN": 423,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Halton",
+    "Electorate": 1000,
+    "LEAVE": 577,
+    "REMAIN": 423,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Selby and Ainsty",
+    "Electorate": 1000,
+    "LEAVE": 577,
+    "REMAIN": 423,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Wrexham",
+    "Electorate": 1000,
+    "LEAVE": 576,
+    "REMAIN": 424,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Eastbourne",
+    "Electorate": 1000,
+    "LEAVE": 575,
+    "REMAIN": 425,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Orpington",
+    "Electorate": 1000,
+    "LEAVE": 575,
+    "REMAIN": 425,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Stone",
+    "Electorate": 1000,
+    "LEAVE": 575,
+    "REMAIN": 425,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Lichfield",
+    "Electorate": 1000,
+    "LEAVE": 575,
+    "REMAIN": 425,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Stafford",
+    "Electorate": 1000,
+    "LEAVE": 575,
+    "REMAIN": 425,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Rochdale",
+    "Electorate": 1000,
+    "LEAVE": 575,
+    "REMAIN": 425,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Lincoln",
+    "Electorate": 1000,
+    "LEAVE": 574,
+    "REMAIN": 426,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Poole",
+    "Electorate": 1000,
+    "LEAVE": 574,
+    "REMAIN": 426,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Swindon North",
+    "Electorate": 1000,
+    "LEAVE": 573,
+    "REMAIN": 427,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Barrow and Furness",
+    "Electorate": 1000,
+    "LEAVE": 573,
+    "REMAIN": 427,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Weston-Super-Mare",
+    "Electorate": 1000,
+    "LEAVE": 572,
+    "REMAIN": 428,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Torridge and West Devon",
+    "Electorate": 1000,
+    "LEAVE": 572,
+    "REMAIN": 428,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Uxbridge and South Ruislip",
+    "Electorate": 1000,
+    "LEAVE": 572,
+    "REMAIN": 428,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Sheffield Heeley",
+    "Electorate": 1000,
+    "LEAVE": 572,
+    "REMAIN": 428,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Dewsbury",
+    "Electorate": 1000,
+    "LEAVE": 571,
+    "REMAIN": 429,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Kingswood",
+    "Electorate": 1000,
+    "LEAVE": 571,
+    "REMAIN": 429,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Mid Dorset and North Poole",
+    "Electorate": 1000,
+    "LEAVE": 571,
+    "REMAIN": 429,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North Devon",
+    "Electorate": 1000,
+    "LEAVE": 570,
+    "REMAIN": 430,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Stevenage",
+    "Electorate": 1000,
+    "LEAVE": 570,
+    "REMAIN": 430,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North West Cambridgeshire",
+    "Electorate": 1000,
+    "LEAVE": 569,
+    "REMAIN": 431,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South West Wiltshire",
+    "Electorate": 1000,
+    "LEAVE": 569,
+    "REMAIN": 431,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Newcastle upon Tyne North",
+    "Electorate": 1000,
+    "LEAVE": 568,
+    "REMAIN": 432,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Elmet and Rothwell",
+    "Electorate": 1000,
+    "LEAVE": 568,
+    "REMAIN": 432,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Chorley",
+    "Electorate": 1000,
+    "LEAVE": 567,
+    "REMAIN": 433,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Cynon Valley",
+    "Electorate": 1000,
+    "LEAVE": 567,
+    "REMAIN": 433,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Fylde",
+    "Electorate": 1000,
+    "LEAVE": 567,
+    "REMAIN": 433,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Norwich North",
+    "Electorate": 1000,
+    "LEAVE": 567,
+    "REMAIN": 433,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Llanelli",
+    "Electorate": 1000,
+    "LEAVE": 567,
+    "REMAIN": 433,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South Ribble",
+    "Electorate": 1000,
+    "LEAVE": 566,
+    "REMAIN": 434,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North Dorset",
+    "Electorate": 1000,
+    "LEAVE": 566,
+    "REMAIN": 434,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Vale of Clwyd",
+    "Electorate": 1000,
+    "LEAVE": 566,
+    "REMAIN": 434,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Ipswich",
+    "Electorate": 1000,
+    "LEAVE": 565,
+    "REMAIN": 435,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Thirsk and Malton",
+    "Electorate": 1000,
+    "LEAVE": 564,
+    "REMAIN": 436,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Gedling",
+    "Electorate": 1000,
+    "LEAVE": 563,
+    "REMAIN": 437,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Wansbeck",
+    "Electorate": 1000,
+    "LEAVE": 563,
+    "REMAIN": 437,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Carshalton and Wallington",
+    "Electorate": 1000,
+    "LEAVE": 563,
+    "REMAIN": 437,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Gateshead",
+    "Electorate": 1000,
+    "LEAVE": 562,
+    "REMAIN": 438,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Blaydon",
+    "Electorate": 1000,
+    "LEAVE": 561,
+    "REMAIN": 439,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "St Helens South and Whiston",
+    "Electorate": 1000,
+    "LEAVE": 561,
+    "REMAIN": 439,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Worthing West",
+    "Electorate": 1000,
+    "LEAVE": 560,
+    "REMAIN": 440,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Newton Abbot",
+    "Electorate": 1000,
+    "LEAVE": 560,
+    "REMAIN": 440,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Hastings and Rye",
+    "Electorate": 1000,
+    "LEAVE": 559,
+    "REMAIN": 441,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Feltham and Heston",
+    "Electorate": 1000,
+    "LEAVE": 559,
+    "REMAIN": 441,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Maidstone and The Weald",
+    "Electorate": 1000,
+    "LEAVE": 559,
+    "REMAIN": 441,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Montgomeryshire",
+    "Electorate": 1000,
+    "LEAVE": 558,
+    "REMAIN": 442,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Newark",
+    "Electorate": 1000,
+    "LEAVE": 557,
+    "REMAIN": 443,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Preston",
+    "Electorate": 1000,
+    "LEAVE": 557,
+    "REMAIN": 443,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bolton West",
+    "Electorate": 1000,
+    "LEAVE": 556,
+    "REMAIN": 444,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Strangford",
+    "Electorate": 1000,
+    "LEAVE": 555,
+    "REMAIN": 445,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Fareham",
+    "Electorate": 1000,
+    "LEAVE": 555,
+    "REMAIN": 445,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Hemel Hempstead",
+    "Electorate": 1000,
+    "LEAVE": 555,
+    "REMAIN": 445,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bromsgrove",
+    "Electorate": 1000,
+    "LEAVE": 554,
+    "REMAIN": 446,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Preseli Pembrokeshire",
+    "Electorate": 1000,
+    "LEAVE": 553,
+    "REMAIN": 447,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Berwick-upon-Tweed",
+    "Electorate": 1000,
+    "LEAVE": 553,
+    "REMAIN": 447,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "New Forest West",
+    "Electorate": 1000,
+    "LEAVE": 553,
+    "REMAIN": 447,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Haltemprice and Howden",
+    "Electorate": 1000,
+    "LEAVE": 552,
+    "REMAIN": 448,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Suffolk Coastal",
+    "Electorate": 1000,
+    "LEAVE": 552,
+    "REMAIN": 448,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Penrith and The Border",
+    "Electorate": 1000,
+    "LEAVE": 552,
+    "REMAIN": 448,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "East Antrim",
+    "Electorate": 1000,
+    "LEAVE": 552,
+    "REMAIN": 448,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Carmarthen West and South Pembrokeshire",
+    "Electorate": 1000,
+    "LEAVE": 552,
+    "REMAIN": 448,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bradford East",
+    "Electorate": 1000,
+    "LEAVE": 552,
+    "REMAIN": 448,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Caerphilly",
+    "Electorate": 1000,
+    "LEAVE": 551,
+    "REMAIN": 449,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South East Cornwall",
+    "Electorate": 1000,
+    "LEAVE": 551,
+    "REMAIN": 449,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South West Devon",
+    "Electorate": 1000,
+    "LEAVE": 551,
+    "REMAIN": 449,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Southend West",
+    "Electorate": 1000,
+    "LEAVE": 551,
+    "REMAIN": 449,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North West Durham",
+    "Electorate": 1000,
+    "LEAVE": 550,
+    "REMAIN": 450,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "West Lancashire",
+    "Electorate": 1000,
+    "LEAVE": 550,
+    "REMAIN": 450,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Central Suffolk and North Ipswich",
+    "Electorate": 1000,
+    "LEAVE": 549,
+    "REMAIN": 451,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bootle",
+    "Electorate": 1000,
+    "LEAVE": 548,
+    "REMAIN": 452,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "St Ives",
+    "Electorate": 1000,
+    "LEAVE": 548,
+    "REMAIN": 452,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North West Hampshire",
+    "Electorate": 1000,
+    "LEAVE": 548,
+    "REMAIN": 452,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Richmond (Yorks)",
+    "Electorate": 1000,
+    "LEAVE": 547,
+    "REMAIN": 453,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Erith and Thamesmead",
+    "Electorate": 1000,
+    "LEAVE": 546,
+    "REMAIN": 454,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Luton South",
+    "Electorate": 1000,
+    "LEAVE": 546,
+    "REMAIN": 454,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bury South",
+    "Electorate": 1000,
+    "LEAVE": 545,
+    "REMAIN": 455,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Delyn",
+    "Electorate": 1000,
+    "LEAVE": 544,
+    "REMAIN": 456,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Plymouth Sutton and Devonport",
+    "Electorate": 1000,
+    "LEAVE": 544,
+    "REMAIN": 456,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Wolverhampton South West",
+    "Electorate": 1000,
+    "LEAVE": 544,
+    "REMAIN": 456,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Eastleigh",
+    "Electorate": 1000,
+    "LEAVE": 543,
+    "REMAIN": 457,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Derby North",
+    "Electorate": 1000,
+    "LEAVE": 543,
+    "REMAIN": 457,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "East Surrey",
+    "Electorate": 1000,
+    "LEAVE": 542,
+    "REMAIN": 458,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Wyre and Preston North",
+    "Electorate": 1000,
+    "LEAVE": 542,
+    "REMAIN": 458,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Broadland",
+    "Electorate": 1000,
+    "LEAVE": 541,
+    "REMAIN": 459,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Leicester East",
+    "Electorate": 1000,
+    "LEAVE": 541,
+    "REMAIN": 459,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Slough",
+    "Electorate": 1000,
+    "LEAVE": 541,
+    "REMAIN": 459,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Sevenoaks",
+    "Electorate": 1000,
+    "LEAVE": 540,
+    "REMAIN": 460,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South Suffolk",
+    "Electorate": 1000,
+    "LEAVE": 540,
+    "REMAIN": 460,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Neath",
+    "Electorate": 1000,
+    "LEAVE": 540,
+    "REMAIN": 460,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bury St Edmunds",
+    "Electorate": 1000,
+    "LEAVE": 540,
+    "REMAIN": 460,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Totnes",
+    "Electorate": 1000,
+    "LEAVE": 539,
+    "REMAIN": 461,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Rutland and Melton",
+    "Electorate": 1000,
+    "LEAVE": 539,
+    "REMAIN": 461,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Blackburn",
+    "Electorate": 1000,
+    "LEAVE": 537,
+    "REMAIN": 463,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bournemouth East",
+    "Electorate": 1000,
+    "LEAVE": 537,
+    "REMAIN": 463,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "East Worthing and Shoreham",
+    "Electorate": 1000,
+    "LEAVE": 537,
+    "REMAIN": 463,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Worcester",
+    "Electorate": 1000,
+    "LEAVE": 537,
+    "REMAIN": 463,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bury North",
+    "Electorate": 1000,
+    "LEAVE": 537,
+    "REMAIN": 463,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Newport West",
+    "Electorate": 1000,
+    "LEAVE": 537,
+    "REMAIN": 463,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Tewkesbury",
+    "Electorate": 1000,
+    "LEAVE": 536,
+    "REMAIN": 464,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Wells",
+    "Electorate": 1000,
+    "LEAVE": 536,
+    "REMAIN": 464,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Basingstoke",
+    "Electorate": 1000,
+    "LEAVE": 536,
+    "REMAIN": 464,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Banff and Buchan",
+    "Electorate": 1000,
+    "LEAVE": 536,
+    "REMAIN": 464,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Salford and Eccles",
+    "Electorate": 1000,
+    "LEAVE": 536,
+    "REMAIN": 464,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Devizes",
+    "Electorate": 1000,
+    "LEAVE": 535,
+    "REMAIN": 465,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Huntingdon",
+    "Electorate": 1000,
+    "LEAVE": 535,
+    "REMAIN": 465,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North East Bedfordshire",
+    "Electorate": 1000,
+    "LEAVE": 534,
+    "REMAIN": 466,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Solihull",
+    "Electorate": 1000,
+    "LEAVE": 533,
+    "REMAIN": 467,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South Northamptonshire",
+    "Electorate": 1000,
+    "LEAVE": 533,
+    "REMAIN": 467,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Keighley",
+    "Electorate": 1000,
+    "LEAVE": 533,
+    "REMAIN": 467,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Ilford North",
+    "Electorate": 1000,
+    "LEAVE": 533,
+    "REMAIN": 467,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Leeds West",
+    "Electorate": 1000,
+    "LEAVE": 533,
+    "REMAIN": 467,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bracknell",
+    "Electorate": 1000,
+    "LEAVE": 532,
+    "REMAIN": 468,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Carmarthen East and Dinefwr",
+    "Electorate": 1000,
+    "LEAVE": 532,
+    "REMAIN": 468,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Skipton and Ripon",
+    "Electorate": 1000,
+    "LEAVE": 532,
+    "REMAIN": 468,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Calder Valley",
+    "Electorate": 1000,
+    "LEAVE": 532,
+    "REMAIN": 468,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Lagan Valley",
+    "Electorate": 1000,
+    "LEAVE": 531,
+    "REMAIN": 469,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Milton Keynes South",
+    "Electorate": 1000,
+    "LEAVE": 531,
+    "REMAIN": 469,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Clwyd West",
+    "Electorate": 1000,
+    "LEAVE": 530,
+    "REMAIN": 470,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Taunton Deane",
+    "Electorate": 1000,
+    "LEAVE": 529,
+    "REMAIN": 471,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Shrewsbury and Atcham",
+    "Electorate": 1000,
+    "LEAVE": 529,
+    "REMAIN": 471,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Mid Bedfordshire",
+    "Electorate": 1000,
+    "LEAVE": 529,
+    "REMAIN": 471,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Tonbridge and Malling",
+    "Electorate": 1000,
+    "LEAVE": 529,
+    "REMAIN": 471,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Welwyn Hatfield",
+    "Electorate": 1000,
+    "LEAVE": 528,
+    "REMAIN": 472,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Wealden",
+    "Electorate": 1000,
+    "LEAVE": 528,
+    "REMAIN": 472,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Upper Bann",
+    "Electorate": 1000,
+    "LEAVE": 526,
+    "REMAIN": 474,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Congleton",
+    "Electorate": 1000,
+    "LEAVE": 526,
+    "REMAIN": 474,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Vale of Glamorgan",
+    "Electorate": 1000,
+    "LEAVE": 526,
+    "REMAIN": 474,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "West Worcestershire",
+    "Electorate": 1000,
+    "LEAVE": 525,
+    "REMAIN": 475,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Broxtowe",
+    "Electorate": 1000,
+    "LEAVE": 525,
+    "REMAIN": 475,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Mid Derbyshire",
+    "Electorate": 1000,
+    "LEAVE": 525,
+    "REMAIN": 475,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Harborough",
+    "Electorate": 1000,
+    "LEAVE": 524,
+    "REMAIN": 476,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Knowsley",
+    "Electorate": 1000,
+    "LEAVE": 523,
+    "REMAIN": 477,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Shipley",
+    "Electorate": 1000,
+    "LEAVE": 522,
+    "REMAIN": 478,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Hazel Grove",
+    "Electorate": 1000,
+    "LEAVE": 522,
+    "REMAIN": 478,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Aberconwy",
+    "Electorate": 1000,
+    "LEAVE": 522,
+    "REMAIN": 478,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Thornbury and Yate",
+    "Electorate": 1000,
+    "LEAVE": 522,
+    "REMAIN": 478,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Liverpool Walton",
+    "Electorate": 1000,
+    "LEAVE": 522,
+    "REMAIN": 478,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Eddisbury",
+    "Electorate": 1000,
+    "LEAVE": 522,
+    "REMAIN": 478,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Lancaster and Fleetwood",
+    "Electorate": 1000,
+    "LEAVE": 520,
+    "REMAIN": 480,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bedford",
+    "Electorate": 1000,
+    "LEAVE": 519,
+    "REMAIN": 481,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Belfast East",
+    "Electorate": 1000,
+    "LEAVE": 519,
+    "REMAIN": 481,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Meon Valley",
+    "Electorate": 1000,
+    "LEAVE": 519,
+    "REMAIN": 481,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Brecon and Radnorshire",
+    "Electorate": 1000,
+    "LEAVE": 519,
+    "REMAIN": 481,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Surrey Heath",
+    "Electorate": 1000,
+    "LEAVE": 519,
+    "REMAIN": 481,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Huddersfield",
+    "Electorate": 1000,
+    "LEAVE": 519,
+    "REMAIN": 481,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Eltham",
+    "Electorate": 1000,
+    "LEAVE": 518,
+    "REMAIN": 482,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Aylesbury",
+    "Electorate": 1000,
+    "LEAVE": 518,
+    "REMAIN": 482,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Portsmouth South",
+    "Electorate": 1000,
+    "LEAVE": 518,
+    "REMAIN": 482,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Birkenhead",
+    "Electorate": 1000,
+    "LEAVE": 517,
+    "REMAIN": 483,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Sutton Coldfield",
+    "Electorate": 1000,
+    "LEAVE": 517,
+    "REMAIN": 483,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Swindon South",
+    "Electorate": 1000,
+    "LEAVE": 517,
+    "REMAIN": 483,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North East Somerset",
+    "Electorate": 1000,
+    "LEAVE": 516,
+    "REMAIN": 484,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Chippenham",
+    "Electorate": 1000,
+    "LEAVE": 516,
+    "REMAIN": 484,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Colchester",
+    "Electorate": 1000,
+    "LEAVE": 515,
+    "REMAIN": 485,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Reading West",
+    "Electorate": 1000,
+    "LEAVE": 515,
+    "REMAIN": 485,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Birmingham Hodge Hill",
+    "Electorate": 1000,
+    "LEAVE": 515,
+    "REMAIN": 485,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North East Hertfordshire",
+    "Electorate": 1000,
+    "LEAVE": 514,
+    "REMAIN": 486,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Caithness, Sutherland and Easter Ross",
+    "Electorate": 1000,
+    "LEAVE": 513,
+    "REMAIN": 487,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Sutton and Cheam",
+    "Electorate": 1000,
+    "LEAVE": 513,
+    "REMAIN": 487,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Saffron Walden",
+    "Electorate": 1000,
+    "LEAVE": 512,
+    "REMAIN": 488,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Derbyshire Dales",
+    "Electorate": 1000,
+    "LEAVE": 512,
+    "REMAIN": 488,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Birmingham Perry Barr",
+    "Electorate": 1000,
+    "LEAVE": 512,
+    "REMAIN": 488,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Watford",
+    "Electorate": 1000,
+    "LEAVE": 512,
+    "REMAIN": 488,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Warrington South",
+    "Electorate": 1000,
+    "LEAVE": 511,
+    "REMAIN": 489,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "West Dorset",
+    "Electorate": 1000,
+    "LEAVE": 510,
+    "REMAIN": 490,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Stratford-on-Avon",
+    "Electorate": 1000,
+    "LEAVE": 510,
+    "REMAIN": 490,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Ynys Môn",
+    "Electorate": 1000,
+    "LEAVE": 509,
+    "REMAIN": 491,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Central Devon",
+    "Electorate": 1000,
+    "LEAVE": 509,
+    "REMAIN": 491,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "South Norfolk",
+    "Electorate": 1000,
+    "LEAVE": 509,
+    "REMAIN": 491,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Hertsmere",
+    "Electorate": 1000,
+    "LEAVE": 508,
+    "REMAIN": 492,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Leicester West",
+    "Electorate": 1000,
+    "LEAVE": 508,
+    "REMAIN": 492,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Chichester",
+    "Electorate": 1000,
+    "LEAVE": 507,
+    "REMAIN": 493,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Chelmsford",
+    "Electorate": 1000,
+    "LEAVE": 507,
+    "REMAIN": 493,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Weaver Vale",
+    "Electorate": 1000,
+    "LEAVE": 506,
+    "REMAIN": 494,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "High Peak",
+    "Electorate": 1000,
+    "LEAVE": 505,
+    "REMAIN": 495,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "East Devon",
+    "Electorate": 1000,
+    "LEAVE": 504,
+    "REMAIN": 496,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Coventry South",
+    "Electorate": 1000,
+    "LEAVE": 504,
+    "REMAIN": 496,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Banbury",
+    "Electorate": 1000,
+    "LEAVE": 503,
+    "REMAIN": 497,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Somerton and Frome",
+    "Electorate": 1000,
+    "LEAVE": 503,
+    "REMAIN": 497,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Croydon Central",
+    "Electorate": 1000,
+    "LEAVE": 503,
+    "REMAIN": 497,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "North Wiltshire",
+    "Electorate": 1000,
+    "LEAVE": 503,
+    "REMAIN": 497,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Bridgend",
+    "Electorate": 1000,
+    "LEAVE": 503,
+    "REMAIN": 497,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Loughborough",
+    "Electorate": 1000,
+    "LEAVE": 501,
+    "REMAIN": 499,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Colne Valley",
+    "Electorate": 1000,
+    "LEAVE": 501,
+    "REMAIN": 499,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Blackley and Broughton",
+    "Electorate": 1000,
+    "LEAVE": 500,
+    "REMAIN": 500,
+    "Total": 1000,
+    "Winner": "LEAVE"
+  },
+  {
+    "Name": "Wallasey",
+    "Electorate": 1000,
+    "LEAVE": 499,
+    "REMAIN": 501,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Salisbury",
+    "Electorate": 1000,
+    "LEAVE": 499,
+    "REMAIN": 501,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Chingford and Woodford Green",
+    "Electorate": 1000,
+    "LEAVE": 499,
+    "REMAIN": 501,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Moray",
+    "Electorate": 1000,
+    "LEAVE": 499,
+    "REMAIN": 501,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Runnymede and Weybridge",
+    "Electorate": 1000,
+    "LEAVE": 498,
+    "REMAIN": 502,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Bromley and Chislehurst",
+    "Electorate": 1000,
+    "LEAVE": 498,
+    "REMAIN": 502,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Liverpool West Derby",
+    "Electorate": 1000,
+    "LEAVE": 498,
+    "REMAIN": 502,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Arundel and South Downs",
+    "Electorate": 1000,
+    "LEAVE": 497,
+    "REMAIN": 503,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Milton Keynes North",
+    "Electorate": 1000,
+    "LEAVE": 497,
+    "REMAIN": 503,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Wythenshawe and Sale East",
+    "Electorate": 1000,
+    "LEAVE": 496,
+    "REMAIN": 504,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Belfast North",
+    "Electorate": 1000,
+    "LEAVE": 496,
+    "REMAIN": 504,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Ruislip, Northwood and Pinner",
+    "Electorate": 1000,
+    "LEAVE": 495,
+    "REMAIN": 505,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Horsham",
+    "Electorate": 1000,
+    "LEAVE": 495,
+    "REMAIN": 505,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Southampton Test",
+    "Electorate": 1000,
+    "LEAVE": 494,
+    "REMAIN": 506,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Gower",
+    "Electorate": 1000,
+    "LEAVE": 493,
+    "REMAIN": 507,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "East Hampshire",
+    "Electorate": 1000,
+    "LEAVE": 493,
+    "REMAIN": 507,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Hertford and Stortford",
+    "Electorate": 1000,
+    "LEAVE": 492,
+    "REMAIN": 508,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Enfield North",
+    "Electorate": 1000,
+    "LEAVE": 492,
+    "REMAIN": 508,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Beaconsfield",
+    "Electorate": 1000,
+    "LEAVE": 490,
+    "REMAIN": 510,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Stretford and Urmston",
+    "Electorate": 1000,
+    "LEAVE": 489,
+    "REMAIN": 511,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Buckingham",
+    "Electorate": 1000,
+    "LEAVE": 489,
+    "REMAIN": 511,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Filton and Bradley Stoke",
+    "Electorate": 1000,
+    "LEAVE": 488,
+    "REMAIN": 512,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Pudsey",
+    "Electorate": 1000,
+    "LEAVE": 486,
+    "REMAIN": 514,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Wycombe",
+    "Electorate": 1000,
+    "LEAVE": 485,
+    "REMAIN": 515,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Angus",
+    "Electorate": 1000,
+    "LEAVE": 482,
+    "REMAIN": 518,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Monmouth",
+    "Electorate": 1000,
+    "LEAVE": 481,
+    "REMAIN": 519,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Newcastle upon Tyne Central",
+    "Electorate": 1000,
+    "LEAVE": 480,
+    "REMAIN": 520,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Reigate",
+    "Electorate": 1000,
+    "LEAVE": 480,
+    "REMAIN": 520,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "West Ham",
+    "Electorate": 1000,
+    "LEAVE": 480,
+    "REMAIN": 520,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Garston and Halewood",
+    "Electorate": 1000,
+    "LEAVE": 480,
+    "REMAIN": 520,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "The Cotswolds",
+    "Electorate": 1000,
+    "LEAVE": 479,
+    "REMAIN": 521,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Newbury",
+    "Electorate": 1000,
+    "LEAVE": 478,
+    "REMAIN": 522,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Epsom and Ewell",
+    "Electorate": 1000,
+    "LEAVE": 478,
+    "REMAIN": 522,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "North Down",
+    "Electorate": 1000,
+    "LEAVE": 476,
+    "REMAIN": 524,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Tynemouth",
+    "Electorate": 1000,
+    "LEAVE": 476,
+    "REMAIN": 524,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Glenrothes",
+    "Electorate": 1000,
+    "LEAVE": 476,
+    "REMAIN": 524,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "North Somerset",
+    "Electorate": 1000,
+    "LEAVE": 476,
+    "REMAIN": 524,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Harrow East",
+    "Electorate": 1000,
+    "LEAVE": 475,
+    "REMAIN": 525,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Dwyfor Meirionnydd",
+    "Electorate": 1000,
+    "LEAVE": 474,
+    "REMAIN": 526,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Mole Valley",
+    "Electorate": 1000,
+    "LEAVE": 473,
+    "REMAIN": 527,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Birmingham Edgbaston",
+    "Electorate": 1000,
+    "LEAVE": 473,
+    "REMAIN": 527,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Macclesfield",
+    "Electorate": 1000,
+    "LEAVE": 472,
+    "REMAIN": 528,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Harrogate and Knaresborough",
+    "Electorate": 1000,
+    "LEAVE": 472,
+    "REMAIN": 528,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Lewes",
+    "Electorate": 1000,
+    "LEAVE": 471,
+    "REMAIN": 529,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Bristol South",
+    "Electorate": 1000,
+    "LEAVE": 471,
+    "REMAIN": 529,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Westmorland and Lonsdale",
+    "Electorate": 1000,
+    "LEAVE": 471,
+    "REMAIN": 529,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Birmingham Selly Oak",
+    "Electorate": 1000,
+    "LEAVE": 469,
+    "REMAIN": 531,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Bristol East",
+    "Electorate": 1000,
+    "LEAVE": 468,
+    "REMAIN": 532,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Stockport",
+    "Electorate": 1000,
+    "LEAVE": 468,
+    "REMAIN": 532,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Bradford West",
+    "Electorate": 1000,
+    "LEAVE": 467,
+    "REMAIN": 533,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Windsor",
+    "Electorate": 1000,
+    "LEAVE": 467,
+    "REMAIN": 533,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Beckenham",
+    "Electorate": 1000,
+    "LEAVE": 466,
+    "REMAIN": 534,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Wirral South",
+    "Electorate": 1000,
+    "LEAVE": 465,
+    "REMAIN": 535,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Pontypridd",
+    "Electorate": 1000,
+    "LEAVE": 465,
+    "REMAIN": 535,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Nottingham South",
+    "Electorate": 1000,
+    "LEAVE": 465,
+    "REMAIN": 535,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Wantage",
+    "Electorate": 1000,
+    "LEAVE": 465,
+    "REMAIN": 535,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Mid Sussex",
+    "Electorate": 1000,
+    "LEAVE": 464,
+    "REMAIN": 536,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Witney",
+    "Electorate": 1000,
+    "LEAVE": 463,
+    "REMAIN": 537,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Southport",
+    "Electorate": 1000,
+    "LEAVE": 463,
+    "REMAIN": 537,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "East Ham",
+    "Electorate": 1000,
+    "LEAVE": 463,
+    "REMAIN": 537,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Ealing North",
+    "Electorate": 1000,
+    "LEAVE": 463,
+    "REMAIN": 537,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Kenilworth and Southam",
+    "Electorate": 1000,
+    "LEAVE": 462,
+    "REMAIN": 538,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "South West Hertfordshire",
+    "Electorate": 1000,
+    "LEAVE": 462,
+    "REMAIN": 538,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "North East Hampshire",
+    "Electorate": 1000,
+    "LEAVE": 462,
+    "REMAIN": 538,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Romsey and Southampton North",
+    "Electorate": 1000,
+    "LEAVE": 461,
+    "REMAIN": 539,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Leeds Central",
+    "Electorate": 1000,
+    "LEAVE": 460,
+    "REMAIN": 540,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Stroud",
+    "Electorate": 1000,
+    "LEAVE": 459,
+    "REMAIN": 541,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Truro and Falmouth",
+    "Electorate": 1000,
+    "LEAVE": 459,
+    "REMAIN": 541,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Croydon South",
+    "Electorate": 1000,
+    "LEAVE": 458,
+    "REMAIN": 542,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Tatton",
+    "Electorate": 1000,
+    "LEAVE": 456,
+    "REMAIN": 544,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Edmonton",
+    "Electorate": 1000,
+    "LEAVE": 455,
+    "REMAIN": 545,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Ceredigion",
+    "Electorate": 1000,
+    "LEAVE": 454,
+    "REMAIN": 546,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Hexham",
+    "Electorate": 1000,
+    "LEAVE": 453,
+    "REMAIN": 547,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Canterbury",
+    "Electorate": 1000,
+    "LEAVE": 453,
+    "REMAIN": 547,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "South East Cambridgeshire",
+    "Electorate": 1000,
+    "LEAVE": 453,
+    "REMAIN": 547,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Dumfries and Galloway",
+    "Electorate": 1000,
+    "LEAVE": 451,
+    "REMAIN": 549,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Harrow West",
+    "Electorate": 1000,
+    "LEAVE": 451,
+    "REMAIN": 549,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Maidenhead",
+    "Electorate": 1000,
+    "LEAVE": 450,
+    "REMAIN": 550,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Chesham and Amersham",
+    "Electorate": 1000,
+    "LEAVE": 450,
+    "REMAIN": 550,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Exeter",
+    "Electorate": 1000,
+    "LEAVE": 448,
+    "REMAIN": 552,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Na h-Eileanan an Iar",
+    "Electorate": 1000,
+    "LEAVE": 448,
+    "REMAIN": 552,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Wirral West",
+    "Electorate": 1000,
+    "LEAVE": 447,
+    "REMAIN": 553,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Mitcham and Morden",
+    "Electorate": 1000,
+    "LEAVE": 447,
+    "REMAIN": 553,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "York Outer",
+    "Electorate": 1000,
+    "LEAVE": 447,
+    "REMAIN": 553,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Tunbridge Wells",
+    "Electorate": 1000,
+    "LEAVE": 446,
+    "REMAIN": 554,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Dumfriesshire, Clydesdale and Tweeddale",
+    "Electorate": 1000,
+    "LEAVE": 446,
+    "REMAIN": 554,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Gordon",
+    "Electorate": 1000,
+    "LEAVE": 443,
+    "REMAIN": 557,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Woking",
+    "Electorate": 1000,
+    "LEAVE": 443,
+    "REMAIN": 557,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Ayr, Carrick and Cumnock",
+    "Electorate": 1000,
+    "LEAVE": 441,
+    "REMAIN": 559,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Sefton Central",
+    "Electorate": 1000,
+    "LEAVE": 441,
+    "REMAIN": 559,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Glasgow East",
+    "Electorate": 1000,
+    "LEAVE": 438,
+    "REMAIN": 562,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Cardiff West",
+    "Electorate": 1000,
+    "LEAVE": 438,
+    "REMAIN": 562,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Brighton Kemptown",
+    "Electorate": 1000,
+    "LEAVE": 436,
+    "REMAIN": 564,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Ross, Skye and Lochaber",
+    "Electorate": 1000,
+    "LEAVE": 435,
+    "REMAIN": 565,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Swansea West",
+    "Electorate": 1000,
+    "LEAVE": 434,
+    "REMAIN": 566,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "City of Durham",
+    "Electorate": 1000,
+    "LEAVE": 433,
+    "REMAIN": 567,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Ilford South",
+    "Electorate": 1000,
+    "LEAVE": 433,
+    "REMAIN": 567,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Brentford and Isleworth",
+    "Electorate": 1000,
+    "LEAVE": 433,
+    "REMAIN": 567,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Kirkcaldy and Cowdenbeath",
+    "Electorate": 1000,
+    "LEAVE": 433,
+    "REMAIN": 567,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Livingston",
+    "Electorate": 1000,
+    "LEAVE": 433,
+    "REMAIN": 567,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Berwickshire, Roxburgh and Selkirk",
+    "Electorate": 1000,
+    "LEAVE": 433,
+    "REMAIN": 567,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Aberdeen North",
+    "Electorate": 1000,
+    "LEAVE": 431,
+    "REMAIN": 569,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Henley",
+    "Electorate": 1000,
+    "LEAVE": 431,
+    "REMAIN": 569,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Cheltenham",
+    "Electorate": 1000,
+    "LEAVE": 429,
+    "REMAIN": 571,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Brent Central",
+    "Electorate": 1000,
+    "LEAVE": 429,
+    "REMAIN": 571,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Nottingham East",
+    "Electorate": 1000,
+    "LEAVE": 429,
+    "REMAIN": 571,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Cardiff South and Penarth",
+    "Electorate": 1000,
+    "LEAVE": 428,
+    "REMAIN": 572,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Wokingham",
+    "Electorate": 1000,
+    "LEAVE": 427,
+    "REMAIN": 573,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Cheadle",
+    "Electorate": 1000,
+    "LEAVE": 427,
+    "REMAIN": 573,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Brent North",
+    "Electorate": 1000,
+    "LEAVE": 426,
+    "REMAIN": 574,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Leicester South",
+    "Electorate": 1000,
+    "LEAVE": 424,
+    "REMAIN": 576,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "North Ayrshire and Arran",
+    "Electorate": 1000,
+    "LEAVE": 424,
+    "REMAIN": 576,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "City of Chester",
+    "Electorate": 1000,
+    "LEAVE": 423,
+    "REMAIN": 577,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Falkirk",
+    "Electorate": 1000,
+    "LEAVE": 421,
+    "REMAIN": 579,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Linlithgow and East Falkirk",
+    "Electorate": 1000,
+    "LEAVE": 420,
+    "REMAIN": 580,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Ealing Southall",
+    "Electorate": 1000,
+    "LEAVE": 418,
+    "REMAIN": 582,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Warwick and Leamington",
+    "Electorate": 1000,
+    "LEAVE": 416,
+    "REMAIN": 584,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Central Ayrshire",
+    "Electorate": 1000,
+    "LEAVE": 416,
+    "REMAIN": 584,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Bristol North West",
+    "Electorate": 1000,
+    "LEAVE": 416,
+    "REMAIN": 584,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Hendon",
+    "Electorate": 1000,
+    "LEAVE": 416,
+    "REMAIN": 584,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Esher and Walton",
+    "Electorate": 1000,
+    "LEAVE": 416,
+    "REMAIN": 584,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Rushcliffe",
+    "Electorate": 1000,
+    "LEAVE": 415,
+    "REMAIN": 585,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Fermanagh and South Tyrone",
+    "Electorate": 1000,
+    "LEAVE": 414,
+    "REMAIN": 586,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Guildford",
+    "Electorate": 1000,
+    "LEAVE": 412,
+    "REMAIN": 588,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "South Antrim",
+    "Electorate": 1000,
+    "LEAVE": 412,
+    "REMAIN": 588,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Croydon North",
+    "Electorate": 1000,
+    "LEAVE": 412,
+    "REMAIN": 588,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Chipping Barnet",
+    "Electorate": 1000,
+    "LEAVE": 411,
+    "REMAIN": 589,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Newcastle upon Tyne East",
+    "Electorate": 1000,
+    "LEAVE": 411,
+    "REMAIN": 589,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Glasgow South West",
+    "Electorate": 1000,
+    "LEAVE": 409,
+    "REMAIN": 591,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Kingston and Surbiton",
+    "Electorate": 1000,
+    "LEAVE": 408,
+    "REMAIN": 592,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "South West Surrey",
+    "Electorate": 1000,
+    "LEAVE": 407,
+    "REMAIN": 593,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Dundee West",
+    "Electorate": 1000,
+    "LEAVE": 407,
+    "REMAIN": 593,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Glasgow North East",
+    "Electorate": 1000,
+    "LEAVE": 407,
+    "REMAIN": 593,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Norwich South",
+    "Electorate": 1000,
+    "LEAVE": 405,
+    "REMAIN": 595,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Orkney and Shetland",
+    "Electorate": 1000,
+    "LEAVE": 403,
+    "REMAIN": 597,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Inverness, Nairn, Badenoch and Strathspey",
+    "Electorate": 1000,
+    "LEAVE": 401,
+    "REMAIN": 599,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Perth and North Perthshire",
+    "Electorate": 1000,
+    "LEAVE": 399,
+    "REMAIN": 601,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Airdrie and Shotts",
+    "Electorate": 1000,
+    "LEAVE": 398,
+    "REMAIN": 602,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Hitchin and Harpenden",
+    "Electorate": 1000,
+    "LEAVE": 398,
+    "REMAIN": 602,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Winchester",
+    "Electorate": 1000,
+    "LEAVE": 396,
+    "REMAIN": 604,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Mid Ulster",
+    "Electorate": 1000,
+    "LEAVE": 396,
+    "REMAIN": 604,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Ochil and South Perthshire",
+    "Electorate": 1000,
+    "LEAVE": 395,
+    "REMAIN": 605,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Kilmarnock and Loudoun",
+    "Electorate": 1000,
+    "LEAVE": 395,
+    "REMAIN": 605,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Argyll and Bute",
+    "Electorate": 1000,
+    "LEAVE": 394,
+    "REMAIN": 606,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Dunfermline and West Fife",
+    "Electorate": 1000,
+    "LEAVE": 394,
+    "REMAIN": 606,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "West Aberdeenshire and Kincardine",
+    "Electorate": 1000,
+    "LEAVE": 392,
+    "REMAIN": 608,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Cardiff North",
+    "Electorate": 1000,
+    "LEAVE": 391,
+    "REMAIN": 609,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "York Central",
+    "Electorate": 1000,
+    "LEAVE": 388,
+    "REMAIN": 612,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Coatbridge, Chryston and Bellshill",
+    "Electorate": 1000,
+    "LEAVE": 388,
+    "REMAIN": 612,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Altrincham and Sale West",
+    "Electorate": 1000,
+    "LEAVE": 386,
+    "REMAIN": 614,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "South Cambridgeshire",
+    "Electorate": 1000,
+    "LEAVE": 385,
+    "REMAIN": 615,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Dundee East",
+    "Electorate": 1000,
+    "LEAVE": 384,
+    "REMAIN": 616,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Reading East",
+    "Electorate": 1000,
+    "LEAVE": 383,
+    "REMAIN": 617,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Manchester Gorton",
+    "Electorate": 1000,
+    "LEAVE": 382,
+    "REMAIN": 618,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Oxford West and Abingdon",
+    "Electorate": 1000,
+    "LEAVE": 380,
+    "REMAIN": 620,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "West Dunbartonshire",
+    "Electorate": 1000,
+    "LEAVE": 380,
+    "REMAIN": 620,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Midlothian",
+    "Electorate": 1000,
+    "LEAVE": 379,
+    "REMAIN": 621,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Enfield Southgate",
+    "Electorate": 1000,
+    "LEAVE": 379,
+    "REMAIN": 621,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "St Albans",
+    "Electorate": 1000,
+    "LEAVE": 378,
+    "REMAIN": 622,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Motherwell and Wishaw",
+    "Electorate": 1000,
+    "LEAVE": 377,
+    "REMAIN": 623,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Rutherglen and Hamilton West",
+    "Electorate": 1000,
+    "LEAVE": 376,
+    "REMAIN": 624,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Leeds North East",
+    "Electorate": 1000,
+    "LEAVE": 374,
+    "REMAIN": 626,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Newry and Armagh",
+    "Electorate": 1000,
+    "LEAVE": 371,
+    "REMAIN": 629,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Cumbernauld, Kilsyth and Kirkintilloch East",
+    "Electorate": 1000,
+    "LEAVE": 370,
+    "REMAIN": 630,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "East Kilbride, Strathaven and Lesmahagow",
+    "Electorate": 1000,
+    "LEAVE": 369,
+    "REMAIN": 631,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Manchester Central",
+    "Electorate": 1000,
+    "LEAVE": 364,
+    "REMAIN": 636,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "North East Fife",
+    "Electorate": 1000,
+    "LEAVE": 363,
+    "REMAIN": 637,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Inverclyde",
+    "Electorate": 1000,
+    "LEAVE": 362,
+    "REMAIN": 638,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Lanark and Hamilton East",
+    "Electorate": 1000,
+    "LEAVE": 360,
+    "REMAIN": 640,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Arfon",
+    "Electorate": 1000,
+    "LEAVE": 358,
+    "REMAIN": 642,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Greenwich and Woolwich",
+    "Electorate": 1000,
+    "LEAVE": 357,
+    "REMAIN": 643,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Birmingham Ladywood",
+    "Electorate": 1000,
+    "LEAVE": 356,
+    "REMAIN": 644,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Paisley and Renfrewshire North",
+    "Electorate": 1000,
+    "LEAVE": 355,
+    "REMAIN": 645,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Leeds North West",
+    "Electorate": 1000,
+    "LEAVE": 354,
+    "REMAIN": 646,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "East Lothian",
+    "Electorate": 1000,
+    "LEAVE": 354,
+    "REMAIN": 646,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Lewisham East",
+    "Electorate": 1000,
+    "LEAVE": 354,
+    "REMAIN": 646,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Liverpool Wavertree",
+    "Electorate": 1000,
+    "LEAVE": 353,
+    "REMAIN": 647,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Paisley and Renfrewshire South",
+    "Electorate": 1000,
+    "LEAVE": 348,
+    "REMAIN": 652,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Leyton and Wanstead",
+    "Electorate": 1000,
+    "LEAVE": 348,
+    "REMAIN": 652,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Lewisham West and Penge",
+    "Electorate": 1000,
+    "LEAVE": 346,
+    "REMAIN": 654,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Poplar and Limehouse",
+    "Electorate": 1000,
+    "LEAVE": 342,
+    "REMAIN": 658,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Sheffield Hallam",
+    "Electorate": 1000,
+    "LEAVE": 340,
+    "REMAIN": 660,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Westminster North",
+    "Electorate": 1000,
+    "LEAVE": 337,
+    "REMAIN": 663,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Birmingham Hall Green",
+    "Electorate": 1000,
+    "LEAVE": 336,
+    "REMAIN": 664,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Walthamstow",
+    "Electorate": 1000,
+    "LEAVE": 335,
+    "REMAIN": 665,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Twickenham",
+    "Electorate": 1000,
+    "LEAVE": 333,
+    "REMAIN": 667,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "West Tyrone",
+    "Electorate": 1000,
+    "LEAVE": 332,
+    "REMAIN": 668,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Hove",
+    "Electorate": 1000,
+    "LEAVE": 329,
+    "REMAIN": 671,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "South Down",
+    "Electorate": 1000,
+    "LEAVE": 328,
+    "REMAIN": 672,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Oxford East",
+    "Electorate": 1000,
+    "LEAVE": 325,
+    "REMAIN": 675,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Stirling",
+    "Electorate": 1000,
+    "LEAVE": 323,
+    "REMAIN": 677,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Aberdeen South",
+    "Electorate": 1000,
+    "LEAVE": 321,
+    "REMAIN": 679,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Cardiff Central",
+    "Electorate": 1000,
+    "LEAVE": 320,
+    "REMAIN": 680,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Sheffield Central",
+    "Electorate": 1000,
+    "LEAVE": 319,
+    "REMAIN": 681,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Bath",
+    "Electorate": 1000,
+    "LEAVE": 317,
+    "REMAIN": 683,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Glasgow North West",
+    "Electorate": 1000,
+    "LEAVE": 315,
+    "REMAIN": 685,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Camberwell and Peckham",
+    "Electorate": 1000,
+    "LEAVE": 315,
+    "REMAIN": 685,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Hammersmith",
+    "Electorate": 1000,
+    "LEAVE": 313,
+    "REMAIN": 687,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Kensington",
+    "Electorate": 1000,
+    "LEAVE": 312,
+    "REMAIN": 688,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Finchley and Golders Green",
+    "Electorate": 1000,
+    "LEAVE": 311,
+    "REMAIN": 689,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Bethnal Green and Bow",
+    "Electorate": 1000,
+    "LEAVE": 309,
+    "REMAIN": 691,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Belfast South",
+    "Electorate": 1000,
+    "LEAVE": 305,
+    "REMAIN": 695,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Wimbledon",
+    "Electorate": 1000,
+    "LEAVE": 294,
+    "REMAIN": 706,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Ealing Central and Acton",
+    "Electorate": 1000,
+    "LEAVE": 292,
+    "REMAIN": 708,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Chelsea and Fulham",
+    "Electorate": 1000,
+    "LEAVE": 291,
+    "REMAIN": 709,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Edinburgh West",
+    "Electorate": 1000,
+    "LEAVE": 288,
+    "REMAIN": 712,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Glasgow Central",
+    "Electorate": 1000,
+    "LEAVE": 288,
+    "REMAIN": 712,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Richmond Park",
+    "Electorate": 1000,
+    "LEAVE": 287,
+    "REMAIN": 713,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Islington South and Finsbury",
+    "Electorate": 1000,
+    "LEAVE": 283,
+    "REMAIN": 717,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Glasgow South",
+    "Electorate": 1000,
+    "LEAVE": 282,
+    "REMAIN": 718,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Cities of London and Westminster",
+    "Electorate": 1000,
+    "LEAVE": 281,
+    "REMAIN": 719,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Edinburgh South West",
+    "Electorate": 1000,
+    "LEAVE": 279,
+    "REMAIN": 721,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Putney",
+    "Electorate": 1000,
+    "LEAVE": 278,
+    "REMAIN": 722,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Edinburgh East",
+    "Electorate": 1000,
+    "LEAVE": 276,
+    "REMAIN": 724,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Liverpool Riverside",
+    "Electorate": 1000,
+    "LEAVE": 273,
+    "REMAIN": 727,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "East Dunbartonshire",
+    "Electorate": 1000,
+    "LEAVE": 269,
+    "REMAIN": 731,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Holborn and St Pancras",
+    "Electorate": 1000,
+    "LEAVE": 267,
+    "REMAIN": 733,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Cambridge",
+    "Electorate": 1000,
+    "LEAVE": 262,
+    "REMAIN": 738,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Bermondsey and Old Southwark",
+    "Electorate": 1000,
+    "LEAVE": 261,
+    "REMAIN": 739,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Belfast West",
+    "Electorate": 1000,
+    "LEAVE": 259,
+    "REMAIN": 741,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Brighton Pavilion",
+    "Electorate": 1000,
+    "LEAVE": 259,
+    "REMAIN": 741,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "East Renfrewshire",
+    "Electorate": 1000,
+    "LEAVE": 257,
+    "REMAIN": 743,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Tooting",
+    "Electorate": 1000,
+    "LEAVE": 256,
+    "REMAIN": 744,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Hornsey and Wood Green",
+    "Electorate": 1000,
+    "LEAVE": 250,
+    "REMAIN": 750,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Manchester Withington",
+    "Electorate": 1000,
+    "LEAVE": 249,
+    "REMAIN": 751,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Lewisham Deptford",
+    "Electorate": 1000,
+    "LEAVE": 244,
+    "REMAIN": 756,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Tottenham",
+    "Electorate": 1000,
+    "LEAVE": 238,
+    "REMAIN": 762,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Hampstead and Kilburn",
+    "Electorate": 1000,
+    "LEAVE": 237,
+    "REMAIN": 763,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Dulwich and West Norwood",
+    "Electorate": 1000,
+    "LEAVE": 229,
+    "REMAIN": 771,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Hackney South and Shoreditch",
+    "Electorate": 1000,
+    "LEAVE": 228,
+    "REMAIN": 772,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Vauxhall",
+    "Electorate": 1000,
+    "LEAVE": 224,
+    "REMAIN": 776,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Edinburgh South",
+    "Electorate": 1000,
+    "LEAVE": 222,
+    "REMAIN": 778,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Battersea",
+    "Electorate": 1000,
+    "LEAVE": 220,
+    "REMAIN": 780,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Edinburgh North and Leith",
+    "Electorate": 1000,
+    "LEAVE": 218,
+    "REMAIN": 782,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Foyle",
+    "Electorate": 1000,
+    "LEAVE": 217,
+    "REMAIN": 783,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Glasgow North",
+    "Electorate": 1000,
+    "LEAVE": 216,
+    "REMAIN": 784,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Islington North",
+    "Electorate": 1000,
+    "LEAVE": 216,
+    "REMAIN": 784,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Bristol West",
+    "Electorate": 1000,
+    "LEAVE": 207,
+    "REMAIN": 793,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Streatham",
+    "Electorate": 1000,
+    "LEAVE": 205,
+    "REMAIN": 795,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  },
+  {
+    "Name": "Hackney North and Stoke Newington",
+    "Electorate": 1000,
+    "LEAVE": 205,
+    "REMAIN": 795,
+    "Total": 1000,
+    "Winner": "REMAIN"
+  }
+]

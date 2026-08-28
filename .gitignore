@@ -1,0 +1,14 @@
+# Editor / OS / local tooling
+.idea/
+.vscode/
+.claude/
+*.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Spreadsheet auto-backups (timestamped snapshots, not source of truth)
+*.bak_*

@@ -1,0 +1,42 @@
+{
+  "nation": "scotland",
+  "n_seats": 57,
+  "n_features": 57,
+  "n_pca_components": 11,
+  "pca_variance_explained": 0.8975402229517122,
+  "k_max_searched": 11,
+  "working_k": 8,
+  "gmm_best_k": 8,
+  "gmm_bic_by_k": {
+    "2": 2523.936004381259,
+    "3": 2394.3995359415776,
+    "4": 2460.858846751088,
+    "5": 2470.220437339418,
+    "6": 2500.9368002593824,
+    "7": 2419.61765399884,
+    "8": 2338.2290618290203,
+    "9": 2437.1819502042526,
+    "10": 2406.091919525405,
+    "11": 2439.505732707847
+  },
+  "kmeans_silhouette_best_k": 2,
+  "kmeans_silhouette_by_k": {
+    "2": 0.3945364478228537,
+    "3": 0.25398754018989345,
+    "4": 0.2580695879052731,
+    "5": 0.2532576629383637,
+    "6": 0.2740863829802716,
+    "7": 0.281543163481285,
+    "8": 0.197470607476227,
+    "9": 0.22086111956634424,
+    "10": 0.2207580095051363,
+    "11": 0.21994616187482507
+  },
+  "note": "kmeans_silhouette_best_k is a diagnostic (the single strongest hard split); KMeans_label/Agglomerative_label in segments_*.csv are both computed at the GMM working_k for a like-for-like comparison, not at kmeans_silhouette_best_k.",
+  "ari_kmeans_vs_gmm_at_working_k": 0.5125194043580751,
+  "ari_kmeans_vs_agglomerative_at_working_k": 0.5702299392560952,
+  "ari_agglomerative_vs_gmm_at_working_k": 0.6840255722829449,
+  "dbscan_eps": 7.422607326788816,
+  "dbscan_min_samples": 3,
+  "dbscan_n_outliers": 2
+}

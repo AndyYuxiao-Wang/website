@@ -1,0 +1,562 @@
+[
+  {
+    "Nation": "england",
+    "Party": "CON",
+    "Target": "2024_share",
+    "CV_R2": 0.716,
+    "Top_standardized_coefficients": {
+      "Degrees": -6.51,
+      "ManagerialProfessional": 4.8,
+      "LGBT": -2.6,
+      "WhiteOther": 2.2,
+      "Veterans": 1.91,
+      "SocialRent": -1.83
+    }
+  },
+  {
+    "Nation": "england",
+    "Party": "GRN",
+    "Target": "2024_share",
+    "CV_R2": 0.429,
+    "Top_standardized_coefficients": {
+      "LGBT": 2.67,
+      "Degrees": 1.72,
+      "NoQualifications": 1.02,
+      "Veterans": -0.88,
+      "Intermediate": 0.87,
+      "WhiteOther": -0.76
+    }
+  },
+  {
+    "Nation": "england",
+    "Party": "LAB",
+    "Target": "2024_share",
+    "CV_R2": 0.551,
+    "Top_standardized_coefficients": {
+      "Age65plus": -7.2,
+      "ManagerialProfessional": -5.51,
+      "Intermediate": -4.83,
+      "Age18to24": -4.75,
+      "Age0to17": -4.04,
+      "Christian": 3.53
+    }
+  },
+  {
+    "Nation": "england",
+    "Party": "LD",
+    "Target": "2024_share",
+    "CV_R2": 0.386,
+    "Top_standardized_coefficients": {
+      "Degrees": 8.28,
+      "Age65plus": 8.25,
+      "Age0to17": 6.15,
+      "Age18to24": 3.88,
+      "Intermediate": 3.61,
+      "Jewish": -2.43
+    }
+  },
+  {
+    "Nation": "england",
+    "Party": "OTHER",
+    "Target": "2024_share",
+    "CV_R2": 0.354,
+    "Top_standardized_coefficients": {
+      "Muslim": 2.23,
+      "NoReligion": -1.95,
+      "Indian": -1.71,
+      "Black": -1.28,
+      "Hindu": 1.07,
+      "LGBT": 0.97
+    }
+  },
+  {
+    "Nation": "england",
+    "Party": "REF",
+    "Target": "2024_share",
+    "CV_R2": 0.607,
+    "Top_standardized_coefficients": {
+      "Degrees": -3.82,
+      "NoQualifications": 2.29,
+      "NoReligion": 1.61,
+      "Age65plus": -1.38,
+      "LGBT": -1.29,
+      "Christian": 1.2
+    }
+  },
+  {
+    "Nation": "england",
+    "Party": "CON",
+    "Target": "swing",
+    "CV_R2": 0.651,
+    "Top_standardized_coefficients": {
+      "Degrees": 4.99,
+      "ManagerialProfessional": -3.7,
+      "Routine": -2.32,
+      "OtherEthnicity": 2.11,
+      "WhiteOther": -2.08,
+      "Intermediate": -1.88
+    }
+  },
+  {
+    "Nation": "england",
+    "Party": "GRN",
+    "Target": "swing",
+    "CV_R2": 0.353,
+    "Top_standardized_coefficients": {
+      "Degrees": 1.84,
+      "NoQualifications": 1.08,
+      "LGBT": 0.73,
+      "Veterans": -0.68,
+      "ManagerialProfessional": -0.62,
+      "WhiteOther": -0.6
+    }
+  },
+  {
+    "Nation": "england",
+    "Party": "LAB",
+    "Target": "swing",
+    "CV_R2": 0.677,
+    "Top_standardized_coefficients": {
+      "Muslim": -3.78,
+      "Degrees": -3.68,
+      "NoReligion": 2.96,
+      "ManagerialProfessional": 2.23,
+      "Indian": -1.92,
+      "OwnerOccupation": 1.81
+    }
+  },
+  {
+    "Nation": "england",
+    "Party": "LD",
+    "Target": "swing",
+    "CV_R2": 0.136,
+    "Top_standardized_coefficients": {
+      "Degrees": 3.12,
+      "Age65plus": 2.84,
+      "Age0to17": 2.57,
+      "Intermediate": 2.49,
+      "Age18to24": 2.04,
+      "Jewish": -1.22
+    }
+  },
+  {
+    "Nation": "england",
+    "Party": "OTHER",
+    "Target": "swing",
+    "CV_R2": 0.429,
+    "Top_standardized_coefficients": {
+      "Muslim": 2.33,
+      "NoReligion": -1.58,
+      "Indian": -1.58,
+      "Black": -1.23,
+      "LGBT": 1.05,
+      "Hindu": 0.89
+    }
+  },
+  {
+    "Nation": "england",
+    "Party": "REF",
+    "Target": "swing",
+    "CV_R2": 0.467,
+    "Top_standardized_coefficients": {
+      "Degrees": -5.6,
+      "ManagerialProfessional": 2.17,
+      "SocialRent": -1.52,
+      "OtherEthnicity": -1.3,
+      "LGBT": -1.24,
+      "NoReligion": 1.23
+    }
+  },
+  {
+    "Nation": "scotland",
+    "Party": "CON",
+    "Target": "2024_share",
+    "CV_R2": 0.412,
+    "Top_standardized_coefficients": {
+      "Age65plus": 2.9,
+      "PrivateRent": 2.84,
+      "Superwealthy": 2.82,
+      "LGBT": -2.7,
+      "Bangladeshi": -1.99,
+      "Intermediate": 1.9
+    }
+  },
+  {
+    "Nation": "scotland",
+    "Party": "GRN",
+    "Target": "2024_share",
+    "CV_R2": 0.478,
+    "Top_standardized_coefficients": {
+      "Bangladeshi": -0.7,
+      "Age0to17": -0.69,
+      "Veterans": -0.59,
+      "Degrees": 0.55,
+      "Mixed": 0.51,
+      "LGBT": 0.5
+    }
+  },
+  {
+    "Nation": "scotland",
+    "Party": "LAB",
+    "Target": "2024_share",
+    "CV_R2": 0.391,
+    "Top_standardized_coefficients": {
+      "Age65plus": -4.55,
+      "Buddhist": -4.28,
+      "Intermediate": -3.35,
+      "Superwealthy": -2.58,
+      "Veterans": -2.36,
+      "Christian": 2.09
+    }
+  },
+  {
+    "Nation": "scotland",
+    "Party": "LD",
+    "Target": "2024_share",
+    "CV_R2": -0.103,
+    "Top_standardized_coefficients": {
+      "PrivateRent": -4.3,
+      "Age65plus": 2.77,
+      "Buddhist": 2.44,
+      "OwnerOccupation": 2.26,
+      "Jewish": -2.25,
+      "Bangladeshi": 2.18
+    }
+  },
+  {
+    "Nation": "scotland",
+    "Party": "OTHER",
+    "Target": "2024_share",
+    "CV_R2": -0.152,
+    "Top_standardized_coefficients": {
+      "Christian": 0.73,
+      "Sikh": -0.61,
+      "NoReligion": -0.59,
+      "Routine": 0.57,
+      "PublicSector": 0.48,
+      "NoQualifications": -0.42
+    }
+  },
+  {
+    "Nation": "scotland",
+    "Party": "REF",
+    "Target": "2024_share",
+    "CV_R2": 0.662,
+    "Top_standardized_coefficients": {
+      "ManagerialProfessional": -0.46,
+      "Routine": 0.44,
+      "Degrees": -0.42,
+      "NoReligion": 0.37,
+      "Christian": -0.33,
+      "NoQualifications": 0.31
+    }
+  },
+  {
+    "Nation": "scotland",
+    "Party": "SNP",
+    "Target": "2024_share",
+    "CV_R2": -0.075,
+    "Top_standardized_coefficients": {
+      "Degrees": -1.3,
+      "PrivateRent": 1.28,
+      "Veterans": 0.99,
+      "Age65plus": -0.88,
+      "Chinese": -0.84,
+      "OwnerOccupation": -0.79
+    }
+  },
+  {
+    "Nation": "scotland",
+    "Party": "CON",
+    "Target": "swing",
+    "CV_R2": 0.179,
+    "Top_standardized_coefficients": {
+      "Buddhist": 0.79,
+      "Jewish": -0.69,
+      "Superwealthy": 0.49,
+      "Age0to17": 0.47,
+      "Chinese": 0.46,
+      "WhiteOther": -0.43
+    }
+  },
+  {
+    "Nation": "scotland",
+    "Party": "GRN",
+    "Target": "swing",
+    "CV_R2": 0.385,
+    "Top_standardized_coefficients": {
+      "Degrees": 0.62,
+      "Veterans": -0.58,
+      "Bangladeshi": -0.58,
+      "Age0to17": -0.53,
+      "Black": 0.39,
+      "LGBT": 0.37
+    }
+  },
+  {
+    "Nation": "scotland",
+    "Party": "LAB",
+    "Target": "swing",
+    "CV_R2": -0.146,
+    "Top_standardized_coefficients": {
+      "Buddhist": -2.37,
+      "Age65plus": -2.01,
+      "Intermediate": -1.81,
+      "Jewish": 1.78,
+      "PrivateRent": 1.27,
+      "Chinese": -1.17
+    }
+  },
+  {
+    "Nation": "scotland",
+    "Party": "LD",
+    "Target": "swing",
+    "CV_R2": -0.033,
+    "Top_standardized_coefficients": {
+      "PrivateRent": -1.57,
+      "Buddhist": 1.0,
+      "Intermediate": 0.96,
+      "Bangladeshi": 0.94,
+      "Jewish": -0.89,
+      "OwnerOccupation": 0.85
+    }
+  },
+  {
+    "Nation": "scotland",
+    "Party": "OTHER",
+    "Target": "swing",
+    "CV_R2": -0.182,
+    "Top_standardized_coefficients": {
+      "Christian": 0.71,
+      "Sikh": -0.63,
+      "Routine": 0.62,
+      "NoReligion": -0.59,
+      "Intermediate": -0.41,
+      "PublicSector": 0.39
+    }
+  },
+  {
+    "Nation": "scotland",
+    "Party": "REF",
+    "Target": "swing",
+    "CV_R2": 0.428,
+    "Top_standardized_coefficients": {
+      "Degrees": -0.48,
+      "NoQualifications": 0.47,
+      "Superwealthy": 0.44,
+      "Buddhist": -0.41,
+      "ManagerialProfessional": -0.34,
+      "Bangladeshi": -0.28
+    }
+  },
+  {
+    "Nation": "scotland",
+    "Party": "SNP",
+    "Target": "swing",
+    "CV_R2": -0.256,
+    "Top_standardized_coefficients": {
+      "Age0to17": 1.02,
+      "WhiteOther": 0.99,
+      "NoQualifications": 0.95,
+      "Age65plus": 0.8,
+      "Intermediate": 0.73,
+      "Hindu": -0.69
+    }
+  },
+  {
+    "Nation": "wales",
+    "Party": "CON",
+    "Target": "2024_share",
+    "CV_R2": 0.547,
+    "Top_standardized_coefficients": {
+      "Veterans": 3.54,
+      "ManagerialProfessional": 1.46,
+      "Age18to24": -1.25,
+      "NoReligion": -1.14,
+      "Christian": 1.11,
+      "PrivateRent": 1.11
+    }
+  },
+  {
+    "Nation": "wales",
+    "Party": "GRN",
+    "Target": "2024_share",
+    "CV_R2": 0.755,
+    "Top_standardized_coefficients": {
+      "PublicSector": -0.29,
+      "Hindu": 0.25,
+      "Age0to17": -0.25,
+      "Arab": 0.24,
+      "Christian": -0.21,
+      "Indian": 0.2
+    }
+  },
+  {
+    "Nation": "wales",
+    "Party": "LAB",
+    "Target": "2024_share",
+    "CV_R2": 0.521,
+    "Top_standardized_coefficients": {
+      "Intermediate": -3.21,
+      "Rural": -2.89,
+      "ManagerialProfessional": 0.96,
+      "Routine": 0.79,
+      "NoQualifications": 0.78,
+      "LGBT": -0.74
+    }
+  },
+  {
+    "Nation": "wales",
+    "Party": "LD",
+    "Target": "2024_share",
+    "CV_R2": -0.048,
+    "Top_standardized_coefficients": {
+      "Buddhist": 2.69,
+      "Intermediate": 1.9,
+      "Jewish": 0.92,
+      "PublicSector": -0.88,
+      "Degrees": -0.75,
+      "SocialRent": 0.59
+    }
+  },
+  {
+    "Nation": "wales",
+    "Party": "OTHER",
+    "Target": "2024_share",
+    "CV_R2": -0.166,
+    "Top_standardized_coefficients": {
+      "Jewish": -0.38,
+      "Age18to24": -0.38,
+      "NoReligion": 0.36,
+      "Intermediate": -0.35,
+      "Sikh": 0.33,
+      "Age65plus": -0.32
+    }
+  },
+  {
+    "Nation": "wales",
+    "Party": "PLAID",
+    "Target": "2024_share",
+    "CV_R2": 0.251,
+    "Top_standardized_coefficients": {
+      "Rural": 4.47,
+      "Veterans": -4.12,
+      "Buddhist": -2.38,
+      "Intermediate": 2.07,
+      "ManagerialProfessional": -1.83,
+      "LGBT": 1.75
+    }
+  },
+  {
+    "Nation": "wales",
+    "Party": "REF",
+    "Target": "2024_share",
+    "CV_R2": -0.071,
+    "Top_standardized_coefficients": {
+      "Rural": -1.47,
+      "Age0to17": 1.13,
+      "Jewish": -0.98,
+      "SocialRent": -0.87,
+      "OwnerOccupation": 0.77,
+      "Sikh": -0.71
+    }
+  },
+  {
+    "Nation": "wales",
+    "Party": "CON",
+    "Target": "swing",
+    "CV_R2": -0.026,
+    "Top_standardized_coefficients": {
+      "WhiteOther": -1.49,
+      "Intermediate": -1.23,
+      "Rural": 1.15,
+      "Buddhist": -1.11,
+      "Jewish": 0.95,
+      "PublicSector": 0.82
+    }
+  },
+  {
+    "Nation": "wales",
+    "Party": "GRN",
+    "Target": "swing",
+    "CV_R2": 0.49,
+    "Top_standardized_coefficients": {
+      "Veterans": -0.38,
+      "Age0to17": -0.35,
+      "Arab": 0.34,
+      "Hindu": 0.33,
+      "Mixed": -0.27,
+      "OtherEthnicity": 0.25
+    }
+  },
+  {
+    "Nation": "wales",
+    "Party": "LAB",
+    "Target": "swing",
+    "CV_R2": 0.115,
+    "Top_standardized_coefficients": {
+      "Age0to17": -1.31,
+      "ManagerialProfessional": 1.09,
+      "LGBT": -0.97,
+      "Chinese": -0.83,
+      "Jewish": -0.83,
+      "Veterans": 0.81
+    }
+  },
+  {
+    "Nation": "wales",
+    "Party": "LD",
+    "Target": "swing",
+    "CV_R2": -0.405,
+    "Top_standardized_coefficients": {
+      "Jewish": 0.6,
+      "ManagerialProfessional": -0.5,
+      "Age0to17": 0.39,
+      "Age18to24": 0.38,
+      "Rural": 0.35,
+      "PublicSector": 0.29
+    }
+  },
+  {
+    "Nation": "wales",
+    "Party": "OTHER",
+    "Target": "swing",
+    "CV_R2": -0.317,
+    "Top_standardized_coefficients": {
+      "Veterans": 0.42,
+      "Intermediate": -0.42,
+      "Age0to17": -0.4,
+      "Age18to24": -0.37,
+      "Routine": 0.36,
+      "PrivateRent": -0.36
+    }
+  },
+  {
+    "Nation": "wales",
+    "Party": "PLAID",
+    "Target": "swing",
+    "CV_R2": -0.001,
+    "Top_standardized_coefficients": {
+      "Veterans": -1.34,
+      "LGBT": 0.96,
+      "Intermediate": 0.79,
+      "Rural": 0.57,
+      "Mixed": 0.53,
+      "PublicSector": -0.51
+    }
+  },
+  {
+    "Nation": "wales",
+    "Party": "REF",
+    "Target": "swing",
+    "CV_R2": -0.255,
+    "Top_standardized_coefficients": {
+      "Age0to17": 1.4,
+      "SocialRent": -1.39,
+      "Rural": -1.34,
+      "Sikh": -1.0,
+      "Buddhist": 0.81,
+      "Jewish": -0.8
+    }
+  }
+]

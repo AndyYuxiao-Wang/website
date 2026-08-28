@@ -1,0 +1,1558 @@
+{
+  "nation": "england",
+  "adjusted_rand_index": 0.11,
+  "n_seats": 543,
+  "n_disagreements": 240,
+  "contingency_table": {
+    "Segment_1": {
+      "Average": 1,
+      "Blues": 4,
+      "Left": 0,
+      "Liberal": 1,
+      "Muslim": 0,
+      "Progressives": 9,
+      "Reforms": 1
+    },
+    "Segment_2": {
+      "Average": 6,
+      "Blues": 0,
+      "Left": 0,
+      "Liberal": 2,
+      "Muslim": 20,
+      "Progressives": 2,
+      "Reforms": 5
+    },
+    "Segment_3": {
+      "Average": 20,
+      "Blues": 0,
+      "Left": 11,
+      "Liberal": 3,
+      "Muslim": 0,
+      "Progressives": 5,
+      "Reforms": 1
+    },
+    "Segment_4": {
+      "Average": 52,
+      "Blues": 0,
+      "Left": 0,
+      "Liberal": 0,
+      "Muslim": 0,
+      "Progressives": 0,
+      "Reforms": 12
+    },
+    "Segment_5": {
+      "Average": 7,
+      "Blues": 2,
+      "Left": 6,
+      "Liberal": 8,
+      "Muslim": 4,
+      "Progressives": 12,
+      "Reforms": 5
+    },
+    "Segment_6": {
+      "Average": 40,
+      "Blues": 0,
+      "Left": 0,
+      "Liberal": 35,
+      "Muslim": 0,
+      "Progressives": 0,
+      "Reforms": 27
+    },
+    "Segment_7": {
+      "Average": 5,
+      "Blues": 0,
+      "Left": 0,
+      "Liberal": 19,
+      "Muslim": 0,
+      "Progressives": 0,
+      "Reforms": 0
+    },
+    "Segment_8": {
+      "Average": 41,
+      "Blues": 0,
+      "Left": 0,
+      "Liberal": 0,
+      "Muslim": 0,
+      "Progressives": 0,
+      "Reforms": 14
+    },
+    "Segment_9": {
+      "Average": 1,
+      "Blues": 0,
+      "Left": 0,
+      "Liberal": 0,
+      "Muslim": 0,
+      "Progressives": 29,
+      "Reforms": 0
+    },
+    "Segment_10": {
+      "Average": 35,
+      "Blues": 0,
+      "Left": 0,
+      "Liberal": 32,
+      "Muslim": 0,
+      "Progressives": 11,
+      "Reforms": 6
+    },
+    "Segment_11": {
+      "Average": 17,
+      "Blues": 0,
+      "Left": 0,
+      "Liberal": 25,
+      "Muslim": 0,
+      "Progressives": 0,
+      "Reforms": 6
+    },
+    "Segment_12": {
+      "Average": 1,
+      "Blues": 0,
+      "Left": 0,
+      "Liberal": 0,
+      "Muslim": 0,
+      "Progressives": 0,
+      "Reforms": 0
+    }
+  },
+  "disagreement_seats": [
+    {
+      "Seat": "Aldershot",
+      "DominantTribe": "Average",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Altrincham and Sale West",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Amber Valley",
+      "DominantTribe": "Reforms",
+      "GMM_label": 4,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Arundel and South Downs",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Ashfield",
+      "DominantTribe": "Reforms",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Banbury",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Barnsley South",
+      "DominantTribe": "Reforms",
+      "GMM_label": 8,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Barrow and Furness",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Bassetlaw",
+      "DominantTribe": "Reforms",
+      "GMM_label": 8,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Bath",
+      "DominantTribe": "Left",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Beaconsfield",
+      "DominantTribe": "Liberal",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Beckenham and Penge",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Bethnal Green and Stepney",
+      "DominantTribe": "Muslim",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Birkenhead",
+      "DominantTribe": "Average",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Birmingham Edgbaston",
+      "DominantTribe": "Progressives",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Birmingham Erdington",
+      "DominantTribe": "Progressives",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Birmingham Selly Oak",
+      "DominantTribe": "Left",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Bishop Auckland",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Blaydon and Consett",
+      "DominantTribe": "Reforms",
+      "GMM_label": 8,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Bolsover",
+      "DominantTribe": "Reforms",
+      "GMM_label": 8,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Bolton West",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Boston and Skegness",
+      "DominantTribe": "Reforms",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Bradford South",
+      "DominantTribe": "Reforms",
+      "GMM_label": 2,
+      "SegmentMajorityTribe": "Muslim"
+    },
+    {
+      "Seat": "Brent West",
+      "DominantTribe": "Blues",
+      "GMM_label": 1,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Brentwood and Ongar",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Bridgwater",
+      "DominantTribe": "Reforms",
+      "GMM_label": 4,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Bridlington and The Wolds",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Brigg and Immingham",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Brighton Pavilion",
+      "DominantTribe": "Left",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Bristol Central",
+      "DominantTribe": "Left",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Bristol South",
+      "DominantTribe": "Average",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Broadland and Fakenham",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Bromley and Biggin Hill",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Bromsgrove",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Buckingham and Bletchley",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Burnley",
+      "DominantTribe": "Reforms",
+      "GMM_label": 2,
+      "SegmentMajorityTribe": "Muslim"
+    },
+    {
+      "Seat": "Burton and Uttoxeter",
+      "DominantTribe": "Reforms",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Bury South",
+      "DominantTribe": "Liberal",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Calder Valley",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Camborne and Redruth",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Cambridge",
+      "DominantTribe": "Left",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Cannock Chase",
+      "DominantTribe": "Reforms",
+      "GMM_label": 4,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Carshalton and Wallington",
+      "DominantTribe": "Average",
+      "GMM_label": 7,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Central Devon",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Central Suffolk and North Ipswich",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Chelmsford",
+      "DominantTribe": "Average",
+      "GMM_label": 7,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Cheltenham",
+      "DominantTribe": "Average",
+      "GMM_label": 7,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Chester South and Eddisbury",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Chichester",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Chingford and Woodford Green",
+      "DominantTribe": "Liberal",
+      "GMM_label": 2,
+      "SegmentMajorityTribe": "Muslim"
+    },
+    {
+      "Seat": "Chippenham",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Chipping Barnet",
+      "DominantTribe": "Liberal",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Cities of London and Westminster",
+      "DominantTribe": "Blues",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "City of Durham",
+      "DominantTribe": "Left",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Clacton",
+      "DominantTribe": "Average",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Congleton",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Corby and East Northamptonshire",
+      "DominantTribe": "Reforms",
+      "GMM_label": 4,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Coventry East",
+      "DominantTribe": "Progressives",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Coventry South",
+      "DominantTribe": "Progressives",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Croydon South",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Dagenham and Rainham",
+      "DominantTribe": "Progressives",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Dartford",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Daventry",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Derby South",
+      "DominantTribe": "Progressives",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Derbyshire Dales",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Doncaster East and the Isle of Axholme",
+      "DominantTribe": "Reforms",
+      "GMM_label": 8,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Doncaster North",
+      "DominantTribe": "Reforms",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Earley and Woodley",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Easington",
+      "DominantTribe": "Reforms",
+      "GMM_label": 8,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "East Grinstead and Uckfield",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "East Surrey",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "East Wiltshire",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Eastbourne",
+      "DominantTribe": "Average",
+      "GMM_label": 7,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Eastleigh",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Eltham and Chislehurst",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Epping Forest",
+      "DominantTribe": "Liberal",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Erewash",
+      "DominantTribe": "Reforms",
+      "GMM_label": 4,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Exeter",
+      "DominantTribe": "Left",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Exmouth and Exeter East",
+      "DominantTribe": "Average",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Finchley and Golders Green",
+      "DominantTribe": "Blues",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Forest of Dean",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Frome and East Somerset",
+      "DominantTribe": "Reforms",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Gainsborough",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Glastonbury and Somerton",
+      "DominantTribe": "Reforms",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Goole and Pocklington",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Gravesham",
+      "DominantTribe": "Progressives",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Great Grimsby and Cleethorpes",
+      "DominantTribe": "Reforms",
+      "GMM_label": 4,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Great Yarmouth",
+      "DominantTribe": "Reforms",
+      "GMM_label": 4,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Halifax",
+      "DominantTribe": "Average",
+      "GMM_label": 2,
+      "SegmentMajorityTribe": "Muslim"
+    },
+    {
+      "Seat": "Harborough, Oadby and Wigston",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Harrogate and Knaresborough",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Harrow East",
+      "DominantTribe": "Blues",
+      "GMM_label": 1,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Harrow West",
+      "DominantTribe": "Blues",
+      "GMM_label": 1,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Harwich and North Essex",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Hazel Grove",
+      "DominantTribe": "Average",
+      "GMM_label": 7,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Hemel Hempstead",
+      "DominantTribe": "Average",
+      "GMM_label": 9,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Hertford and Stortford",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Hertsmere",
+      "DominantTribe": "Liberal",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Hexham",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Heywood and Middleton North",
+      "DominantTribe": "Average",
+      "GMM_label": 2,
+      "SegmentMajorityTribe": "Muslim"
+    },
+    {
+      "Seat": "Hinckley and Bosworth",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Hitchin",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Honiton and Sidmouth",
+      "DominantTribe": "Liberal",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Huddersfield",
+      "DominantTribe": "Muslim",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Hyndburn",
+      "DominantTribe": "Reforms",
+      "GMM_label": 2,
+      "SegmentMajorityTribe": "Muslim"
+    },
+    {
+      "Seat": "Isle of Wight East",
+      "DominantTribe": "Average",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Isle of Wight West",
+      "DominantTribe": "Average",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Keighley and Ilkley",
+      "DominantTribe": "Average",
+      "GMM_label": 2,
+      "SegmentMajorityTribe": "Muslim"
+    },
+    {
+      "Seat": "Kenilworth and Southam",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Kingston upon Hull East",
+      "DominantTribe": "Reforms",
+      "GMM_label": 8,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Leeds Central and Headingley",
+      "DominantTribe": "Left",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Leeds East",
+      "DominantTribe": "Reforms",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Leeds North East",
+      "DominantTribe": "Liberal",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Leeds North West",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Leeds South",
+      "DominantTribe": "Progressives",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Leicester East",
+      "DominantTribe": "Blues",
+      "GMM_label": 1,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Leicester South",
+      "DominantTribe": "Muslim",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Lewes",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Lichfield",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Liverpool Riverside",
+      "DominantTribe": "Left",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Liverpool Wavertree",
+      "DominantTribe": "Left",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Loughborough",
+      "DominantTribe": "Left",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Louth and Horncastle",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Maldon",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Manchester Central",
+      "DominantTribe": "Progressives",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Manchester Rusholme",
+      "DominantTribe": "Left",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Manchester Withington",
+      "DominantTribe": "Progressives",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Mansfield",
+      "DominantTribe": "Reforms",
+      "GMM_label": 4,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Melton and Syston",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Meriden and Solihull East",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Mid Bedfordshire",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Mid Derbyshire",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Mid Dorset and North Poole",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Mid Leicestershire",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Mid Norfolk",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Middlesbrough South and East Cleveland",
+      "DominantTribe": "Reforms",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Milton Keynes Central",
+      "DominantTribe": "Progressives",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Milton Keynes North",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Morecambe and Lunesdale",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Newcastle upon Tyne Central and West",
+      "DominantTribe": "Left",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Newcastle-under-Lyme",
+      "DominantTribe": "Reforms",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Newton Abbot",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Newton Aycliffe and Spennymoor",
+      "DominantTribe": "Reforms",
+      "GMM_label": 8,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Normanton and Hemsworth",
+      "DominantTribe": "Reforms",
+      "GMM_label": 8,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "North Bedfordshire",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "North Cornwall",
+      "DominantTribe": "Reforms",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "North Devon",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "North Dorset",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "North Durham",
+      "DominantTribe": "Reforms",
+      "GMM_label": 8,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "North East Hertfordshire",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "North East Somerset and Hanham",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "North Herefordshire",
+      "DominantTribe": "Liberal",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "North Norfolk",
+      "DominantTribe": "Reforms",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "North Northumberland",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "North Shropshire",
+      "DominantTribe": "Reforms",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "North Somerset",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "North Warwickshire and Bedworth",
+      "DominantTribe": "Reforms",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "North West Essex",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "North West Leicestershire",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "North West Norfolk",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Nottingham East",
+      "DominantTribe": "Left",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Nottingham South",
+      "DominantTribe": "Left",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Oldham East and Saddleworth",
+      "DominantTribe": "Average",
+      "GMM_label": 2,
+      "SegmentMajorityTribe": "Muslim"
+    },
+    {
+      "Seat": "Orpington",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Ossett and Denby Dale",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Oxford East",
+      "DominantTribe": "Progressives",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Pendle and Clitheroe",
+      "DominantTribe": "Reforms",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Penrith and Solway",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Peterborough",
+      "DominantTribe": "Average",
+      "GMM_label": 2,
+      "SegmentMajorityTribe": "Muslim"
+    },
+    {
+      "Seat": "Pontefract, Castleford and Knottingley",
+      "DominantTribe": "Reforms",
+      "GMM_label": 8,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Poplar and Limehouse",
+      "DominantTribe": "Muslim",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Preston",
+      "DominantTribe": "Average",
+      "GMM_label": 2,
+      "SegmentMajorityTribe": "Muslim"
+    },
+    {
+      "Seat": "Rawmarsh and Conisbrough",
+      "DominantTribe": "Reforms",
+      "GMM_label": 8,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Reading Central",
+      "DominantTribe": "Progressives",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Reading West and Mid Berkshire",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Redcar",
+      "DominantTribe": "Reforms",
+      "GMM_label": 8,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Richmond and Northallerton",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Ruislip, Northwood and Pinner",
+      "DominantTribe": "Liberal",
+      "GMM_label": 1,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Runnymede and Weybridge",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Rushcliffe",
+      "DominantTribe": "Liberal",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Rutland and Stamford",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Salford",
+      "DominantTribe": "Progressives",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Scunthorpe",
+      "DominantTribe": "Reforms",
+      "GMM_label": 4,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Selby",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Sevenoaks",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Sheffield Brightside and Hillsborough",
+      "DominantTribe": "Reforms",
+      "GMM_label": 2,
+      "SegmentMajorityTribe": "Muslim"
+    },
+    {
+      "Seat": "Sheffield Central",
+      "DominantTribe": "Left",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Sheffield Hallam",
+      "DominantTribe": "Liberal",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Sheffield South East",
+      "DominantTribe": "Reforms",
+      "GMM_label": 2,
+      "SegmentMajorityTribe": "Muslim"
+    },
+    {
+      "Seat": "Sherwood Forest",
+      "DominantTribe": "Reforms",
+      "GMM_label": 4,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Shipley",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Skipton and Ripon",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Sleaford and North Hykeham",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Solihull West and Shirley",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "South Derbyshire",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "South Devon",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "South East Cornwall",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "South Holland and The Deepings",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "South Leicestershire",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "South Northamptonshire",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "South Suffolk",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "South West Hertfordshire",
+      "DominantTribe": "Liberal",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "South West Norfolk",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Spelthorne",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "St Austell and Newquay",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "St Ives",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Stoke-on-Trent Central",
+      "DominantTribe": "Reforms",
+      "GMM_label": 4,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Stoke-on-Trent North",
+      "DominantTribe": "Reforms",
+      "GMM_label": 4,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Stoke-on-Trent South",
+      "DominantTribe": "Reforms",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Stratford and Bow",
+      "DominantTribe": "Progressives",
+      "GMM_label": 2,
+      "SegmentMajorityTribe": "Muslim"
+    },
+    {
+      "Seat": "Stretford and Urmston",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Sutton Coldfield",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Tatton",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Taunton and Wellington",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Tewkesbury",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Thirsk and Malton",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Thurrock",
+      "DominantTribe": "Progressives",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Tipton and Wednesbury",
+      "DominantTribe": "Reforms",
+      "GMM_label": 1,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Tiverton and Minehead",
+      "DominantTribe": "Reforms",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Tonbridge",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Torbay",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Uxbridge and South Ruislip",
+      "DominantTribe": "Progressives",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Warwick and Leamington",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Watford",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Waveney Valley",
+      "DominantTribe": "Reforms",
+      "GMM_label": 5,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Weald of Kent",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "West Dorset",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "West Ham and Beckton",
+      "DominantTribe": "Progressives",
+      "GMM_label": 2,
+      "SegmentMajorityTribe": "Muslim"
+    },
+    {
+      "Seat": "West Suffolk",
+      "DominantTribe": "Reforms",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "West Worcestershire",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Westmorland and Lonsdale",
+      "DominantTribe": "Reforms",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "Wetherby and Easingwold",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Whitehaven and Workington",
+      "DominantTribe": "Reforms",
+      "GMM_label": 8,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Windsor",
+      "DominantTribe": "Liberal",
+      "GMM_label": 10,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Witham",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "Wolverhampton North East",
+      "DominantTribe": "Average",
+      "GMM_label": 1,
+      "SegmentMajorityTribe": "Progressives"
+    },
+    {
+      "Seat": "Wycombe",
+      "DominantTribe": "Liberal",
+      "GMM_label": 2,
+      "SegmentMajorityTribe": "Muslim"
+    },
+    {
+      "Seat": "Yeovil",
+      "DominantTribe": "Average",
+      "GMM_label": 11,
+      "SegmentMajorityTribe": "Liberal"
+    },
+    {
+      "Seat": "York Central",
+      "DominantTribe": "Left",
+      "GMM_label": 3,
+      "SegmentMajorityTribe": "Average"
+    },
+    {
+      "Seat": "York Outer",
+      "DominantTribe": "Liberal",
+      "GMM_label": 6,
+      "SegmentMajorityTribe": "Average"
+    }
+  ]
+}
