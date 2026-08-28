@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elections UK &middot; An independent UK election model</title>
-<meta name="description" content="An independent, data-driven model of British general elections: an interactive constituency map, and research notes on rebuilding it with clustering and matrix factorization.">
+<title>Home</title>
+<meta name="description" content="Personal site and blog - notes on whatever I'm currently building, from a UK election model to a house-price dissertation.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto+Condensed:wght@400;500;700&display=swap" rel="stylesheet">
@@ -13,86 +13,59 @@
 <body>
 
 <nav class="site-nav">
-  <a class="brand" href="index.html">ELECTIONS UK</a>
+  <!-- TODO: swap this for your own name -->
+  <a class="brand" href="index.html">MY SITE</a>
   <a class="nav-link active" href="index.html">Home</a>
   <a class="nav-link" href="blog/index.html">Blog</a>
-  <a class="nav-link app-link" href="app/index.html">Open the App</a>
+  <a class="nav-link app-link" href="app/index.html">UK Election Map</a>
 </nav>
 
-<header class="hero">
-  <div class="kicker">632 seats &middot; England, Scotland, Wales</div>
-  <h1>An independent model of<br>British general elections</h1>
-  <p class="lede">Every constituency modelled seat by seat &mdash; census demographics, vote flows,
-    tactical voting and Monte Carlo uncertainty, built into an interactive map and documented in
-    public as it's built.</p>
-  <div class="hero-actions">
-    <a class="btn btn-custom" href="app/index.html">Open the interactive map</a>
-    <a class="btn btn-ghost" href="blog/index.html">Read the research notes</a>
+<header class="page-header">
+  <div class="page-header-inner">
+    <h1>Hi, I'm building things and writing about them</h1>
+    <p class="lede">This is where I keep notes on whatever I'm currently working on &mdash; a UK
+      general election model, a dissertation project, and whatever comes next.</p>
   </div>
 </header>
 
 <section class="section">
-  <div class="section-head">
-    <div class="eyebrow">What's here</div>
-    <h2>Three ways into the same model</h2>
-  </div>
-  <div class="card-grid">
-    <a class="card" href="app/index.html">
-      <div class="card-tag">Interactive</div>
-      <h3>The map</h3>
-      <p>Every UK general election since 2005, a live 2029 prediction, tactical-voting and
-        "electorate segments" overlays, and a custom predictor you can drive yourself &mdash;
-        constituency by constituency.</p>
-      <div class="card-meta"><span>632 seats</span><span>2005&ndash;2029</span></div>
-    </a>
-    <a class="card accent-segments" href="blog/political-fragmentation-and-latent-groups.html">
-      <div class="card-tag">Part 1 &middot; Methodology</div>
-      <h3>One seat, many voters</h3>
-      <p>Why a single category per constituency stopped being plausible, and what unmixing
-        census composition into shared latent groups gets us instead &mdash; run live against
-        the real data.</p>
-      <div class="card-meta"><span>NMF</span><span>clustering</span><span>22 min read</span></div>
-    </a>
-    <a class="card accent-custom" href="blog/the-prediction-pipeline.html">
-      <div class="card-tag">Part 2 &middot; Prediction</div>
-      <h3>From groups to seats</h3>
-      <p>Opening up the pipeline that turns any group structure into a seat-by-seat forecast:
-        flow tables, Monte Carlo uncertainty, and a winnability-based tactical voting model.</p>
-      <div class="card-meta"><span>Monte Carlo</span><span>tactical voting</span><span>18 min read</span></div>
-    </a>
-  </div>
+  <h2>Latest posts</h2>
+  <ul class="post-list">
+    <li>
+      <a class="post-list-title" href="blog/the-prediction-pipeline.html">From groups to seats</a>
+      <p class="post-list-dek">Flows, uncertainty, and tactical voting &mdash; opening up the pipeline that turns any group structure into seat-by-seat forecasts.</p>
+      <div class="post-list-meta"><span>August 2026</span><span>Part 3 &middot; Prediction</span><span>18 min read</span></div>
+    </li>
+    <li>
+      <a class="post-list-title" href="blog/predicting-house-prices-and-london.html">What a house is worth, and why London breaks the curve</a>
+      <p class="post-list-dek">A dissertation project's baseline house-price model finds sensible, well-behaved relationships everywhere &mdash; until it hits the one UK housing market that isn't behaving like the rest of the country.</p>
+      <div class="post-list-meta"><span>June 2026</span><span>Research note</span><span>10 min read</span></div>
+    </li>
+    <li>
+      <a class="post-list-title" href="blog/political-fragmentation-and-latent-groups.html">One seat, many voters</a>
+      <p class="post-list-dek">Why single-category constituency models are running out of road, and what unmixing 632 seats&rsquo; census composition into a handful of shared archetypes gets us instead.</p>
+      <div class="post-list-meta"><span>April 2026</span><span>Part 2 &middot; Latent groups</span><span>24 min read</span></div>
+    </li>
+  </ul>
+  <p style="margin-top:16px;"><a href="blog/index.html">See all posts &rarr;</a></p>
 </section>
 
-<section class="section" style="background:var(--bbc-panel); border-top:1px solid var(--bbc-line); border-bottom:1px solid var(--bbc-line);">
-  <div class="section-head">
-    <div class="eyebrow">The approach</div>
-    <h2>Built in the open, checked against the data</h2>
-  </div>
-  <div class="card-grid">
-    <div class="card" style="cursor:default;">
-      <div class="card-tag">Evidence, not assumption</div>
-      <h3>Every claim is checked</h3>
-      <p>Segments, correlations and formulas are tested against the real 632-seat dataset and,
-        where relevant, external research &mdash; not just plausible-sounding.</p>
-    </div>
-    <div class="card" style="cursor:default;">
-      <div class="card-tag">Real code, real output</div>
-      <h3>Nothing invented</h3>
-      <p>The research notes are executable notebooks. Every number on the page came out of a
-        code cell that ran against this project's own data.</p>
-    </div>
-    <div class="card" style="cursor:default;">
-      <div class="card-tag">Honest about limits</div>
-      <h3>Bugs get reported, not hidden</h3>
-      <p>Where the model has a real limitation &mdash; a bug, a stale assumption, a conceptual
-        gap &mdash; it's written up alongside the parts that work.</p>
-    </div>
-  </div>
+<section class="section">
+  <h2>Also here</h2>
+  <ul class="post-list">
+    <li>
+      <a class="post-list-title" href="app/index.html">UK election map</a>
+      <p class="post-list-dek">An interactive constituency map built alongside the blog posts above &mdash; every UK general election since 2005, a 2029 prediction, and a custom what-if predictor.</p>
+    </li>
+    <li>
+      <a class="post-list-title" href="https://socioeconomichousevaluationweb.uk/">House price predictor</a>
+      <p class="post-list-dek">A live Random Forest model, from the house-price dissertation post, that estimates a sale price from a property's characteristics and its LSOA's socioeconomic profile.</p>
+    </li>
+  </ul>
 </section>
 
 <footer class="site-footer">
-  <p>An independent, data-driven model of British general elections &mdash;
-     <a href="blog/index.html">blog</a> &middot; <a href="app/index.html">interactive map</a></p>
+  <p><a href="blog/index.html">blog</a> &middot; <a href="app/index.html">election map</a></p>
 </footer>
 
 </body>

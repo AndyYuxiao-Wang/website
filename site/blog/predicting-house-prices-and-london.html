@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What a house is worth, and why London breaks the curve</title>
+<meta name="description" content="A machine-learning house-price model built from census and deprivation data, and what its errors reveal about London's outlier prices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto+Condensed:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+<nav class="site-nav">
+  <!-- TODO: swap this for your own name -->
+  <a class="brand" href="../index.html">MY SITE</a>
+  <a class="nav-link " href="../index.html">Home</a>
+  <a class="nav-link active" href="index.html">Blog</a>
+  <a class="nav-link app-link" href="../app/index.html">UK Election Map</a>
+</nav>
+
+<header class="post-header" style="--accent: var(--bbc-blue-dark);">
+  <span class="series-tag">Research note</span>
+  <h1>What a house is worth, and why London breaks the curve</h1>
+  <p class="dek">A dissertation project's baseline house-price model finds sensible, well-behaved relationships everywhere &mdash; until it hits the one UK housing market that isn't behaving like the rest of the country.</p>
+  <p class="byline">June 2026 &middot; 10 min read</p>
+  
+</header>
+
+<article class="post-body" style="--accent: var(--bbc-blue-dark);">
+<h2>The gap the project is trying to close</h2>
+<p>Property listing sites are data-rich about the property itself &mdash; square footage, photos,
+floor plans, asking price &mdash; and comparatively thin on everything around it. Rightmove
+shows a map of nearby schools without saying whether they're any good; Zoopla's valuation tool
+leans almost entirely on nearby sold prices. Neither tells a buyer relocating to an unfamiliar
+area much about the deprivation, crime, or income profile of the neighbourhood they're about to
+move into, and asking a local forum tends to return anecdote rather than anything comparable
+across the country.</p>
+<p>The project's response is to build a house-price model that takes socioeconomic geography
+seriously as an input in its own right, not just an afterthought to square footage and property
+type &mdash; and to see how much of a house's price that geography actually explains.</p>
+
+<h2>Data: property records, meet the census</h2>
+<p>England was the target (Scotland and Northern Ireland record small-area socioeconomic data
+under different systems, so pooling all three would mean reconciling incompatible geographies
+for comparatively little benefit — the great majority of the UK's internal relocators and new
+arrivals move to England anyway). Two datasets, joined at LSOA/MSOA level:</p>
+<ul>
+<li><strong>HM Land Registry Price Paid Data</strong>, November 2025: residential sale transactions, each
+  with property type, sale price and postcode.</li>
+<li><strong>The English Indices of Deprivation (2024–25)</strong>, plus targeted replacements for two of its
+  seven domains. The IoD's own Income domain only measures the <em>proportion of people on a low
+  income</em> — an area with one very poor resident and everyone else wealthy would register as
+  more deprived than one where everybody earns exactly the national average, which is the
+  wrong shape of variable for pricing a house. Actual small-area income estimates were used
+  instead. The Education domain has the mirror problem (it measures the share <em>lacking</em>
+  qualifications, not the presence of good schools), so it's replaced with Attainment 8 — the
+  average GCSE score by Local Authority, weighted to pupil residence rather than school
+  location, so it reflects catchment rather than which school happens to sit inside a boundary.</li>
+</ul>
+<p>Land Registry doesn't record floor area, so each sale was matched to its Energy Performance
+Certificate for that figure instead. The code and the final merged dataset behind every table
+in this post are the dissertation's own:</p>
+
+<div class="nb-code"><pre><code>import pandas as pd
+import numpy as np
+from pathlib import Path
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression, Ridge
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.neural_network import MLPRegressor
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+
+CODE_DIR = Path(&quot;../socioeconomichosueingvaluator&quot;)
+
+df = pd.read_csv(CODE_DIR / &quot;final_data_house_sales2025.csv&quot;, encoding=&quot;latin1&quot;)
+df = df.drop(columns=[&quot;LSOA&quot;])
+df = pd.get_dummies(df, columns=[&quot;Type&quot;], drop_first=True)   # Type_F, Type_S, Type_T vs. Detached baseline
+
+X = df.drop(columns=[&quot;Paid Price&quot;, &quot;Postcode&quot;, &quot;Address&quot;])
+y = df[&quot;Paid Price&quot;]
+
+X_train, X_test, y_train, y_test, addr_train, addr_test, pc_train, pc_test = train_test_split(
+    X, y, df[&quot;Address&quot;], df[&quot;Postcode&quot;],
+    test_size=0.2, random_state=88,
+)
+print(f&quot;{len(df):,} properties -&gt; {len(X_train):,} train / {len(X_test):,} test&quot;)
+X_train.head()</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><pre>16,997 properties -&gt; 13,597 train / 3,400 test
+</pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_floor_area_m2</th>
+      <th>Employment</th>
+      <th>Health</th>
+      <th>Crime</th>
+      <th>Income</th>
+      <th>Education</th>
+      <th>Type_F</th>
+      <th>Type_S</th>
+      <th>Type_T</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>15522</th>
+      <td>93.0</td>
+      <td>22570</td>
+      <td>20795</td>
+      <td>31483</td>
+      <td>56143</td>
+      <td>44.0</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>14135</th>
+      <td>89.0</td>
+      <td>3144</td>
+      <td>1974</td>
+      <td>11578</td>
+      <td>34493</td>
+      <td>43.0</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>13986</th>
+      <td>99.0</td>
+      <td>23461</td>
+      <td>24047</td>
+      <td>28964</td>
+      <td>55398</td>
+      <td>45.1</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>125.0</td>
+      <td>21077</td>
+      <td>20881</td>
+      <td>30192</td>
+      <td>66347</td>
+      <td>49.8</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>16779</th>
+      <td>85.0</td>
+      <td>13022</td>
+      <td>14454</td>
+      <td>22922</td>
+      <td>46384</td>
+      <td>42.5</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<h2>Five models, the same dataset</h2>
+<p>Every model below is trained and tested on the identical 80/20 split of that dataset, so the
+comparison is clean. Two are linear (a straight line through the features, one with a
+regularisation penalty added); three are built to capture the kind of non-linear, interacting
+relationships a straight line structurally can't:</p>
+
+<div class="nb-code"><pre><code>def rmse(y_true, y_pred):
+    return np.sqrt(mean_squared_error(y_true, y_pred))
+
+scaler = StandardScaler().fit(X_train)
+X_train_scaled = scaler.transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# Hyperparameters as tuned in the dissertation&#x27;s own model.py
+models = {
+    &quot;Linear Regression&quot;: (LinearRegression(), False),
+    &quot;Ridge Regression&quot;:  (Ridge(alpha=50), False),
+    &quot;Random Forest&quot;:     (RandomForestRegressor(n_estimators=100, max_depth=None,
+                                                 min_samples_split=5, min_samples_leaf=2,
+                                                 random_state=50), False),
+    &quot;Gradient Boosting&quot;: (GradientBoostingRegressor(n_estimators=300, learning_rate=0.1,
+                                                     max_depth=4, min_samples_split=5,
+                                                     min_samples_leaf=2, random_state=50), False),
+    &quot;Neural Network&quot;:    (MLPRegressor(hidden_layer_sizes=(100, 50), activation=&quot;relu&quot;,
+                                        solver=&quot;adam&quot;, learning_rate_init=0.01, max_iter=500,
+                                        random_state=50, alpha=0.001), True),   # scaled input
+}
+
+predictions, rows = {}, []
+for name, (model, needs_scaling) in models.items():
+    Xtr, Xte = (X_train_scaled, X_test_scaled) if needs_scaling else (X_train, X_test)
+    model.fit(Xtr, y_train)
+    y_pred = model.predict(Xte)
+    predictions[name] = y_pred
+    rows.append({&quot;Model&quot;: name, &quot;RMSE (£)&quot;: round(rmse(y_test, y_pred)),
+                 &quot;MAE (£)&quot;: round(mean_absolute_error(y_test, y_pred)),
+                 &quot;R2&quot;: round(r2_score(y_test, y_pred), 3)})
+
+results = pd.DataFrame(rows).sort_values(&quot;RMSE (£)&quot;).reset_index(drop=True)
+results</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Model</th>
+      <th>RMSE (£)</th>
+      <th>MAE (£)</th>
+      <th>R2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Neural Network</td>
+      <td>167851</td>
+      <td>81403</td>
+      <td>0.743</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Random Forest</td>
+      <td>170921</td>
+      <td>70244</td>
+      <td>0.733</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Gradient Boosting</td>
+      <td>190435</td>
+      <td>71953</td>
+      <td>0.669</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Linear Regression</td>
+      <td>204758</td>
+      <td>99517</td>
+      <td>0.617</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Ridge Regression</td>
+      <td>204763</td>
+      <td>99548</td>
+      <td>0.617</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<p>Linear and Ridge Regression land almost identically (unsurprising — Ridge is Linear Regression
+with large coefficients penalised, and here that penalty barely moves the needle). All three
+non-linear models improve on both by a wide margin. Random Forest and the Neural Network come
+out close to tied — Random Forest wins on MAE (a lower <em>typical</em> error), the Neural Network
+wins on RMSE and R² (fewer really large misses) — with Gradient Boosting a clear step behind
+both but still well ahead of the two linear models. Random Forest is the one actually wired
+into the project's web application, on the strength of that MAE and its faster, more robust
+training.</p>
+<p>That's the full model comparison, and it's the last time this post treats the five as
+competitors. What's more interesting than which one wins is a failure they share.</p>
+
+<h2>Where the straight line breaks first: the opposite end of England</h2>
+<p>Before getting to London, it's worth seeing what the <em>linear</em> models get wrong, because it's
+the mirror image of what's coming. A straight line fitted to minimise overall error inevitably
+extrapolates past the point where the relationship it learned still makes sense — and pushed
+far enough into deprived, low-income, high-crime territory, that extrapolation crosses zero
+entirely:</p>
+
+<div class="nb-code"><pre><code>linear_check = pd.DataFrame({
+    &quot;Address&quot;: addr_test.values,
+    &quot;Postcode&quot;: pc_test.values,
+    &quot;Actual (£)&quot;: y_test.values,
+    &quot;Linear predicted (£)&quot;: predictions[&quot;Linear Regression&quot;],
+}).sort_values(&quot;Linear predicted (£)&quot;).head(8).reset_index(drop=True)
+linear_check</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Address</th>
+      <th>Postcode</th>
+      <th>Actual (£)</th>
+      <th>Linear predicted (£)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>FLAT 3 6 CHARLES STREET</td>
+      <td>FY1 3HD</td>
+      <td>45000</td>
+      <td>-247282.664465</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>FLAT 4 6 CHARLES STREET</td>
+      <td>FY1 3HD</td>
+      <td>45000</td>
+      <td>-247282.664465</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>8 PARKWOOD MEWS</td>
+      <td>BB9 8TS</td>
+      <td>62500</td>
+      <td>-148764.884759</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>22 NITHSIDE</td>
+      <td>FY4 4SA</td>
+      <td>155000</td>
+      <td>-97959.285636</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>49 BOARDMANS LANE</td>
+      <td>WA9 1HH</td>
+      <td>48000</td>
+      <td>-82945.619041</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>11 GRAY GROVE</td>
+      <td>L36 0TB</td>
+      <td>76500</td>
+      <td>-78221.444190</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>25 HAMMOON GROVE</td>
+      <td>ST2 9DH</td>
+      <td>170000</td>
+      <td>-76146.129121</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>47 CAWTHORNE DRIVE</td>
+      <td>HU4 7AS</td>
+      <td>90000</td>
+      <td>-69449.825820</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<p>Every one of the most-underpredicted properties by Linear Regression is a cheap flat or
+terrace outside the South East, and the postcodes are a tour of England's post-industrial and
+seaside towns: <strong>FY1</strong> and <strong>FY4</strong> are Blackpool; <strong>BB9</strong> is Nelson, in Lancashire's old
+cotton-mill belt; <strong>WA9</strong> is St Helens, a former glass-and-chemicals town in Merseyside;
+<strong>L36</strong> is Huyton, on Liverpool's eastern edge; further down the same list sit <strong>ST2</strong>
+(Stoke-on-Trent) and <strong>HU4</strong> (Hull). Blackpool in particular isn't a borderline case: on the
+2025 Indices of Deprivation it's ranked as <strong>the single most deprived local authority in
+England</strong> — first nationally on the employment and health domains, second on crime
+(<a href="https://www.gov.uk/government/statistics/english-indices-of-deprivation-2025/english-indices-of-deprivation-2025-statistical-release">GOV.UK Indices of Deprivation 2025</a>;
+<a href="https://deprivation.communities.gov.uk/">Local Deprivation Explorer</a>) — the exact dataset this
+model was trained on.</p>
+<p>The model isn't wrong to associate that profile with a low house price — it's wrong about <em>how</em>
+low, because it's still trying to draw one straight line all the way from Kensington's income
+and school figures down to Blackpool's, and a line steep enough to capture the top of that
+range overshoots badly at the bottom. A model with no concept of a floor at zero, minimising
+squared error, will happily predict a house is worth minus a quarter of a million pounds if
+that's what the slope says at that end of the data — the same structural inflexibility that,
+at the other end of the income and price distribution entirely, is about to show up again in a
+different shape.</p>
+
+<h2>The one mistake every model makes, in the same handful of postcodes</h2>
+<p>Moving from a straight line to Random Forest, Gradient Boosting or a Neural Network fixes that
+specific problem: none of the three non-linear models ever predicts a negative house price,
+because tree-based splits and a network's learned function aren't forced through one global
+slope the way a straight line is. But all three independently converge on a <em>different</em>
+failure, in exactly the same postcodes — and this time it's the opposite end of the country
+entirely:</p>
+
+<div class="nb-code"><pre><code>def most_underpredicted(name, n=8):
+    resid = predictions[name] - y_test.values
+    idx = np.argsort(resid)[:n]
+    return set(addr_test.values[idx])
+
+# addresses appearing in every non-linear model&#x27;s own worst-underpredicted list
+shared = most_underpredicted(&quot;Random Forest&quot;) &amp; most_underpredicted(&quot;Gradient Boosting&quot;) &amp; most_underpredicted(&quot;Neural Network&quot;)
+
+rows = []
+for addr in shared:
+    mask = addr_test.values == addr
+    row = {&quot;Address&quot;: addr, &quot;Postcode&quot;: pc_test.values[mask][0], &quot;Actual (£)&quot;: int(y_test.values[mask][0])}
+    for name in [&quot;Random Forest&quot;, &quot;Gradient Boosting&quot;, &quot;Neural Network&quot;]:
+        row[name] = round(predictions[name][mask][0])
+    rows.append(row)
+
+shared_underpredicted = pd.DataFrame(rows).sort_values(&quot;Actual (£)&quot;, ascending=False).reset_index(drop=True)
+shared_underpredicted</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Address</th>
+      <th>Postcode</th>
+      <th>Actual (£)</th>
+      <th>Random Forest</th>
+      <th>Gradient Boosting</th>
+      <th>Neural Network</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>73 MARLBOROUGH PLACE</td>
+      <td>NW8 0PT</td>
+      <td>8600000</td>
+      <td>2695406</td>
+      <td>3779351</td>
+      <td>3451837</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>28 KENSINGTON PARK ROAD</td>
+      <td>W11 3BU</td>
+      <td>5511000</td>
+      <td>3213029</td>
+      <td>3698170</td>
+      <td>3853500</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9 BROOKFIELD PARK</td>
+      <td>NW5 1ES</td>
+      <td>3100000</td>
+      <td>1281923</td>
+      <td>1388151</td>
+      <td>1135717</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5 WYKEHAM ROAD</td>
+      <td>NW4 2TB</td>
+      <td>3000000</td>
+      <td>1234995</td>
+      <td>1088400</td>
+      <td>1044618</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>14 TOWNSHEND ROAD</td>
+      <td>TW9 1XH</td>
+      <td>2540000</td>
+      <td>1327235</td>
+      <td>1265582</td>
+      <td>1154771</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1A CORNWALL MEWS SOUTH</td>
+      <td>SW7 4RX</td>
+      <td>2250000</td>
+      <td>710833</td>
+      <td>1162371</td>
+      <td>818972</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>65 GROVE PARK</td>
+      <td>SE5 8LF</td>
+      <td>2175000</td>
+      <td>1452981</td>
+      <td>1270562</td>
+      <td>976489</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<p>Every one of these addresses is in inner or well-to-do outer London — <strong>NW8</strong> is St John's
+Wood, <strong>W11</strong> is Notting Hill, <strong>SW7</strong> is South Kensington, <strong>TW9</strong> is Richmond upon Thames —
+and every one of the three flexible models independently placed it among its own worst
+underpredictions, without being told to look for London specifically. 73 Marlborough Place,
+NW8, sold for £8.6 million; every model's best estimate, built from that property's actual
+crime, income, education, employment and health figures, lands somewhere between £2.7 and £3.8
+million — a multi-million-pound gap that has nothing to do with the model being
+unsophisticated, since these are precisely the models built to catch exactly this kind of
+non-linear, location-driven effect.</p>
+<p>There's a mechanical reason a Random Forest in particular converges on this pattern: it
+predicts by averaging many decision trees, each trained on a bootstrap sample, which
+structurally pulls extreme, rare values back toward the mean of whatever similar-looking
+properties it <em>has</em> seen plenty of. But that mechanical explanation only pushes the real
+question back a step — <em>why</em> is a handful of London addresses so rare and so extreme, relative
+to everywhere else with a similar income, school and crime profile, that every flexible model
+independently treats them as the same kind of outlier?</p>
+
+<div class="nb-code"><pre><code>worst = shared_underpredicted.iloc[0]
+gap = worst[&quot;Actual (£)&quot;] - worst[&quot;Random Forest&quot;]
+income_coefficient = 7.51   # £ of house price per £1 of local income, from the linear model above
+
+print(f&quot;{worst[&#x27;Address&#x27;]}: actual £{worst[&#x27;Actual (£)&#x27;]:,} vs. Random Forest&#x27;s £{worst[&#x27;Random Forest&#x27;]:,}&quot;)
+print(f&quot;Shortfall: £{gap:,.0f} — equivalent to {gap / income_coefficient:,.0f} separate £1-of-local-income increases&quot;)</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><pre>73 MARLBOROUGH PLACE: actual £8,600,000 vs. Random Forest&#x27;s £2,695,406
+Shortfall: £5,904,594 — equivalent to 786,231 separate £1-of-local-income increases
+</pre></div>
+
+<p>Random Forest's own shortfall on that one property is the equivalent of over three-quarters of
+a million separate £1-of-local-income increases, stacked on a single street. Income, schools,
+crime and employment explain a genuinely large share of what a house is worth almost everywhere
+in England — and then this specific handful of addresses carries a premium that isn't made of
+any of those things, at a scale no amount of model sophistication closes.</p>
+
+<h2>London isn't an expensive version of England. It's a different market.</h2>
+<p>Officially, in December 2025, the average house in England sold for <strong>£292,000</strong>
+(<a href="https://www.gov.uk/government/statistics/uk-house-price-index-for-december-2025/uk-house-price-index-england-december-2025">GOV.UK: UK House Price Index, England,
+December 2025</a>).
+London's own average, the same release series two months earlier, was <strong>£547,000</strong> — nearly
+double the England-wide figure. That gap isn't just "London vs. everywhere else" either — it
+holds up <em>inside</em> London. Kensington and Chelsea, the most expensive local authority in the
+December 2025 release, averaged <strong>£1,178,497</strong>. Barking and Dagenham, London's <em>cheapest</em>
+borough, averaged <strong>£353,512</strong> — still above the England-wide average of £292,000. The
+cheapest borough in the most expensive city in the country is still pricier than the national
+average. For comparison, Kingston upon Hull — one of the cheapest areas in England, and the
+same HU postcode area that showed up in Linear Regression's worst underpredictions above —
+averaged £131,323 in the same release: <strong>roughly a ninefold gap between Hull and Kensington
+and Chelsea</strong>, inside one country, one currency, one housing market on paper.</p>
+<p>That scale of gap — England's cheapest and most expensive local authorities sitting roughly
+nine times apart — is exactly what sends a straight line into negative numbers at Blackpool's
+end of the distribution, and exactly what three structurally different flexible models still
+can't close at the other end, however sophisticated they get.</p>
+
+<p>The dissertation's own conclusion reaches the same place from the results rather than
+assuming it going in: every model, however flexible, systematically underprices the same
+prime London properties, and the proposed fix isn't a sixth algorithm — it's treating London
+as its own market rather than a more-expensive tail of the national one, for instance by
+adding distance to central London as its own feature, or fitting a separate model for the
+capital entirely. Sophistication bought real accuracy almost everywhere else in the country;
+in St John's Wood, Notting Hill and South Kensington, it bought a <em>smaller</em> wrong answer, not
+a right one.</p>
+<p>The Random Forest model itself is live at
+<a href="https://socioeconomichousevaluationweb.uk/">socioeconomichousevaluationweb.uk</a> — enter an
+LSOA code, property type and floor area (or click the map) for a real prediction from the
+model this post is about.</p>
+</article>
+
+<nav class="post-nav">
+  <a class="btn btn-ghost" href="political-fragmentation-and-latent-groups.html">&larr; One seat, many voters</a>
+  <a class="btn btn-ghost" href="the-prediction-pipeline.html">From groups to seats &rarr;</a>
+</nav>
+
+<footer class="site-footer">
+  <p><a href="../index.html">home</a> &middot; <a href="index.html">blog</a> &middot;
+     <a href="../app/index.html">election map</a></p>
+</footer>
+</body>
+</html>

@@ -12,3 +12,7 @@ __pycache__/
 
 # Spreadsheet auto-backups (timestamped snapshots, not source of truth)
 *.bak_*
+
+# Separate project: its own GitHub repo (AndyYuxiao-Wang/test) and Render deployment.
+# 40MB+ model.pkl has no business bloating this repo's history.
+socioeconomichosueingvaluator/

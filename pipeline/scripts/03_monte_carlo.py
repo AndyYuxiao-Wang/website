@@ -24,8 +24,7 @@ parties = [
     "Green",
     "Oth",
     "SNP",
-    "Plaid",
-    "Restore"
+    "Plaid"
 ]
 
 # -------------------------

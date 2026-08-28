@@ -95,72 +95,57 @@ a { color: inherit; }
    ------------------------------------------------------------------ */
 
 .page {
-  max-width: 880px;
+  max-width: 740px;
   margin: 0 auto;
-  padding: 0 24px 100px;
+  padding: 40px 24px 80px;
 }
 
-.page-wide { max-width: 1180px; }
-
 /* ------------------------------------------------------------------
-   Hero
+   Page header - plain, no gradient/hero treatment
    ------------------------------------------------------------------ */
 
-.hero {
-  padding: 90px 24px 70px;
-  text-align: center;
+.page-header {
+  padding: 40px 24px 28px;
   border-bottom: 1px solid var(--bbc-line);
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(22,86,209,0.18), transparent 60%),
-    var(--bbc-bg);
 }
 
-.hero .kicker {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--bbc-blue);
+.page-header-inner {
+  max-width: 740px;
+  margin: 0 auto;
 }
 
-.hero h1 {
+.page-header h1 {
   font-family: var(--font-head);
-  font-size: clamp(34px, 6vw, 64px);
-  line-height: 1.05;
-  margin: 14px 0 18px;
+  font-size: clamp(26px, 4vw, 38px);
+  line-height: 1.15;
+  margin: 0 0 10px;
   color: #fff;
-  text-wrap: balance;
 }
 
-.hero p.lede {
-  font-size: 19px;
-  line-height: 1.55;
+.page-header p.lede {
+  font-size: 16px;
+  line-height: 1.6;
   color: var(--text-2);
-  max-width: 700px;
-  margin: 0 auto 34px;
+  max-width: 640px;
+  margin: 0;
 }
-
-.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
 /* ------------------------------------------------------------------
-   Buttons (match .zoom-btn / election-controls button language)
+   Buttons / plain links (match .zoom-btn / election-controls language)
    ------------------------------------------------------------------ */
 
 .btn {
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 13px 24px;
+  padding: 10px 18px;
   border: none;
   cursor: pointer;
   display: inline-block;
-  transition: background 0.15s ease, transform 0.1s ease;
 }
-.btn:active { transform: translateY(1px); }
 
 .btn-primary { background: var(--bbc-blue); color: #fff; }
 .btn-primary:hover { background: var(--bbc-blue-dark); }
@@ -168,129 +153,114 @@ a { color: inherit; }
 .btn-ghost { background: var(--bbc-panel); color: var(--text-1); border: 1px solid var(--bbc-line); }
 .btn-ghost:hover { background: var(--bbc-panel-2); }
 
-.btn-custom { background: var(--bbc-custom); color: #fff; }
-.btn-custom:hover { background: var(--bbc-custom-dark); }
-
 /* ------------------------------------------------------------------
    Section headers
    ------------------------------------------------------------------ */
 
-.section { padding: 64px 24px; }
-.section-head { text-align: center; margin-bottom: 40px; }
-.section-head .eyebrow {
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-3);
-}
-.section-head h2 {
-  font-family: var(--font-head);
-  font-size: clamp(24px, 4vw, 36px);
-  color: #fff;
-  margin: 8px 0 0;
-}
-
-/* ------------------------------------------------------------------
-   Cards (feature grid on home, post list on blog)
-   ------------------------------------------------------------------ */
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.card {
-  background: var(--bbc-panel);
-  border: 1px solid var(--bbc-line);
-  border-top: 4px solid var(--bbc-blue);
-  padding: 26px 24px;
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  transition: background 0.15s ease, transform 0.15s ease;
-}
-.card:hover { background: var(--bbc-panel-2); transform: translateY(-2px); }
-.card.accent-segments { border-top-color: var(--bbc-segments); }
-.card.accent-custom { border-top-color: var(--bbc-custom); }
-
-.card .card-tag {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-3);
-}
-.card h3 {
+.section { padding: 32px 24px; max-width: 740px; margin: 0 auto; }
+.section h2 {
   font-family: var(--font-head);
   font-size: 20px;
   color: #fff;
-  margin: 10px 0 10px;
-  line-height: 1.25;
+  margin: 0 0 16px;
 }
-.card p { color: var(--text-2); font-size: 15px; line-height: 1.5; margin: 0; }
-.card .card-meta {
-  margin-top: 16px;
-  font-size: 12px;
+
+/* ------------------------------------------------------------------
+   Plain post list (home + blog index) - no cards, no hover animation
+   ------------------------------------------------------------------ */
+
+.post-list { list-style: none; margin: 0; padding: 0; }
+.post-list li {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--bbc-line);
+}
+.post-list li:first-child { padding-top: 0; }
+
+.post-list a.post-list-title {
+  font-family: var(--font-head);
+  font-size: 17px;
+  color: #fff;
+  text-decoration: none;
+}
+.post-list a.post-list-title:hover { color: var(--bbc-blue); }
+.post-list a.post-list-title::before {
+  content: "\2192  "; /* -> */
   color: var(--text-3);
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
 }
-.card .card-meta span { background: var(--bbc-panel-2); padding: 3px 9px; border: 1px solid var(--bbc-line); }
+
+.post-list .post-list-dek {
+  color: var(--text-2);
+  font-size: 14.5px;
+  margin: 6px 0 6px;
+}
+.post-list .post-list-meta {
+  font-size: 12.5px;
+  color: var(--text-3);
+}
+.post-list .post-list-meta span + span::before { content: " \00b7 "; }
 
 /* ------------------------------------------------------------------
    Blog post typography
    ------------------------------------------------------------------ */
 
 .post-header {
-  padding: 70px 24px 40px;
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 36px 24px 24px;
   border-bottom: 1px solid var(--bbc-line);
-  text-align: center;
 }
 .post-header .series-tag {
-  display: inline-block;
   font-weight: 700;
   font-size: 12px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 5px 12px;
-  border: 1px solid var(--accent, var(--bbc-blue));
   color: var(--accent, var(--bbc-blue));
-  margin-bottom: 18px;
+  margin-bottom: 8px;
+  display: block;
 }
 .post-header h1 {
   font-family: var(--font-head);
-  font-size: clamp(28px, 5vw, 46px);
+  font-size: clamp(24px, 4.5vw, 36px);
   color: #fff;
-  line-height: 1.15;
-  margin: 0 0 16px;
-  text-wrap: balance;
+  line-height: 1.2;
+  margin: 0 0 10px;
 }
 .post-header .dek {
-  font-size: 17px;
+  font-size: 15.5px;
   color: var(--text-2);
-  max-width: 680px;
-  margin: 0 auto;
-  line-height: 1.55;
+  max-width: 640px;
+  margin: 0;
+  line-height: 1.5;
 }
 .post-header .byline {
-  margin-top: 22px;
-  font-size: 13px;
+  margin-top: 14px;
+  font-size: 12px;
   color: var(--text-3);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+}
+.post-header .series-crosslinks {
+  margin-top: 8px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--text-3);
+}
+.post-header .series-crosslinks a {
+  color: var(--accent, var(--bbc-blue));
+  text-decoration: none;
+}
+.post-header .series-crosslinks a:hover {
+  text-decoration: underline;
+}
+.post-header .series-crosslinks .series-crosslink-current {
+  color: var(--text-2);
+  font-weight: 700;
 }
 
 .post-body {
   max-width: 740px;
   margin: 0 auto;
-  padding: 50px 24px 100px;
-  font-size: 17px;
-  line-height: 1.7;
+  padding: 36px 24px 80px;
+  font-size: 16px;
+  line-height: 1.65;
   color: var(--text-2);
 }
 
@@ -324,6 +294,24 @@ a { color: inherit; }
   padding: 2px 6px;
   font-size: 15px;
   color: #d9c8ff;
+}
+
+/* plain ```fenced``` code blocks written directly in a markdown post
+   (as opposed to .nb-code, which wraps a notebook code cell + its output) */
+.post-body pre {
+  background: #101012;
+  border: 1px solid var(--bbc-line);
+  border-left: 3px solid var(--accent, var(--bbc-blue));
+  padding: 16px 18px;
+  margin: 0 0 24px;
+  overflow-x: auto;
+}
+.post-body pre code {
+  background: none;
+  padding: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #e4e4e8;
 }
 
 .post-body blockquote {
@@ -439,6 +427,6 @@ a { color: inherit; }
 .site-footer a { color: var(--text-2); text-decoration: underline; text-underline-offset: 2px; }
 
 @media (max-width: 620px) {
-  .hero { padding: 60px 20px 46px; }
-  .section { padding: 48px 18px; }
+  .page-header { padding: 28px 18px 20px; }
+  .section { padding: 24px 18px; }
 }

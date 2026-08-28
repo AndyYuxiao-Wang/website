@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>One seat, many voters &middot; Elections UK</title>
-<meta name="description" content="Rebuilding the UK election tribe model on data-derived latent groups instead of hand-assigned labels.">
+<title>One seat, many voters</title>
+<meta name="description" content="Rebuilding the UK election tribe model on data-derived categories instead of hand-assigned labels, from clustering technique to per-seat formula.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto+Condensed:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -12,17 +12,19 @@
 </head>
 <body>
 <nav class="site-nav">
-  <a class="brand" href="../index.html">ELECTIONS UK</a>
+  <!-- TODO: swap this for your own name -->
+  <a class="brand" href="../index.html">MY SITE</a>
   <a class="nav-link " href="../index.html">Home</a>
   <a class="nav-link active" href="index.html">Blog</a>
-  <a class="nav-link app-link" href="../app/index.html">Open the App</a>
+  <a class="nav-link app-link" href="../app/index.html">UK Election Map</a>
 </nav>
 
 <header class="post-header" style="--accent: var(--bbc-segments);">
-  <span class="series-tag">Part 1 &middot; Methodology</span>
+  <span class="series-tag">Part 2 &middot; Latent groups</span>
   <h1>One seat, many voters</h1>
-  <p class="dek">Why single-category constituency models are running out of road, and what unmixing 632 seats&rsquo; census composition into shared latent groups gets us instead.</p>
-  <p class="byline">2026 &middot; 22 min read</p>
+  <p class="dek">Why single-category constituency models are running out of road, and what unmixing 632 seats&rsquo; census composition into a handful of shared archetypes gets us instead.</p>
+  <p class="byline">April 2026 &middot; 24 min read</p>
+  <p class="series-crosslinks">Part of a series on the UK election model: <a href="sorting-632-seats.html">Part 1</a> &middot; <span class="series-crosslink-current">Part 2</span> &middot; <a href="the-prediction-pipeline.html">Part 3</a></p>
 </header>
 
 <article class="post-body" style="--accent: var(--bbc-segments);">
@@ -39,11 +41,14 @@ multiple-regression modelling of multiparty electoral change" over a panel of a 
 130 constituencies, run by a team led by Sir John Curtice for Ipsos (<a href="https://ukandeu.ac.uk/the-exit-poll-how-it-works-and-why-we-need-it/">UK in a Changing
 Europe explainer</a>;
 <a href="https://www.ipsos.com/en-uk/the-ipsos-exit-poll-how-does-it-work">Ipsos methodology note</a>).</p>
-<p>Both approaches share an assumption this project's own hand-built tribe model already
-rejected: that a constituency is well described by <em>one</em> category. UNS assumes every seat
+<p>Both approaches share an assumption worth challenging directly: that a constituency is well
+described by <em>one</em> category. UNS assumes every seat
 moves the same way. The exit poll's panel approach assumes every seat moves the way its
 assigned "type" seat moves. Both were reasonable simplifications in a stable two-party
-system. 2024 was not that system.</p>
+system. 2024 was not that system. Part one's own clustering experiment found the same thing
+from a completely different angle: even the best available hard partition of Britain's 632
+seats couldn't agree with itself, let alone with reality, on where the lines between types
+should fall.</p>
 
 <div class="nb-code"><pre><code>import json
 import pandas as pd
@@ -159,60 +164,24 @@ Reform-curious minority, a small but decisive bloc of voters motivated primarily
 a handful of Green-curious graduates who moved in during the last decade. None of those groups
 is the constituency's "type" — they're all <em>in</em> it, simultaneously, in different proportions
 to the seat next door.</p>
-<p>That's the empirical case for the rest of this notebook: if a constituency's electorate is
+<p>That's the empirical case for the rest of this post: if a constituency's electorate is
 a <strong>mixture</strong> of a smallish number of recurring voter types, rather than a single type, the
 right tool isn't a better category label. It's something that can express <em>how much of each
 type</em> is present.</p>
 
-<h2>2. From "which bucket" to "how much of which bucket": clustering, for the non-specialist</h2>
-<p>If you've used k-means or seen a dendrogram before, skip ahead to the pivot at the end of
-this section. If not, here's the minimum needed to follow the rest of this notebook.</p>
-<p><strong>Clustering</strong> is the general name for algorithms that look at a table of numeric measurements
-— one row per thing (here: one row per constituency, columns are census percentages) — and
-group similar rows together, without being told in advance what the groups are. Four
-techniques matter here, and it's worth knowing what each one actually assumes:</p>
-<ul>
-<li><strong>K-means</strong> picks <em>k</em> points ("centroids") and assigns every row to whichever centroid is
-  closest, then moves the centroids to the average of their assigned rows, and repeats until
-  stable. It's fast and simple, but it assumes clusters are round, similarly sized blobs —
-  which real demographic data usually isn't.</li>
-<li><strong>Hierarchical agglomerative clustering (HAC)</strong> starts with every row as its own cluster and
-  repeatedly merges the two closest clusters, building a tree (a <em>dendrogram</em>) of every
-  merge. You get the whole family history for free, and can cut the tree at any number of
-  clusters after the fact — useful for sanity-checking a k-means result rather than trusting
-  one number blindly.</li>
-<li><strong>DBSCAN</strong> doesn't need a number of clusters at all. It grows clusters outward from dense
-  regions and explicitly labels anything not part of a dense region as noise. It's the right
-  tool for finding "this seat is a genuine outlier" — and, just as informatively, it's the
-  right tool for discovering that there <em>isn't</em> dense, separated structure at all (more on
-  this below).</li>
-<li><strong>Gaussian Mixture Models (GMM)</strong> are a soft version of k-means: instead of a hard
-  assignment, every row gets a probability of belonging to each cluster, based on fitting the
-  data as a mixture of overlapping bell-curve-shaped (Gaussian) clumps.</li>
-</ul>
-<p>All four of these — including GMM's "soft" probabilities — still answer the same underlying
-question: <strong>which single cluster does this whole row most plausibly belong to, and how sure
-are we?</strong> A GMM saying "Bethnal Green and Stepney is 60% likely to be in cluster 3, 40% likely
-to be in cluster 5" is expressing <em>uncertainty about a single assignment</em>, not "60% of this
-seat's population is one thing and 40% is another." That distinction sounds pedantic until you
-try to build a vote model on top of it — at which point it's the whole ballgame, because we
-actually want the second one: a real compositional breakdown, the same shape as the hand-built
-Muslim/Left/Progressives/Average/Liberal/Blues/Reforms percentages this project already
-produces (which do sum to exactly 100% per seat, by construction).</p>
-
-<div class="nb-code"><pre><code>import pandas as pd
-
-tribes = pd.read_csv(&quot;../../pipeline/data/raw/englandCon.csv&quot;)
-tribe_cols = [&quot;Muslim&quot;, &quot;Left&quot;, &quot;Progressives&quot;, &quot;Average&quot;, &quot;Liberal&quot;, &quot;Blues&quot;, &quot;Reforms&quot;]
-tribes[tribe_cols].sum(axis=1).describe()[[&quot;mean&quot;, &quot;std&quot;, &quot;min&quot;, &quot;max&quot;]]</code></pre></div>
-<div class="nb-output"><div class="nb-output-label">Output</div><pre>mean    1.000000e+02
-std     1.041279e-14
-min     1.000000e+02
-max     1.000000e+02
-dtype: float64</pre></div>
-
-<p>Confirmed: every row sums to 100.000% (to floating-point precision). That's the target shape.
-Getting there needs a different family of technique.</p>
+<h2>2. From "which bucket" to "how much of which bucket"</h2>
+<p>Part one's glossary covered what K-means, HAC, DBSCAN and GMM each assume. Worth restating the
+one thing all four have in common, because it's exactly what needs to change: every one of
+them — including GMM's "soft" probabilities — answers the question <strong>which single cluster does
+this whole row most plausibly belong to, and how sure are we?</strong> A GMM saying "Bethnal Green and
+Stepney is 60% likely to be in cluster 3, 40% likely to be in cluster 5" is expressing
+<em>uncertainty about a single assignment</em>, not "60% of this seat's population is one thing and
+40% is another." That distinction sounds pedantic until you try to build a vote model on top of
+it — at which point it's the whole ballgame, because what we actually want is the second one: a
+real compositional breakdown that sums to exactly 100% per seat, the same way a census breakdown
+of ethnicity or age already does for the underlying population. Getting there needs a different
+family of technique entirely, not a better-tuned member of the family part one already
+exhausted.</p>
 <h3>The matrix approach: unmixing instead of sorting</h3>
 <p><strong>Non-negative Matrix Factorization (NMF)</strong> starts from a different question: instead of
 "which single group does this row belong to," it asks "can every row be reconstructed as a
@@ -243,42 +212,18 @@ Least Squares Unmixing (FCLSU)</strong>, and it's what actually produces "this s
 25% Segment 1, 13% Segment 5" as a genuine, literal percentage breakdown — not a clustering
 confidence score.</p>
 
-<h2>3. What we do with the groups once we have them: greedy allocation and flow tables</h2>
-<p>Finding latent groups only gets us half of the model. The existing pipeline
-(<code>pipeline/scripts/01_allocate_tribes.py</code>) already solves the second half for the hand-built
-tribes, and the same mechanism carries over unchanged to data-derived groups:</p>
-<ol>
-<li>Every group has a <strong>preference order</strong> over parties — the party it votes for <em>first</em>, if
-   that party is standing and has votes left to allocate in that seat; otherwise its second
-   choice; and so on.</li>
-<li>For each seat, the algorithm works through every group in turn, in every preference round,
-   handing over <code>min(group's remaining voters, party's remaining votes)</code> — a <strong>greedy</strong>
-   allocation, because at each step it takes as much as it can for the current group/party
-   pair without looking ahead.</li>
-<li>This has to balance against the actual reported vote total per party in that seat: the
-   sum of every group's allocation to a party must equal that party's real vote count.</li>
-</ol>
-<p>This is also exactly where <strong>flow tables</strong> come in, and why they matter more once groups are
-built from data rather than assumption. A flow table (the pipeline's <code>LocalFlows.xlsx</code> /
-<code>englandFlows.xlsx</code> play this role already) records, for one group, what fraction of its
-2019 support for each party carried over to each party in 2024 — Labour→Labour, Labour→Reform,
-Labour→Independent, and so on. A preference <em>order</em> is really a simplification of a flow
-table: it says "this group always tries Green first, then Labour," but a flow table says "73%
-of this group's 2019 Labour voters stayed Labour, 12% went Green, 9% went to an independent,
-and so on" — richer, and directly checkable against the 2019→2024 swing this project already
-has for every seat. Once we have latent groups with internally <em>coherent</em> voting behaviour, we
-can estimate a flow table per group directly from the seats where that group is dominant,
-rather than hand-assigning a preference order and hoping it's right. That's the payoff for
-getting the groups themselves right, which is the rest of this notebook.</p>
-<p>One consequence worth flagging early, because it comes back at the end: <strong>a preference order
-(or a flow table) only makes sense for a group whose members actually behave similarly.</strong> If a
-"group" is secretly two different electorates with two different loyalties bundled together
-by an oversimplified label, no single preference order can represent it — and the round-robin
-allocation will silently produce nonsense for exactly the seats where those two electorates
-are mixed in different proportions. Keep that in mind; it's precisely the failure mode we find
-in Section 5.</p>
+<p>Categories are only useful if their members actually vote similarly. If a "category" is
+secretly two different electorates with two different loyalties bundled together by an
+oversimplified label, no single description of how it votes can represent it — the two
+electorates will just pull in opposite directions in whichever seats mix them in different
+proportions. That's the test the rest of this post applies to every category it proposes:
+not just "does this describe the census data well," but "do the seats dominated by this
+category actually behave like one electorate."</p>
+<p>How each category then translates into an actual vote prediction — turnout, swing, tactical
+voting — is a big enough question to get its own write-up. This one stays focused on the
+categories themselves: what they are, and what evidence supports each one.</p>
 
-<h2>4. The data</h2>
+<h2>3. The data</h2>
 <p>Every demographic variable feeding the archetype model comes from the <strong>2021 Census</strong> (Office
 for National Statistics, for England &amp; Wales; National Records of Scotland for the equivalent
 Scottish figures), at constituency level:</p>
@@ -416,13 +361,13 @@ pd.DataFrame(superwealthy[:8], columns=[&quot;Seat&quot;, &quot;Superwealthy sco
 <p>Exactly the two seats the non-dom study flags by name come out on top of this project's own
 data — a good sign the variable is measuring what it claims to.</p>
 
-<h2>5. Running the matrix: five archetypes</h2>
+<h2>4. Running the matrix: five archetypes</h2>
 <p>NMF was fit once, across all 632 GB constituencies pooled together (England, Scotland and
 Wales at once — since this step uses no electoral data, there's no reason to fit each nation
-separately the way the earlier, vote-informed clustering did). The number of archetypes, <em>k</em>,
-was chosen by sweeping NMF's reconstruction quality (R²) across k=2..20 and taking the elbow —
-the point where adding another archetype stops buying much more reconstruction accuracy. That
-came out at <strong>k=5</strong>.</p>
+separately the way an earlier, vote-informed clustering pass might). The number of archetypes,
+<em>k</em>, was chosen by sweeping NMF's reconstruction quality (R²) across k=2..20 and taking the
+elbow — the point where adding another archetype stops buying much more reconstruction
+accuracy. That came out at <strong>k=5</strong>.</p>
 
 <div class="nb-code"><pre><code>import json
 
@@ -533,7 +478,7 @@ not quite the end of the story. The "implied vote" column above is a single numb
 archetype; it only tells the truth if every seat dominated by that archetype behaves
 similarly. Two of the five don't.</p>
 
-<h2>6. Archetype 1 doesn't hold together</h2>
+<h2>5. What's actually inside Archetype 1</h2>
 <p>Archetype 1's headline profile — "high Asian, high Muslim, high Pakistani, high Indian" — is
 already a hint of trouble: those are four different, only loosely correlated things being
 described by one archetype. NMF found them co-occurring often enough across 632 seats to treat
@@ -735,7 +680,7 @@ either bucket. That's not a bug in the analysis; it's a seat where the assumptio
 groups genuinely strains, and it's worth flagging as a case that will need special handling
 however the final grouping shakes out — rather than quietly forcing it into whichever side
 looks more convenient.</p>
-<p><strong>The fix</strong>: split Archetype 1 into (at least) two groups along the Hindu/Indian vs. Muslim
+<p>The evidence points to (at least) two distinct categories along the Hindu/Indian vs. Muslim
 axis — a <strong>South Asian, Conservative-diaspora-leaning</strong> group (Harrow-shaped) and a <strong>Muslim,
 Labour-to-independent</strong> group (Bethnal Green/Dewsbury/Blackburn-shaped) — rather than one
 archetype with an implied vote that's a meaningless average of two opposed electorates.</p>
@@ -833,13 +778,20 @@ Conservative-leaning constituency within whatever broader "Archetype 1"-adjacent
 housing them — a strong candidate to fold into the same Conservative-diaspora group as the
 Harrow-shaped seats above, on electoral behaviour rather than ethnicity or religion as such.</p>
 
-<h2>7. Archetype 3's hidden Conservative pocket</h2>
+<h2>6. What's actually inside Archetype 3</h2>
 <p>Archetype 3 — "international metropolitan," high <code>Superwealthy</code>, high ethnic diversity,
 implied vote Labour 54% / Conservative 22% — has the same kind of problem as Archetype 1, for
 a related reason: <strong><code>Superwealthy</code>, as the non-dom research above already told us, is
 extremely spatially concentrated.</strong> A handful of seats drive almost all of the archetype's
 <code>Superwealthy</code> loading, and if their Conservative vote behaves differently from the rest of
 the archetype, averaging them in dilutes a real, distinct signal.</p>
+<p>Worth a wry footnote before the numbers: <code>Superwealthy</code> is, at bottom, a non-dom proxy, and
+plenty of non-doms are foreign nationals who aren't eligible to vote in a UK general election
+at all. Whatever Conservative lean turns up here isn't literally non-doms turning out to vote
+non-dom — it's that a genuine non-dom enclave doesn't arrive alone. It comes with a great many
+very-domestic, very-enfranchised, very Conservative-voting neighbours, because that's who else
+can afford to live next door to that kind of money. The seat votes Tory even where the specific
+population the variable is naming, mostly, can't.</p>
 
 <div class="nb-code"><pre><code>merged3 = mem.merge(
     feat[[&quot;Seat&quot;, &quot;Superwealthy&quot;, &quot;y2019_CON_share&quot;, &quot;y2024_CON_share&quot;, &quot;swing_CON&quot;]],
@@ -957,18 +909,28 @@ inside Cities of London and Westminster — returned all three of its councillor
 Conservatives, with the top candidate taking 62.7% of the vote outright
 (<a href="https://en.wikipedia.org/wiki/Knightsbridge_and_Belgravia_(ward)">results via Wikipedia</a>).
 That's not a marginal lean; it's a landslide, at exactly the geographic resolution the
-<code>Superwealthy</code> variable is trying to target. On this evidence, the small number of
-<code>Superwealthy</code>-heavy seats within Archetype 3 are safe to peel off into the same Blue
-(Conservative-leaning) group as the diaspora and Jewish-vote seats from Section 6 — a genuinely
-different electorate from the rest of Archetype 3's Labour-leaning metropolitan mass, hiding
-inside the same broad ethnicity-and-tenure profile that NMF (reasonably) treated as one thing.</p>
+<code>Superwealthy</code> variable is trying to target.</p>
+<p>The same three seats check out against a completely independent measure: recorded average
+house price. Electoral Calculus's constituency house-price figures put Kensington and
+Bayswater at <strong>£2,047,640</strong>, Cities of London and Westminster at <strong>£1,934,555</strong>, and Chelsea
+and Fulham at <strong>£1,418,340</strong> — against £631,345 for London as a whole and £313,667 for Great
+Britain (<a href="https://www.electoralcalculus.co.uk/fcgi-bin/seatdetails.py?seat=Kensington+and+Bayswater">Electoral Calculus constituency
+data</a>).
+Every one of them is, literally, over a million pounds: three to six times the national
+average, in the same three seats the <code>Superwealthy</code> variable and the Belgravia ward result
+already pointed to independently. Three unrelated measurements — a tax-record-derived census
+proxy, a hyper-local council-ward election, and the property market — landing on the same
+handful of postcodes is about as much corroboration as this kind of claim gets. On this
+evidence, the small number of <code>Superwealthy</code>-heavy seats within Archetype 3 are safe to peel
+off into the same Blue (Conservative-leaning) group as the diaspora and Jewish-vote seats from
+Section 5 — a genuinely different electorate from the rest of Archetype 3's Labour-leaning
+metropolitan mass, hiding inside the same broad ethnicity-and-tenure profile that NMF
+(reasonably) treated as one thing.</p>
 
-<h3>A weaker, older assumption worth re-checking: rural areas</h3>
-<p>The original hand-built model folded a flat <strong>20% of a seat's <code>Rural</code> score into the
-Conservative-leaning tribe</strong> — a round-number anecdotal judgement rather than something
-estimated from data. It's worth checking properly rather than carrying it forward unexamined,
-because the answer turns out to be "the <em>direction</em> is right, but 20% probably isn't the
-right number any more."</p>
+<h3>What about rural areas?</h3>
+<p>Rural areas are the traditional shorthand for "safe Conservative," so it's worth checking
+whether that shorthand still earns a place in the Blue category, and how much weight it
+deserves — rather than assuming the answer.</p>
 
 <div class="nb-code"><pre><code>print(f&quot;Correlation(Rural, 2024 Conservative share), England: {feat[&#x27;Rural&#x27;].corr(feat[&#x27;y2024_CON_share&#x27;]):.3f}&quot;)
 print(f&quot;Correlation(Rural, Conservative swing), England:      {feat[&#x27;Rural&#x27;].corr(feat[&#x27;swing_CON&#x27;]):.3f}\n&quot;)
@@ -988,92 +950,157 @@ Low-rural seats  (Rural&lt;=10, n=302): mean CON 2019 = 38.7%, mean CON 2024 = 2
 
 <p>Rural seats really are meaningfully more Conservative (r ≈ 0.50 with 2024 vote share — a
 stronger relationship than either Jewish or Hindu population share managed on their own), so
-the original instinct to route some of the rural population toward the Blue group was sound.
-But the <em>size</em> of the lean has moved a lot: the average high-rural seat here went from 59.5%
-Conservative in 2019 to 32.7% in 2024, a 26.8-point collapse — and that's not a quirk of this
-dataset. An independent CLA/Survation poll of the 100 most rural constituencies in Britain
-found Conservative support at 34% going into the 2024 election, "down 25 points from 2019"
-(<a href="https://www.cla.org.uk/news/general-election-2024-the-rural-reaction/">CLA: <em>General election 2024: the rural reaction</em></a>) —
+routing some of the rural population toward the Blue category is the right call. But the
+<em>size</em> of that lean has moved a lot in a short time: the average high-rural seat here went
+from 59.5% Conservative in 2019 to 32.7% in 2024, a 26.8-point collapse — and that's not a
+quirk of this dataset. An independent CLA/Survation poll of the 100 most rural constituencies
+in Britain found Conservative support at 34% going into the 2024 election, "down 25 points
+from 2019" (<a href="https://www.cla.org.uk/news/general-election-2024-the-rural-reaction/">CLA: <em>General election 2024: the rural reaction</em></a>) —
 essentially the same number, from a completely different source. Rural seats are also swinging
 <em>away</em> from the Conservatives somewhat faster than urban ones (r ≈ -0.41 between <code>Rural</code> and
-swing), which is the opposite of what you'd want if you're trying to justify treating "rural"
-as a stably Conservative-leaning signal going forward. A flat 20% multiplier baked in when the
-Conservative rural lean was worth ~59% doesn't obviously transfer to a world where it's worth
-~33% — this is a case for re-deriving the rural contribution from the regression coefficient
-in the current data (already computed in the Correlates tab of the companion dashboard) rather
-than carrying the original anecdotal figure forward unchanged.</p>
+swing), which is the case for treating rural residence as a real but heavily discounted signal
+rather than the near-blanket assumption it might have earned pre-2019: the model routes a flat
+<strong>20% of a seat's <code>Rural</code> population</strong> into Blue — enough to register the relationship that's
+still there (r ≈ 0.50), deliberately conservative given that the historic rural Tory lean has
+roughly halved in one election (59.5% → 32.7% above) and shows no sign of having stopped moving.</p>
 
-<h2>8. Why there still has to be an "Average" group</h2>
+<h2>7. Average: politically disengaged, follows the national mood</h2>
 <p>It's tempting, having just spent two sections finding real signal inside supposedly generic
-archetypes, to conclude the goal is to keep splitting until every group is a clean, named,
-explicable electorate — Muslim, Diaspora-Conservative, Superwealthy, Working-class-Reform,
-Secular-graduate, and so on — with nothing left over. That's not achievable, and trying to
-force it would break the round-robin allocation described in Section 3. Here's why a residual,
-generically-behaved "Average" group is a structural requirement of the method, not a
-concession to laziness.</p>
-<p>The round-robin allocates each party's <em>actual, reported</em> vote total in a seat by working
-through the specific groups present in that seat, in preference order, until the party's votes
-run out or the groups do. That only balances if, in every seat, the specific groups' combined
-plausible support for a party is <em>at least</em> as large as that party's real vote total there —
-and in practice it frequently won't be. Consider an ordinary suburban seat with a small Muslim
-population, a small superwealthy pocket, a modest working-class minority, and no other strong
-archetype signal: if the Conservative party's real vote share there is, say, 38%, but the named
-groups we've built (Muslim, Diaspora-Conservative, Superwealthy, Working-class) together only
-account for 15% of that seat's population, the round-robin has no legitimate voters left to
-assign the other 23 points of Conservative vote to — even though we know, empirically, that
-Conservative got 38% of the vote there. Something has to represent "the rest of the
-electorate": people who don't fit any of the specific, distinctively-behaved profiles above,
-and who vote in roughly the same proportions as the national/regional trend for their seat's
-overall lean. That's the Average group's actual job — not "we couldn't be bothered
-characterising them," but "the allocation mechanism is arithmetically incomplete without a
-group that can absorb whatever the specific groups can't plausibly account for, in whichever
-direction a seat actually leans."</p>
-<p>This also explains why Average tends to end up the <em>largest</em> single tribe in the original
-hand-built model, and why NMF's own Archetype 2 and Archetype 4 — at 37.7% and 32.7% of Great
-Britain respectively — are so much bigger than the niche archetypes examined in Sections 6 and
-7. The niche groups are where the <em>specific, well-evidenced</em> stories live (Muslim vote,
-Jewish vote, superwealthy enclaves, diaspora Conservatism); the bulk of the country is still
-better modelled as "broadly typical for wherever they live" than as a member of any narrower
-category, and forcing them into one would manufacture false precision rather than remove it.
-The practical design question for the model isn't "how do we get rid of Average" — it's
-"how small can we make the <em>residual</em>, once every real signal we can actually justify with
-evidence has been pulled out of it into its own named group?" Sections 6 and 7 pulled two real
-signals out. There are probably more to find. There will never be zero left over.</p>
+archetypes, to expect that enough digging turns every seat into a clean, named, explicable
+electorate — Muslim, Diaspora-Conservative, Superwealthy, Working-class-Reform, and so on. It
+doesn't. A large share of Britain's constituencies simply don't lean on any one distinguishing
+trait: no unusual ethnic or religious composition, no notably young or old population, no
+striking tenure or class skew. If none of the specific categories above describes a seat well,
+what does?</p>
+<p>The most direct test: does a seat's demographic distinctiveness predict how unusual its
+voting is? If "Average" seats are a real category — not just leftover statistical noise —
+they should be the ones whose vote share and swing sit closest to the national numbers, while
+the seats with a strong, distinctive demographic signature should be the ones that deviate
+furthest from the national trend.</p>
 
-<h2>9. Where this leaves the group structure</h2>
-<p>Putting Sections 5–8 together, the revised latent-group structure looks like this:</p>
+<div class="nb-code"><pre><code>demo_cols = [c for c in feat.columns if c not in (&quot;Seat&quot;, &quot;County&quot;, &quot;Region&quot;)
+             and not c.startswith((&quot;y2019_&quot;, &quot;y2024_&quot;, &quot;swing_&quot;))]
+z = (feat[demo_cols] - feat[demo_cols].mean()) / feat[demo_cols].std()
+feat[&quot;distinctiveness&quot;] = z.abs().mean(axis=1)   # average |z-score| across every demographic variable
+
+national_con, national_swing = feat[&quot;y2024_CON_share&quot;].mean(), feat[&quot;swing_CON&quot;].mean()
+feat[&quot;dev_swing&quot;] = (feat[&quot;swing_CON&quot;] - national_swing).abs()
+
+print(f&quot;Correlation(demographic distinctiveness, |deviation from national swing|): &quot;
+      f&quot;{feat[&#x27;distinctiveness&#x27;].corr(feat[&#x27;dev_swing&#x27;]):.3f}\n&quot;)
+
+least = feat.sort_values(&quot;distinctiveness&quot;).head(50)
+most = feat.sort_values(&quot;distinctiveness&quot;).tail(50)
+print(f&quot;50 LEAST distinctive seats: mean 2024 CON = {least[&#x27;y2024_CON_share&#x27;].mean():.1f}% &quot;
+      f&quot;(national {national_con:.1f}%), mean |swing deviation| = {least[&#x27;dev_swing&#x27;].mean():.1f}pp&quot;)
+print(f&quot;50 MOST distinctive seats:  mean 2024 CON = {most[&#x27;y2024_CON_share&#x27;].mean():.1f}% &quot;
+      f&quot;(national {national_con:.1f}%), mean |swing deviation| = {most[&#x27;dev_swing&#x27;].mean():.1f}pp&quot;)
+
+least.nsmallest(6, &quot;distinctiveness&quot;)[[&quot;Seat&quot;]]</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><pre>Correlation(demographic distinctiveness, |deviation from national swing|): 0.491
+
+50 LEAST distinctive seats: mean 2024 CON = 28.2% (national 25.1%), mean |swing deviation| = 5.4pp
+50 MOST distinctive seats:  mean 2024 CON = 15.8% (national 25.1%), mean |swing deviation| = 14.0pp
+</pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Seat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>78</th>
+      <td>Buckingham and Bletchley</td>
+    </tr>
+    <tr>
+      <th>344</th>
+      <td>Northampton South</td>
+    </tr>
+    <tr>
+      <th>307</th>
+      <td>Milton Keynes North</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>Chelmsford</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Banbury</td>
+    </tr>
+    <tr>
+      <th>384</th>
+      <td>Rochester and Strood</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<p>The relationship holds (r ≈ 0.49 between distinctiveness and swing deviation), and the gap
+between the two groups is stark: the 50 least distinctive seats swing within about 5 points of
+the national average; the 50 most distinctive seats swing nearly three times as far off it. The
+least-distinctive seats themselves read exactly like the "safe bellwether" reputation suggests
+— Buckingham and Bletchley, Northampton South, Milton Keynes North, Chelmsford, Banbury —
+medium English towns with no strong ethnic, religious, generational or class skew in any
+direction, and votes that track the national mood almost by definition.</p>
+<p>That's what Average actually captures: not "we couldn't characterise them," but a real,
+predictable behavioural pattern — a voter, or a seat, without a strong independent pull of its
+own, who or which follows wherever the national conversation goes that year. It's the largest
+single category almost everywhere, for the same reason a "typical" reading is more common than
+an extreme one: most places aren't unusual on any single axis at once. The specific categories
+in Sections 5 and 6 are where the <em>distinctive</em> stories live; Average is what's left when none
+of those stories apply, and empirically it behaves exactly the way that description predicts.</p>
+
+<h2>8. Where this leaves the group structure</h2>
+<p>Putting Sections 4–7 together, the categories this research converges on look like this:</p>
 <table>
 <thead>
 <tr>
 <th>Group</th>
-<th>Origin</th>
+<th>Where it comes from</th>
 <th>Core evidence</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Muslim / independent-leaning</strong></td>
-<td>split from Archetype 1</td>
+<td>Archetype 1, Muslim-plurality seats</td>
 <td>Bethnal Green, Dewsbury, Blackburn: 20–33pt swings to independents</td>
 </tr>
 <tr>
 <td><strong>South Asian Conservative-diaspora</strong></td>
-<td>split from Archetype 1</td>
+<td>Archetype 1, Hindu/Indian-plurality seats</td>
 <td>Harrow West/East: Conservative vote barely moved against a 20pt national collapse</td>
 </tr>
 <tr>
 <td><strong>Jewish / Conservative</strong></td>
-<td>new, evidence-led addition</td>
+<td>evidence-led addition</td>
 <td>JPR/Survation: 61% Conservative, 11% Labour (2019); Finchley &amp; Hendon held up in 2024</td>
 </tr>
 <tr>
 <td><strong>Superwealthy / Conservative</strong></td>
-<td>split from Archetype 3</td>
-<td>Kensington, Cities of London &amp; Westminster, Chelsea &amp; Fulham; Belgravia ward 62.7% Conservative locally</td>
+<td>Archetype 3, high-<code>Superwealthy</code> seats</td>
+<td>Kensington, Cities of London &amp; Westminster, Chelsea &amp; Fulham; £1.4m–£2.0m average house prices; Belgravia ward 62.7% Conservative locally</td>
 </tr>
 <tr>
 <td><strong>Metropolitan / cosmopolitan</strong></td>
-<td>remainder of Archetype 3</td>
+<td>Archetype 3, the rest</td>
 <td>Labour-leaning, ethnically diverse, not superwealthy</td>
 </tr>
 <tr>
@@ -1092,20 +1119,20 @@ signals out. There are probably more to find. There will never be zero left over
 <td>Labour 68%, Green 30% implied vote</td>
 </tr>
 <tr>
-<td><strong>Average (residual)</strong></td>
-<td>structural necessity</td>
-<td>absorbs whatever the named groups can't account for, per Section 8</td>
+<td><strong>Average</strong></td>
+<td>no strong distinguishing trait</td>
+<td>r≈0.49 between demographic distinctiveness and swing deviation from the national trend</td>
 </tr>
 </tbody>
 </table>
 <p>Leicester East stays flagged as an unresolved edge case rather than force-fit into either of
-the first two rows, per Section 6.</p>
-<p>That's the group structure conceptually. Section 10 makes it arithmetic: the actual
+the first two rows, per Section 5.</p>
+<p>That's the group structure conceptually. Section 9 makes it arithmetic: the actual
 per-seat scoring formula settled on for each group, and why each piece of each formula is
 there.</p>
 
-<h2>10. Turning the groups into a formula, seat by seat</h2>
-<p>Sections 6–9 established <em>which</em> groups belong in the model and <em>why</em>, from evidence. This
+<h2>9. Turning the groups into a formula, seat by seat</h2>
+<p>Sections 5–8 established <em>which</em> groups belong in the model and <em>why</em>, from evidence. This
 section is the last mile: an explicit, per-seat scoring formula for each group, built directly
 from the census variables already in the dataset, with every design choice justified against
 either this project's own correlations or external research.</p>
@@ -1113,17 +1140,18 @@ either this project's own correlations or external research.</p>
 group below, this one needs no construction: religious self-identification in the census
 already <em>is</em> the exact population this group is trying to represent, at exactly the right
 resolution.</p>
-<p><strong>Blue</strong> (Conservative-leaning) — not one formula but an assembled union of the specific,
-evidenced sub-populations from Sections 6 and 7: the Jewish population (JPR/Survation: 61%
-Conservative in 2019, and the smallest Conservative collapses in the country in 2024 running
-through the highest-Jewish seats), the Hindu/Indian diaspora-Conservative population isolated
-from Archetype 1 (Harrow-shaped: near-zero swing against a seat's own religion/ethnicity
-baseline), the <code>Superwealthy</code> population isolated from Archetype 3 (r ≈ 0.36 with 2024
-Conservative share within Archetype 3, backed by the Belgravia ward result), and a share of
-the <code>Rural</code> population (flagged in Section 7 as needing a smaller multiplier than the
-original model's flat 20%, now that rural Conservative support has roughly halved). This is
-the one group built from "wherever we found a specific, well-evidenced Conservative-leaning
-population," rather than from a single archetype.</p>
+<p><strong>Blue</strong> (Conservative-leaning) — <code>Hindu + Jewish + Superwealthy + 0.2 × Rural</code>. Each term is
+one of the specific, evidenced sub-populations from Sections 5 and 6, added together rather
+than derived from a single archetype: the Hindu population (Harrow-shaped diaspora-Conservative
+seats: near-zero swing against a seat's own religion/ethnicity baseline), the Jewish population
+(JPR/Survation: 61% Conservative in 2019, and the smallest Conservative collapses in the country
+in 2024 running through the highest-Jewish seats), the <code>Superwealthy</code> population (r ≈ 0.36 with
+2024 Conservative share within Archetype 3, backed independently by the Belgravia ward result
+and the million-pounds-plus house prices above), and a flat 20% of the <code>Rural</code> population
+(Section 6 found the relationship real but its size roughly halved between 2019 and 2024, hence
+the discount rather than a full weighting). This is the one group built from "wherever we found
+a specific, well-evidenced Conservative-leaning population," rather than from a single
+archetype.</p>
 <p><strong>Progressives</strong> — <code>Black + Sikh + ManagerialProfessional × (PrivateRent / (PrivateRent +
 OwnerOccupation))</code>. Black British voters have polled at roughly 70–80% Labour for decades,
 remaining Labour's most popular choice among Black voters even in 2024
@@ -1166,12 +1194,13 @@ found for <em>any</em> variable in this dataset, stronger even than <code>Routin
 ethnically-diverse working-class seat and a white-British working-class seat can have identical
 NS-SEC profiles and very different Reform ceilings; this term is what keeps the model from
 conflating them.</p>
-<p><strong>Average</strong> — the residual, exactly as argued in Section 8: given a constant baseline score
-across every seat while the six formulas above vary with local composition, the final
+<p><strong>Average</strong> — a constant baseline score, the same for every seat. The six formulas above all
+vary with local composition; Average doesn't need to, because — per Section 7 — it's
+specifically the category for seats and voters with no strong pull of their own. The final
 renormalisation step (rescaling all seven raw scores to sum to 100% — described next)
-automatically hands Average a larger share in seats where none of the six specific signals
-above are strong, and a smaller share where they are. It is not estimated from any additional
-data; it falls out of the other six formulas by construction.</p>
+automatically hands it a larger share in seats where none of the six specific signals above
+are strong, and a smaller share where they are — which is exactly the "follows whichever way
+the seat otherwise leans" behaviour Section 7 found in the data.</p>
 <h3>On the double-counting question</h3>
 <p>None of the raw scores above are literal, mutually-exclusive headcounts, and they're not meant
 to be — the census only publishes <strong>marginal</strong> percentages (what fraction of a seat is Black;
@@ -1209,29 +1238,28 @@ than a one-shot formula:</p>
    number on its own, and isn't supposed to.</p>
 </li>
 </ol>
-<p>That's what the final step is for. Exactly like the NMF archetypes in Section 5, these seven
+<p>That's what the final step is for. Exactly like the NMF archetypes in Section 4, these seven
 raw propensity scores get <strong>rescaled so they sum to 100% per seat</strong> — the same "renormalise a
 set of non-negative scores into a genuine percentage breakdown" move as the FCLSU step in
-Section 5, just with hand-built weights standing in for NMF's data-discovered ones instead of
-a constrained least-squares solve. The double-counting inside a single raw score before that
-rescaling isn't a bug to be fixed; it's exactly how the score is allowed to accumulate
-confidence from more than one piece of overlapping evidence before being turned into a
-proportion.</p>
+Section 4, just with evidence-derived weights standing in for NMF's data-discovered ones
+instead of a constrained least-squares solve. The double-counting inside a single raw score
+before that rescaling isn't a bug to be fixed; it's exactly how the score is allowed to
+accumulate confidence from more than one piece of overlapping evidence before being turned
+into a proportion.</p>
 
 <p>That's the group structure and the arithmetic behind it, both argued from evidence rather than
 assumed. Turning each group into an actual per-party preference order or flow table, and using
-it to allocate 2024 votes and project 2029 seats, is the next notebook.</p>
+it to allocate 2024 votes and project 2029 seats, is the next post.</p>
 </article>
 
 <nav class="post-nav">
-  <a class="btn btn-ghost" href="index.html">&larr; All posts</a>
-  <a class="btn btn-ghost" href="the-prediction-pipeline.html">From groups to seats &rarr;</a>
+  <a class="btn btn-ghost" href="sorting-632-seats.html">&larr; Trying to sort 632 seats into types</a>
+  <a class="btn btn-ghost" href="predicting-house-prices-and-london.html">What a house is worth, and why London breaks the curve &rarr;</a>
 </nav>
 
 <footer class="site-footer">
-  <p>An independent, data-driven model of British general elections &mdash;
-     <a href="../index.html">home</a> &middot; <a href="index.html">blog</a> &middot;
-     <a href="../app/index.html">interactive map</a></p>
+  <p><a href="../index.html">home</a> &middot; <a href="index.html">blog</a> &middot;
+     <a href="../app/index.html">election map</a></p>
 </footer>
 </body>
 </html>
