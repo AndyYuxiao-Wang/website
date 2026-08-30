@@ -42,49 +42,47 @@ SERIES_TITLES = {
     "uk-election": "the UK election model",
 }
 
-# Non-post projects linked from the home page's "Also here" section.
-ALSO_HERE = [
+# Non-post projects, listed on the dedicated Projects page and teased on the home page.
+PROJECTS = [
     {
         "href": "app/index.html",
         "title": "UK election map",
-        "dek": "An interactive constituency map built alongside the blog posts above &mdash; "
-               "every UK general election since 2005, a 2029 prediction, and a custom "
-               "what-if predictor.",
+        "dek": "Originally built to make the research above easier to explore and work with; now that I've finally got around to the frontend, it can pass as an app. Includes every UK general election since 2005, a 2029 prediction, and a "
+               "what-if predictor for anyone who fancies rigging an election from the comfort "
+               "of their own browser.",
     },
     {
         "href": "https://socioeconomichousevaluationweb.uk/",
         "title": "House price predictor",
-        "dek": "A live Random Forest model, from the house-price dissertation post, that "
-               "estimates a sale price from a property's characteristics and its LSOA's "
-               "socioeconomic profile.",
+        "dek": "A model which will happily estimate what a property is worth from its "
+               "characteristics and its neighbourhood's socioeconomic profile, and, if it's a "
+               "London postcode, quietly disagree with you about it.",
     },
 ]
 
 NAV = """
 <nav class="site-nav">
-  <!-- TODO: swap this for your own name -->
-  <a class="brand" href="../index.html">MY SITE</a>
+  <a class="brand" href="../index.html">UniverseWang</a>
   <a class="nav-link {home_active}" href="../index.html">Home</a>
   <a class="nav-link {blog_active}" href="index.html">Blog</a>
-  <a class="nav-link app-link" href="../app/index.html">UK Election Map</a>
+  <a class="nav-link projects-link {projects_active}" href="../projects.html">Projects</a>
 </nav>
 """.strip()
 
-# same nav, but for site/index.html itself, which sits one level up from blog/ pages
+# same nav, but for pages that sit at the site root (index.html, projects.html)
 NAV_HOME = """
 <nav class="site-nav">
-  <!-- TODO: swap this for your own name -->
-  <a class="brand" href="index.html">MY SITE</a>
-  <a class="nav-link active" href="index.html">Home</a>
-  <a class="nav-link" href="blog/index.html">Blog</a>
-  <a class="nav-link app-link" href="app/index.html">UK Election Map</a>
+  <a class="brand" href="index.html">UniverseWang</a>
+  <a class="nav-link {home_active}" href="index.html">Home</a>
+  <a class="nav-link {blog_active}" href="blog/index.html">Blog</a>
+  <a class="nav-link projects-link {projects_active}" href="projects.html">Projects</a>
 </nav>
 """.strip()
 
 FOOTER = """
 <footer class="site-footer">
   <p><a href="../index.html">home</a> &middot; <a href="index.html">blog</a> &middot;
-     <a href="../app/index.html">election map</a></p>
+     <a href="../projects.html">projects</a></p>
 </footer>
 """.strip()
 
@@ -93,7 +91,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{title}</title>
+<title>{tab_title}</title>
 <meta name="description" content="{description}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -134,57 +132,66 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 NOTEBOOK_POSTS = [
     {
         "notebook": "clustering/notebooks/sorting_632_seats.ipynb",
-        "slug": "sorting-632-seats.html",
+        "slug": "clustering_con.html",
+        "tab_title": "clustering_con",
         "series_tag": "Part 1 &middot; Clustering",
         "series": "uk-election",
         "series_part": 1,
-        "title": "Trying to sort 632 seats into types",
-        "dek": "Running the full standard toolkit &mdash; K-means, HAC, DBSCAN and GMM, across "
-               "PCA and UMAP, scored on four metrics &mdash; on Britain's constituencies, and "
-               "reporting honestly on where it falls short.",
-        "description": "A full PCA/UMAP x clustering-algorithm x validation-metric sweep on UK constituency demographics, and what its limits reveal.",
+        "title": "Do Britain's 632 constituencies fall into clean types?",
+        "dek": "I threw the kitchen sink of clustering methods at Britain's constituencies: "
+               "K-means, hierarchical clustering, DBSCAN, GMM, run across two "
+               "different embeddings and scored four different ways, in the hope that at "
+               "least one of them would tell me something definite. None of them quite did, "
+               "and this is the post where I admit that in some detail.",
+        "description": "An attempt to sort Britain's 632 constituencies into clean, tidy types using every clustering method going, and an honest account of how badly they agreed with each other.",
         "accent": "blue",
         "date": "2025-10-01",
         "read_time": "14 min read",
     },
     {
         "notebook": "clustering/notebooks/political_fragmentation_and_latent_groups.ipynb",
-        "slug": "political-fragmentation-and-latent-groups.html",
+        "slug": "nmf_con.html",
+        "tab_title": "nmf_con",
         "series_tag": "Part 2 &middot; Latent groups",
         "series": "uk-election",
         "series_part": 2,
-        "title": "One seat, many voters",
-        "dek": "Why single-category constituency models are running out of road, and what "
-               "unmixing 632 seats&rsquo; census composition into a handful of shared archetypes "
-               "gets us instead.",
-        "description": "Rebuilding the UK election tribe model on data-derived categories instead of hand-assigned labels, from clustering technique to per-seat formula.",
+        "title": "The trouble with giving a seat one label",
+        "dek": "With Uniform National Swing (UNS) as dead as a dodo, every UK election model eventually has to decide what a constituency &lsquo;is,&rsquo; "
+               "part 1 found that doing so with a single label was about as "
+               "accurate as describing a person by their star sign. Here we "
+               "stop doing that, and start letting each of Britain's 632 seats be several "
+               "different kinds of place at once.",
+        "description": "On why giving a constituency a single political label stopped working, and what happened when I let each of Britain's 632 seats be a mixture of several voter archetypes instead.",
         "accent": "purple",
         "date": "2026-04-01",
         "read_time": "24 min read",
     },
     {
         "notebook": "notebooks/predicting_house_prices_and_london.ipynb",
-        "slug": "predicting-house-prices-and-london.html",
+        "slug": "house_prices.html",
+        "tab_title": "house_prices",
         "series_tag": "Research note",
-        "title": "What a house is worth, and why London breaks the curve",
-        "dek": "A dissertation project's baseline house-price model finds sensible, well-behaved "
-               "relationships everywhere &mdash; until it hits the one UK housing market that "
-               "isn't behaving like the rest of the country.",
-        "description": "A machine-learning house-price model built from census and deprivation data, and what its errors reveal about London's outlier prices.",
+        "title": "A more 'objective' value of a house in the UK (sans London)",
+        "dek": "As a country, we do tend to obsess over how downtrodden or genteel a neighbourhood, town or city is. "
+               "Here, we try to quantify that obsession, to gauge the value of a house by its objectively measured 'affluence'. "
+               "And as per the timeless national joke, London does its own thing ",
+
+        "description": "Five machine-learning models built to price UK houses get steadily better across England as they get smarter, then all hit the same wall in London, the one place that appears to be playing an entirely different game.",
         "accent": "blue-dark",
         "date": "2026-06-01",
         "read_time": "10 min read",
     },
     {
         "notebook": "clustering/notebooks/the_prediction_pipeline.ipynb",
-        "slug": "the-prediction-pipeline.html",
+        "slug": "prediction.html",
+        "tab_title": "prediction",
         "series_tag": "Part 3 &middot; Prediction",
         "series": "uk-election",
         "series_part": 3,
-        "title": "From groups to seats",
-        "dek": "Flows, uncertainty, and tactical voting &mdash; opening up the pipeline that turns "
-               "any group structure into seat-by-seat forecasts.",
-        "description": "How the UK election model projects vote flows, simulates uncertainty, and models tactical voting seat by seat.",
+        "title": "How the model predicts a seat",
+        "dek": "Here we detail the actual electoral predictor itself: vote flows, simulated  "
+               "uncertainty, and a tactical-voting system, all to produce some hopefully-defensible seat-by-seat forecasts ",
+        "description": "A stage-by-stage walkthrough of the UK election model's prediction pipeline, from projected vote flows through tactical-voting adjustments to the final seat-by-seat map, including the part that got cut for being too slow.",
         "accent": "teal",
         "date": "2026-08-01",
         "read_time": "18 min read",
@@ -351,8 +358,9 @@ def build_post(post, prev_post, next_post, all_posts):
 
     html_out = PAGE_TEMPLATE.format(
         title=post["title"],
+        tab_title=post.get("tab_title", post["title"]),
         description=post["description"],
-        nav=NAV.format(home_active="", blog_active="active"),
+        nav=NAV.format(home_active="", blog_active="active", projects_active=""),
         accent=post["accent"],
         series_tag=post["series_tag"],
         dek=post["dek"],
@@ -392,19 +400,18 @@ def build_blog_index(newest_first):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog</title>
-<meta name="description" content="Notes on whatever I'm currently building or thinking about.">
+<meta name="description" content="Notes on whatever I'm currently building or thinking about, written with more enthusiasm than the subject strictly warrants.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto+Condensed:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/site.css">
 </head>
 <body>
-{NAV.format(home_active="", blog_active="active")}
+{NAV.format(home_active="", blog_active="active", projects_active="")}
 <header class="page-header">
   <div class="page-header-inner">
     <h1>Blog</h1>
-    <p class="lede">Notes on whatever I'm currently building or thinking about &mdash; a UK
-      election model, a dissertation project, and whatever comes next.</p>
+    <p class="lede">Notes on whatever it is I'm making or thinking about.</p>
   </div>
 </header>
 {body}
@@ -428,7 +435,7 @@ def build_home_page(newest_first):
     <li>
       <a class="post-list-title" href="{a['href']}">{a['title']}</a>
       <p class="post-list-dek">{a['dek']}</p>
-    </li>""" for a in ALSO_HERE)
+    </li>""" for a in PROJECTS)
 
     html_out = f"""<!DOCTYPE html>
 <html lang="en">
@@ -436,7 +443,7 @@ def build_home_page(newest_first):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home</title>
-<meta name="description" content="Personal site and blog - notes on whatever I'm currently building, from a UK election model to a house-price dissertation.">
+<meta name="description" content="Personal site and blog: notes on whatever I've most recently convinced myself is worth building, from a UK election model to a house-price dissertation with opinions about London.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto+Condensed:wght@400;500;700&display=swap" rel="stylesheet">
@@ -444,13 +451,13 @@ def build_home_page(newest_first):
 </head>
 <body>
 
-{NAV_HOME}
+{NAV_HOME.format(home_active="active", blog_active="", projects_active="")}
 
 <header class="page-header">
   <div class="page-header-inner">
-    <h1>Hi, I'm building things and writing about them</h1>
-    <p class="lede">This is where I keep notes on whatever I'm currently working on &mdash; a UK
-      general election model, a dissertation project, and whatever comes next.</p>
+    <h1>Hello. Welcome to my website.</h1>
+    <p class="lede">This is where I keep notes on whatever I'm working on - from data and modelling projects to research questions of increasingly questionable academic interest. </p>
+
   </div>
 </header>
 
@@ -464,10 +471,11 @@ def build_home_page(newest_first):
   <h2>Also here</h2>
   <ul class="post-list">{also_here}
   </ul>
+  <p style="margin-top:16px;"><a href="projects.html">See all projects &rarr;</a></p>
 </section>
 
 <footer class="site-footer">
-  <p><a href="blog/index.html">blog</a> &middot; <a href="app/index.html">election map</a></p>
+  <p><a href="blog/index.html">blog</a> &middot; <a href="projects.html">projects</a></p>
 </footer>
 
 </body>
@@ -475,6 +483,50 @@ def build_home_page(newest_first):
 """
     (SITE_DIR / "index.html").write_text(html_out, encoding="utf-8")
     print(f"Wrote {SITE_DIR / 'index.html'}")
+
+
+def build_projects_page():
+    items = "".join(f"""
+    <li>
+      <a class="post-list-title" href="{p['href']}">{p['title']}</a>
+      <p class="post-list-dek">{p['dek']}</p>
+    </li>""" for p in PROJECTS)
+
+    html_out = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects</title>
+<meta name="description" content="Things I've built alongside the blog: an interactive UK election map, and a live house-price predictor that will tell you, bluntly, what your house is worth.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto+Condensed:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+{NAV_HOME.format(home_active="", blog_active="", projects_active="active")}
+<header class="page-header">
+  <div class="page-header-inner">
+    <h1>Projects</h1>
+    <p class="lede">The things I built instead of just writing about them: for anyone who'd rather play around with buttons than read nine sections of
+      methodology.</p>
+  </div>
+</header>
+
+<section class="section">
+  <ul class="post-list">{items}
+  </ul>
+</section>
+
+<footer class="site-footer">
+  <p><a href="index.html">home</a> &middot; <a href="blog/index.html">blog</a></p>
+</footer>
+</body>
+</html>
+"""
+    (SITE_DIR / "projects.html").write_text(html_out, encoding="utf-8")
+    print(f"Wrote {SITE_DIR / 'projects.html'}")
 
 
 def main():
@@ -492,6 +544,7 @@ def main():
     newest_first = list(reversed(posts))
     build_blog_index(newest_first)
     build_home_page(newest_first)
+    build_projects_page()
 
 
 if __name__ == "__main__":

@@ -83,12 +83,13 @@ a { color: inherit; }
 .site-nav a.nav-link:hover { background: #2a2a2f; color: #fff; }
 .site-nav a.nav-link.active { background: var(--bbc-blue); color: #fff; }
 
-.site-nav a.nav-link.app-link {
+.site-nav a.nav-link.projects-link {
   background: #0f3d31;
   color: #a8ecd9;
   border-left: 3px solid var(--bbc-custom);
 }
-.site-nav a.nav-link.app-link:hover { background: #145243; color: #fff; }
+.site-nav a.nav-link.projects-link:hover { background: #145243; color: #fff; }
+.site-nav a.nav-link.projects-link.active { background: var(--bbc-custom); color: #fff; }
 
 /* ------------------------------------------------------------------
    Layout shell

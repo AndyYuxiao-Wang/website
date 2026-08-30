@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog</title>
-<meta name="description" content="Notes on whatever I'm currently building or thinking about.">
+<meta name="description" content="Notes on whatever I'm currently building or thinking about, written with more enthusiasm than the subject strictly warrants.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto+Condensed:wght@400;500;700&display=swap" rel="stylesheet">
@@ -12,40 +12,38 @@
 </head>
 <body>
 <nav class="site-nav">
-  <!-- TODO: swap this for your own name -->
-  <a class="brand" href="../index.html">MY SITE</a>
+  <a class="brand" href="../index.html">UniverseWang</a>
   <a class="nav-link " href="../index.html">Home</a>
   <a class="nav-link active" href="index.html">Blog</a>
-  <a class="nav-link app-link" href="../app/index.html">UK Election Map</a>
+  <a class="nav-link projects-link " href="../projects.html">Projects</a>
 </nav>
 <header class="page-header">
   <div class="page-header-inner">
     <h1>Blog</h1>
-    <p class="lede">Notes on whatever I'm currently building or thinking about &mdash; a UK
-      election model, a dissertation project, and whatever comes next.</p>
+    <p class="lede">Notes on whatever it is I'm making or thinking about.</p>
   </div>
 </header>
 
 <section class="section">
   <ul class="post-list">
     <li>
-      <a class="post-list-title" href="the-prediction-pipeline.html">From groups to seats</a>
-      <p class="post-list-dek">Flows, uncertainty, and tactical voting &mdash; opening up the pipeline that turns any group structure into seat-by-seat forecasts.</p>
+      <a class="post-list-title" href="prediction.html">How the model predicts a seat</a>
+      <p class="post-list-dek">Here we detail the actual electoral predictor itself: vote flows, simulated  uncertainty, and a tactical-voting system, all to produce some hopefully-defensible seat-by-seat forecasts </p>
       <div class="post-list-meta"><span>August 2026</span><span>Part 3 &middot; Prediction</span><span>18 min read</span></div>
     </li>
     <li>
-      <a class="post-list-title" href="predicting-house-prices-and-london.html">What a house is worth, and why London breaks the curve</a>
-      <p class="post-list-dek">A dissertation project's baseline house-price model finds sensible, well-behaved relationships everywhere &mdash; until it hits the one UK housing market that isn't behaving like the rest of the country.</p>
+      <a class="post-list-title" href="house_prices.html">A more 'objective' value of a house in the UK (sans London)</a>
+      <p class="post-list-dek">As a country, we do tend to obsess over how downtrodden or genteel a neighbourhood, town or city is. Here, we try to quantify that obsession, to gauge the value of a house by its objectively measured 'affluence'. And as per the timeless national joke, London does its own thing </p>
       <div class="post-list-meta"><span>June 2026</span><span>Research note</span><span>10 min read</span></div>
     </li>
     <li>
-      <a class="post-list-title" href="political-fragmentation-and-latent-groups.html">One seat, many voters</a>
-      <p class="post-list-dek">Why single-category constituency models are running out of road, and what unmixing 632 seats&rsquo; census composition into a handful of shared archetypes gets us instead.</p>
+      <a class="post-list-title" href="nmf_con.html">The trouble with giving a seat one label</a>
+      <p class="post-list-dek">With Uniform National Swing (UNS) as dead as a dodo, every UK election model eventually has to decide what a constituency &lsquo;is,&rsquo; part 1 found that doing so with a single label was about as accurate as describing a person by their star sign. Here we stop doing that, and start letting each of Britain's 632 seats be several different kinds of place at once.</p>
       <div class="post-list-meta"><span>April 2026</span><span>Part 2 &middot; Latent groups</span><span>24 min read</span></div>
     </li>
     <li>
-      <a class="post-list-title" href="sorting-632-seats.html">Trying to sort 632 seats into types</a>
-      <p class="post-list-dek">Running the full standard toolkit &mdash; K-means, HAC, DBSCAN and GMM, across PCA and UMAP, scored on four metrics &mdash; on Britain's constituencies, and reporting honestly on where it falls short.</p>
+      <a class="post-list-title" href="clustering_con.html">Do Britain's 632 constituencies fall into clean types?</a>
+      <p class="post-list-dek">I threw the kitchen sink of clustering methods at Britain's constituencies: K-means, hierarchical clustering, DBSCAN, GMM, run across two different embeddings and scored four different ways, in the hope that at least one of them would tell me something definite. None of them quite did, and this is the post where I admit that in some detail.</p>
       <div class="post-list-meta"><span>October 2025</span><span>Part 1 &middot; Clustering</span><span>14 min read</span></div>
     </li>
   </ul>
@@ -53,7 +51,7 @@
 
 <footer class="site-footer">
   <p><a href="../index.html">home</a> &middot; <a href="index.html">blog</a> &middot;
-     <a href="../app/index.html">election map</a></p>
+     <a href="../projects.html">projects</a></p>
 </footer>
 </body>
 </html>

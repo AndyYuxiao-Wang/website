@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>From groups to seats</title>
-<meta name="description" content="How the UK election model projects vote flows, simulates uncertainty, and models tactical voting seat by seat.">
+<title>prediction</title>
+<meta name="description" content="A stage-by-stage walkthrough of the UK election model's prediction pipeline, from projected vote flows through tactical-voting adjustments to the final seat-by-seat map, including the part that got cut for being too slow.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto+Condensed:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -12,25 +12,24 @@
 </head>
 <body>
 <nav class="site-nav">
-  <!-- TODO: swap this for your own name -->
-  <a class="brand" href="../index.html">MY SITE</a>
+  <a class="brand" href="../index.html">UniverseWang</a>
   <a class="nav-link " href="../index.html">Home</a>
   <a class="nav-link active" href="index.html">Blog</a>
-  <a class="nav-link app-link" href="../app/index.html">UK Election Map</a>
+  <a class="nav-link projects-link " href="../projects.html">Projects</a>
 </nav>
 
 <header class="post-header" style="--accent: var(--bbc-custom);">
   <span class="series-tag">Part 3 &middot; Prediction</span>
-  <h1>From groups to seats</h1>
-  <p class="dek">Flows, uncertainty, and tactical voting &mdash; opening up the pipeline that turns any group structure into seat-by-seat forecasts.</p>
+  <h1>How the model predicts a seat</h1>
+  <p class="dek">Here we detail the actual electoral predictor itself: vote flows, simulated  uncertainty, and a tactical-voting system, all to produce some hopefully-defensible seat-by-seat forecasts </p>
   <p class="byline">August 2026 &middot; 18 min read</p>
-  <p class="series-crosslinks">Part of a series on the UK election model: <a href="sorting-632-seats.html">Part 1</a> &middot; <a href="political-fragmentation-and-latent-groups.html">Part 2</a> &middot; <span class="series-crosslink-current">Part 3</span></p>
+  <p class="series-crosslinks">Part of a series on the UK election model: <a href="clustering_con.html">Part 1</a> &middot; <a href="nmf_con.html">Part 2</a> &middot; <span class="series-crosslink-current">Part 3</span></p>
 </header>
 
 <article class="post-body" style="--accent: var(--bbc-custom);">
 <h2>1. The pipeline, end to end</h2>
-<p>Four scripts run in sequence (<code>pipeline/scripts/run_all.py</code>), each reading the previous
-stage's output:</p>
+<p>Four scripts run in sequence (<code>pipeline/scripts/run_all.py</code>), each dutifully reading the
+previous stage's output:</p>
 <table>
 <thead>
 <tr>
@@ -67,18 +66,17 @@ stage's output:</p>
 </tr>
 </tbody>
 </table>
-<p>One stage is conspicuously <strong>not</strong> in that list. <code>03_monte_carlo.py</code> exists, reads
-<code>projected_results.csv</code>, and writes <code>seat_probabilities.csv</code> — but it isn't one of
-<code>run_all.py</code>'s four <code>STAGES</code>, and nothing downstream reads its output. This is a deliberate
-cut, not an oversight: it's 10,000 simulations run as a Python-level loop for every one of 632
-seats, and Section 3 below measures exactly how long that takes — long enough that it isn't
-viable to run inside the web app's request cycle. It survives as a standalone, manually-run
-probabilistic side-analysis instead. Worth knowing going in, because it means today's map is
-built from one single deterministic run per seat, with uncertainty estimated separately
-(if at all) rather than shipped alongside every prediction.</p>
+<p>One stage is conspicuously missing from that list: <code>03_monte_carlo.py</code>. It reads <code>projected_results.csv</code> and writes <code>seat_probabilities.csv</code>, but it isn't one of
+<code>run_all.py</code>'s four <code>STAGES</code>, and nothing downstream reads what it produces. This is a
+deliberate cut, not an oversight, on the entirely defensible grounds that it's 10,000
+simulations run as a Python-level loop for every one of 632 seats, and Section 3 below
+measures exactly how long that takes: long enough that it's impracticle to run inside a web
+app's request cycle. So it survives as a standalone, manually-run probabilistic intresting alternative instead. Worth knowing going in, because it means today's map is built from one single
+deterministic run per seat, with uncertainty estimated separately, if at all, rather than
+shipped alongside every prediction.</p>
 <p>Two more scripts, <code>07_export_alloc.py</code> and <code>08_export_brexit.py</code>, feed the web app's
-interactive "Custom Predictor" tab and a historical Brexit-referendum overlay respectively —
-useful, but outside the prediction chain itself, and not covered further here.</p>
+interactive "Custom Predictor" tab and a historical Brexit-referendum overlay respectively.
+Both are useful - and outside the prediction pipeline itself and so will recieve no further mention. </p>
 
 <div class="nb-code"><pre><code>import numpy as np
 import pandas as pd
@@ -87,22 +85,19 @@ from pathlib import Path
 PIPELINE = Path(&quot;../../pipeline&quot;)</code></pre></div>
 
 <h2>2. Stage 2: projecting flows</h2>
-<p>This is the "flow table" concept from earlier in the series, as actually implemented.
-<code>{england,scotland,wales}Flows.xlsx</code> each hold <strong>7 sheets, one per group</strong>
+<p>This is the "flow table" idea promised earlier in the series, now that we've got around to implenting it. <code>{england,scotland,wales}Flows.xlsx</code> each hold <strong>7 sheets, one per group</strong>
 (<code>Muslim, Left, Progressives, Average, Liberal, Blues, Reforms</code>), and each sheet is a 9×9
-matrix — rows and columns both <code>Labour, Conservative, Reform, LibDem, Green, Oth, SNP, Plaid,
-Restore</code> — where every row sums to 100. Row <em>i</em>, column <em>j</em> is: <em>of this group's 2019 voters
-who backed party i, what percent now back party j?</em> <code>Restore</code> sits in the party list as a
-hypothetical new force being tested in this projection, alongside the eight parties that
-actually appeared on 2024 ballots.</p>
+matrix, rows and columns both <code>Labour, Conservative, Reform, LibDem, Green, Oth, SNP, Plaid,
+Restore</code>, where every row sums to 100. Row <em>i</em>, column <em>j</em> answers one very specific question:
+of this group's 2019 voters who backed party i, what percent now back party j?</p>
 
-<div class="nb-code"><pre><code>muslim_flows = pd.read_excel(PIPELINE / &quot;data/raw/englandFlows.xlsx&quot;, sheet_name=&quot;Muslim&quot;, index_col=0)
+<div class="nb-code"><pre><code>average_flows = pd.read_excel(PIPELINE / &quot;data/raw/englandFlows.xlsx&quot;, sheet_name=&quot;Average&quot;, index_col=0)
 parties = [&quot;Labour&quot;, &quot;Conservative&quot;, &quot;Reform&quot;, &quot;LibDem&quot;, &quot;Green&quot;, &quot;Oth&quot;, &quot;SNP&quot;, &quot;Plaid&quot;, &quot;Restore&quot;]
-muslim_flows = muslim_flows.loc[parties, parties]
+average_flows = average_flows.loc[parties, parties]
 
 print(&quot;Row sums (should all be 100):&quot;)
-print(muslim_flows.sum(axis=1).to_dict())
-muslim_flows</code></pre></div>
+print(average_flows.sum(axis=1).to_dict())
+average_flows</code></pre></div>
 <div class="nb-output"><div class="nb-output-label">Output</div><pre>Row sums (should all be 100):
 {&#x27;Labour&#x27;: 100, &#x27;Conservative&#x27;: 100, &#x27;Reform&#x27;: 100, &#x27;LibDem&#x27;: 100, &#x27;Green&#x27;: 100, &#x27;Oth&#x27;: 100, &#x27;SNP&#x27;: 100, &#x27;Plaid&#x27;: 100, &#x27;Restore&#x27;: 100}
 </pre></div>
@@ -138,11 +133,11 @@ muslim_flows</code></pre></div>
   <tbody>
     <tr>
       <th>Labour</th>
-      <td>100</td>
+      <td>68</td>
+      <td>2</td>
+      <td>28</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>2</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -150,9 +145,9 @@ muslim_flows</code></pre></div>
     </tr>
     <tr>
       <th>Conservative</th>
-      <td>0</td>
-      <td>100</td>
-      <td>0</td>
+      <td>3</td>
+      <td>50</td>
+      <td>47</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -174,11 +169,11 @@ muslim_flows</code></pre></div>
     </tr>
     <tr>
       <th>LibDem</th>
+      <td>0</td>
       <td>10</td>
-      <td>0</td>
-      <td>0</td>
-      <td>50</td>
-      <td>40</td>
+      <td>13</td>
+      <td>67</td>
+      <td>10</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -186,11 +181,11 @@ muslim_flows</code></pre></div>
     </tr>
     <tr>
       <th>Green</th>
-      <td>10</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>90</td>
+      <td>0</td>
+      <td>100</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -198,12 +193,12 @@ muslim_flows</code></pre></div>
     </tr>
     <tr>
       <th>Oth</th>
-      <td>15</td>
+      <td>20</td>
       <td>0</td>
+      <td>20</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>85</td>
+      <td>10</td>
+      <td>50</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -248,13 +243,11 @@ muslim_flows</code></pre></div>
 </table>
 </div></div>
 
-<p>Reading a couple of rows: within the Muslim group specifically, <strong>Labour voters stay 100%
-Labour</strong> (no leakage modelled at all for that cell), while <strong>Lib Dem voters split 10% to
-Labour, 50% stay Lib Dem, 40% to Green</strong> — a very different retention story for the same
-national swing, because it's scoped to one group. That's the entire value proposition of
-doing this per-group rather than nationally: the same Lib Dem-to-Green drift that shows up
-here might look completely different in the Blues group's own sheet.</p>
-<p>The projection formula, for one (seat, group) row from the group-allocation table:</p>
+<p>Reading a couple of rows: within the 'Average' group specifically, <strong>Labour voters stay 68%
+Labour</strong>, with 2% leaking off to the Conservatives, 28% to Reform, and 2% to the Greens, which
+is a fairly on-the-nose summary of the last few years of British politics in one table row.</p>
+<p>The projection formula, for one (seat, group) row from the group-allocation table, looks like
+this:</p>
 
 <div class="nb-code"><pre><code>def project_row(voters_by_party: dict, flow_matrix: pd.DataFrame) -&gt; dict:
     &quot;&quot;&quot;voters_by_party: this group&#x27;s current vote total per party, in one seat.
@@ -267,25 +260,126 @@ here might look completely different in the Blues group's own sheet.</p>
             projected[new_party] += voters * flow_matrix.loc[old_party, new_party] / 100
     return projected
 
-# worked example: a hypothetical Muslim-group allocation of 1,000 voters in one seat
+# worked example: a hypothetical Average-group allocation of 1,000 voters in one seat
 example_alloc = {&quot;Labour&quot;: 600, &quot;Conservative&quot;: 0, &quot;Reform&quot;: 0, &quot;LibDem&quot;: 200,
                   &quot;Green&quot;: 100, &quot;Oth&quot;: 100, &quot;SNP&quot;: 0, &quot;Plaid&quot;: 0, &quot;Restore&quot;: 0}
-project_row(example_alloc, muslim_flows)</code></pre></div>
-<div class="nb-output"><div class="nb-output-label">Output</div><pre>{&#x27;Labour&#x27;: np.float64(645.0),
- &#x27;Conservative&#x27;: np.float64(0.0),
- &#x27;Reform&#x27;: np.float64(0.0),
- &#x27;LibDem&#x27;: np.float64(100.0),
- &#x27;Green&#x27;: np.float64(170.0),
- &#x27;Oth&#x27;: np.float64(85.0),
+project_row(example_alloc, average_flows)</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><pre>{&#x27;Labour&#x27;: np.float64(428.0),
+ &#x27;Conservative&#x27;: np.float64(32.0),
+ &#x27;Reform&#x27;: np.float64(214.0),
+ &#x27;LibDem&#x27;: np.float64(134.0),
+ &#x27;Green&#x27;: np.float64(142.0),
+ &#x27;Oth&#x27;: np.float64(50.0),
  &#x27;SNP&#x27;: np.float64(0.0),
  &#x27;Plaid&#x27;: np.float64(0.0),
  &#x27;Restore&#x27;: np.float64(0.0)}</pre></div>
 
-<p>Every group's projected row is computed this way, independently, then <strong>summed back across
-all 7 groups within a seat</strong> (<code>groupby("Seat").sum()</code>) to get that seat's single projected
-vote share per party — the seven group-specific stories are only ever visible pre-aggregation;
-the output file (<code>{nation}Projection.csv</code>, then concatenated into <code>projected_results.csv</code>,
-632 rows) shows only the combined result.</p>
+<p>Every group's projected row gets computed this way, independently, then <strong>summed back across
+all 7 groups within a seat</strong> (<code>groupby("Seat").sum()</code>) to arrive at that seat's single
+projected vote share per party. The seven group-specific stories are only ever visible before
+that summing happens; the output file (<code>{nation}Projection.csv</code>, then concatenated into
+<code>projected_results.csv</code>, 632 rows) only ever shows you the combined result, which is a shame,
+because the group-level detail is genuinely the more interesting bit.</p>
+
+<h3>How the actual percentages get set: fitting flows to the national polling average, not the other way around</h3>
+<p>I should confess up front: none of the numbers in any of these matrices come from a
+regression. They're set, and re-set, by hand, against a target that's the whole point of
+<a href="nmf_con.html">Part 2's core methodological claim</a>, which is that this pipeline runs the fit
+in the <em>opposite</em> direction from MRP. MRP fits a model to individual survey respondents first
+and accepts whatever national and seat-level numbers happen to fall out of that fit as the
+answer; this pipeline starts from the <strong>current national polling average per party</strong> as the
+fixed target, and adjusts each group's flow-matrix cells until the seven groups' combined,
+seat-weighted projection reproduces it. The national number is the constraint being satisfied;
+the flow-matrix cells are simply what gets moved to satisfy it.</p>
+<p>Average's Labour row above (68% stay, 28% to Reform, 2% to Conservative, 2% to Green) is one
+instance of that in action: <strong>28%</strong> is the figure that, combined with the other six groups'
+own Labour rows, makes the model's total projected Reform vote share land on the actual
+national polling average for Reform, chosen because a Reform surge built mostly from
+demographically unremarkable Labour switchers is also, independently, the most plausible read
+of who's actually driving Reform's rise nationally. The two justifications, "this is what the
+topline needs" and "this is who's plausibly moving," aren't fighting each other; the whole
+calibration exercise is just finding the cells where they happen to agree.</p>
+<p>That still leaves an alarming number of degrees of freedom per group open: a 9×9 matrix has 72
+off-diagonal cells before you've even looked at one specific group's electorate, and nowhere
+near enough real transition data exists to pin all of them down independently for seven
+separate electorates, so fitting to the topline alone would under-determine them badly. What
+actually narrows it down is the same discipline Part 2 spent nine sections building: <strong>only
+flows that are plausible for that specific group's actual electorate get populated at all</strong>,
+and "plausible" is deliberately different group to group. Compare Average's Labour→Green cell
+above (2%) against the Left group's own Labour row:</p>
+
+<div class="nb-code"><pre><code>left_flows = pd.read_excel(PIPELINE / &quot;data/raw/englandFlows.xlsx&quot;, sheet_name=&quot;Left&quot;, index_col=0)
+left_flows.loc[[&quot;Labour&quot;], parties]</code></pre></div>
+<div class="nb-output"><div class="nb-output-label">Output</div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Labour</th>
+      <th>Conservative</th>
+      <th>Reform</th>
+      <th>LibDem</th>
+      <th>Green</th>
+      <th>Oth</th>
+      <th>SNP</th>
+      <th>Plaid</th>
+      <th>Restore</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Labour</th>
+      <td>30</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>70</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<p>The Left group, Archetype 5's young, secular, graduate electorate, sends <strong>70%</strong> of its own
+Labour vote straight to Green, against Average's measly 2%. Same nominal "Labour voter," two
+entirely different next moves, because a young secular graduate and a demographically average
+swing voter simply aren't fishing in the same pond of plausible defections. A Reform voter
+defecting to Green, or vice versa, isn't a flow this pipeline models for <em>any</em> group, whatever
+the topline needs, because there's no real electoral mechanism putting a meaningful fraction
+of either group on that path in three or four years, and the matrices are structurally zero
+there rather than fit-to-zero.</p>
+<h3>Average: not a category with its own flows, but the one that closes the gap</h3>
+<p>One group's matrix gets set differently from the rest, on purpose, because of what Part 2,
+Section 7 already established about it: <strong>Average has no strong distinguishing pull of its
+own</strong>, it's specifically the group of seats and voters that follow wherever the national mood
+happens to be going. That turns out to be exactly the property this pipeline needs somewhere
+in the system: once the other six groups' flows are locked in against their own specific,
+evidenced behaviour (Left's Labour-to-Green defection above, and the equivalent evidenced
+story for each of Part 2's other groups), something has to mop up whatever's left over so the
+seven groups' combined total lands exactly on the national polling figure being targeted.
+Average is the natural place for that to happen, not an arbitrary dumping ground: "the group
+that follows the national mood" and "the group whose flows get set last, to make the topline
+balance" are the same description of the same thing, not two separate jobs forced onto one
+unlucky table. Its flow matrix is consequently the one that moves whenever the national
+polling snapshot moves, while the other six groups' matrices, set from stable, evidenced
+behavioural stories rather than from whatever's needed to hit a number, stay comparatively put
+between one polling update and the next.</p>
 
 <div class="nb-code"><pre><code>projected = pd.read_csv(PIPELINE / &quot;data/intermediate/projected_results.csv&quot;)
 projected[projected[&quot;Seat&quot;] == &quot;Aldershot&quot;]</code></pre></div>
@@ -337,19 +431,16 @@ projected[projected[&quot;Seat&quot;] == &quot;Aldershot&quot;]</code></pre></di
 </table>
 </div></div>
 
-<p>This is exactly where Part 2's evidence-based group structure plugs in unchanged: one sheet
-per data-derived group (Muslim, Diaspora-Conservative, Jewish, Superwealthy, Metropolitan,
-Working-class/Reform, Affluent-professional, Secular-graduate, Average), each estimated from
-the actual 2019→2024 swing observed in the seats that group dominates, and this entire
-projection mechanism runs without a single line of code changing. The flow-matrix <em>shape</em> was
-never the problem Part 2 was solving — the <em>group definitions</em> feeding it were.</p>
+<p>This is exactly where Part 2's evidence-based group structure slots in, unchanged: one sheet
+per data-derived group (Muslim, Progressives, Liberals etc), each estimated from
+the actual 2019→2024 swing observed in the seats that group dominates.</p>
 
 <h2>3. Stage 3 (unused in the automated run): Monte Carlo uncertainty</h2>
-<p><code>03_monte_carlo.py</code> turns one seat's projected vote shares into win <em>probabilities</em> by
-simulation: 10,000 draws per seat, each party's draw independently Normal with <strong>standard
-deviation set to 30% of that party's own projected mean</strong> (so a party projected at 40% gets
-±12pts of simulated noise, a party at 2% gets ±0.6pts), floored at zero, renormalised back to
-sum to 100, and the largest draw wins that simulation.</p>
+<p><code>03_monte_carlo.py</code> is the stage I mentioned earlier that was cut due to running time concerns. It turns one seat's projected vote shares into win <em>probabilities</em> by simulation: 10,000
+draws per seat, each party's draw independently Normal with <strong>standard deviation set to 30% of
+that party's own projected mean</strong> (so a party projected at 40% gets ±12pts of simulated noise,
+a party at 2% gets ±0.6pts), floored at zero, renormalised back to sum to 100, with the
+largest draw declared the winner of that particular imaginary election.</p>
 
 <div class="nb-code"><pre><code>def simulate_seat(means: dict, n_sims: int = 10_000, std_frac: float = 0.30, seed: int | None = None) -&gt; dict:
     rng = np.random.default_rng(seed)
@@ -380,13 +471,13 @@ simulate_seat(means, seed=0)</code></pre></div>
  &#x27;Plaid&#x27;: 0.0,
  &#x27;Restore&#x27;: 0.0}</pre></div>
 
-<p>That's the intended mechanism, and it's a reasonable one: proportional noise means a close
-race stays genuinely uncertain while a 50-point landslide essentially never flips, without
-needing a hand-tuned uncertainty band per seat.</p>
+<p>That's the intended mechanism, and it's a genuinely sensible one: proportional noise means a
+close race stays properly uncertain while a 50-point landslide essentially never flips.</p>
 <h3>Why it's cut: the loop, not the concept</h3>
-<p>The 10,000-simulations-per-seat idea isn't the problem; the <em>Python-level loop</em> implementing
-it is. Timing the script's actual structure — a <code>for</code> loop over seats, a nested <code>for</code> loop
-over simulations, one <code>np.random.normal</code> call per simulation — against all 632 seats:</p>
+<p>The 10,000-simulations-per-seat idea was never the problem; the <em>Python-level loop</em>
+implementing it was. Timing the script's actual structure (a <code>for</code> loop over seats, a nested
+<code>for</code> loop over simulations, one <code>np.random.normal</code> call per simulation) against all 632 seats
+confirms exactly how much of a problem:</p>
 
 <div class="nb-code"><pre><code>import time
 
@@ -411,16 +502,16 @@ elapsed = time_current_implementation(projected, seat_parties, n_seats=sample_se
 per_seat = elapsed / sample_seats
 print(f&quot;{sample_seats} seats: {elapsed:.2f}s -&gt; {per_seat*1000:.0f}ms/seat -&gt; &quot;
       f&quot;~{per_seat*len(projected):.0f}s projected for all {len(projected)} seats&quot;)</code></pre></div>
-<div class="nb-output"><div class="nb-output-label">Output</div><pre>20 seats: 4.95s -&gt; 247ms/seat -&gt; ~156s projected for all 632 seats
+<div class="nb-output"><div class="nb-output-label">Output</div><pre>20 seats: 5.47s -&gt; 273ms/seat -&gt; ~173s projected for all 632 seats
 </pre></div>
 
-<p>Roughly a minute and a half for a full run — hopeless for a request a user is waiting on in a
-browser tab, and the reason this stage stays a manually-triggered side script rather than a
-<code>run_all.py</code> stage. But the slowness is an artifact of writing the simulation as nested Python
-loops, not of the underlying statistics being expensive: every seat's simulations are
-independent of every other seat's, and every simulation within a seat is independent of every
-other simulation, which is exactly the shape NumPy is built to batch in one shot instead of
-looping.</p>
+<p>Roughly a minute and a half for a full run, needless to say an entirely unacceptable one to wait for a website, hence why this stage
+stays a manually-triggered side script rather than a proper <code>run_all.py</code> stage. The good news
+is that the slowness is an artifact of writing the simulation as nested Python loops, not of
+the underlying statistics being expensive: every seat's simulations are independent of every
+other seat's, and every simulation within a seat is independent of every other simulation,
+which is exactly the shape NumPy is built to batch in one go rather than loop through by
+hand.</p>
 
 <div class="nb-code"><pre><code>def simulate_all_seats_vectorized(df: pd.DataFrame, party_list: list, n_sims: int = 10_000,
                                    std_frac: float = 0.30, seed: int | None = None) -&gt; pd.DataFrame:
@@ -447,7 +538,7 @@ elapsed_est = per_seat * len(projected)
 print(f&quot;Vectorized: all {len(projected)} seats x 10,000 sims in {vector_elapsed:.2f}s &quot;
       f&quot;(loop-based estimate was ~{elapsed_est:.0f}s -&gt; {elapsed_est/vector_elapsed:.0f}x faster)&quot;)
 vectorized_result.head(3)</code></pre></div>
-<div class="nb-output"><div class="nb-output-label">Output</div><pre>Vectorized: all 632 seats x 10,000 sims in 5.05s (loop-based estimate was ~156s -&gt; 31x faster)
+<div class="nb-output"><div class="nb-output-label">Output</div><pre>Vectorized: all 632 seats x 10,000 sims in 4.49s (loop-based estimate was ~173s -&gt; 39x faster)
 </pre></div>
 <div class="nb-output"><div class="nb-output-label">Output</div><div>
 <style scoped>
@@ -527,28 +618,28 @@ vectorized_result.head(3)</code></pre></div>
 </table>
 </div></div>
 
-<p>Same statistics, ~40x faster by replacing two Python loops with one batched array operation —
-comfortably inside a web request's budget, at the cost of holding one <code>(632, 10000, 9)</code> array
-in memory at a time (a few hundred megabytes; trivially choppable into seat-batches if that
-ever matters). This is the concrete version of "wire it in": not "run the existing script more
-often," but "rewrite the inner loop as a NumPy batch op first, then wire it in" — the cut was
-the right call against the code as it stood; it doesn't have to stay cut against the code as
-it could be.</p>
+<p>Same statistics, roughly 40x faster, purely from replacing two Python loops with one batched
+array operation, which comfortably fits inside a web request's budget at the cost of holding
+one <code>(632, 10000, 9)</code> array in memory at a time (a few hundred megabytes, trivially choppable
+into seat-batches if that ever becomes a problem). This is the concrete version of "wire it
+in": not "run the existing script more often," but "rewrite the inner loop as a NumPy batch op
+first, then wire it in." The cut was the right call against the code as it stood at the time.</p>
 
 <h2>4. Stage 3.5: tactical voting, and the winnability problem</h2>
-<p>National tactical-voting polling — the kind <a href="https://yougov.com/en-gb/articles/54117-what-is-the-tactical-voting-landscape-in-february-2026">YouGov's tracker of the tactical voting
+<p>National tactical-voting polling, the kind <a href="https://yougov.com/en-gb/articles/54117-what-is-the-tactical-voting-landscape-in-february-2026">YouGov's tracker of the tactical voting
 landscape</a>
-publishes regularly — measures a genuinely useful thing, but a simplified one: it asks
+publishes regularly, measures a genuinely useful thing, but a simplified one: it asks
 <strong>hypothetical two-party questions</strong> ("if only the Conservatives or Reform UK stood a chance
-of winning in their seat, voters would favour the Tories by 31% to 24%"). That's a clean way
-to isolate one behavioural number, but a real constituency is essentially never <em>actually</em> a
-clean two-horse race in the way the survey question assumes — Eastleigh has four parties
-within twenty points of each other, not two. Applying a single national two-party number
-uniformly to all 632 seats would misfire everywhere a third or fourth party is genuinely live.</p>
+of winning in their seat, voters would favour the Tories by 31% to 24%"). That's a tidy way to
+isolate one behavioural number, but a real constituency is essentially never <em>actually</em> a
+clean two-horse race in the way the survey question politely pretends: Eastleigh has four
+parties within twenty points of each other, not two. Applying a single national two-party
+number uniformly to all 632 seats would misfire everywhere a third or fourth party is
+genuinely alive and kicking.</p>
 <p><code>04_tactical_voting.py</code> solves this with what's effectively a <strong>winnability system</strong>: instead
-of asking survey respondents to imagine a two-horse race, it computes, per seat, from that
-seat's own <em>projected</em> vote shares, which parties are actually plausible contenders there —
-and only lets tactical votes flow toward those.</p>
+of asking survey respondents to imagine a two-horse race that may not exist, it works out, per
+seat, from that seat's own <em>projected</em> vote shares, which parties are actually plausible
+contenders there, and only lets tactical votes flow toward those.</p>
 <h3>Tiering: turning a vote-share gap into a viability tier</h3>
 <p>For each seat, every party's tier is set by its gap to the projected leader:</p>
 
@@ -572,26 +663,28 @@ and only lets tactical votes flow toward those.</p>
 tier_seat(means, incumbent=None)   # Aldershot, from Section 2</code></pre></div>
 <div class="nb-output"><div class="nb-output-label">Output</div><pre>{&#x27;Labour&#x27;: 1, &#x27;Conservative&#x27;: 1, &#x27;Reform&#x27;: 1}</pre></div>
 
-<p>Tier 1 = within 5 points of the leader, or the incumbent regardless of projected gap (a
+<p>Tier 1 means within 5 points of the leader, or the incumbent regardless of projected gap (a
 deliberate hedge: a sitting MP's personal vote and local machine routinely outperform what a
-pure demographic/flow model would predict, so the model refuses to write them off purely on
-projected swing). Tier 2 = 5–10 points back. Tier 3 = 10–15 points back. Beyond 15 points, a
-party isn't a valid tactical <em>destination</em> at all, though it can still be a <em>donor</em> — its own
-supporters can still be persuaded to defect elsewhere, just not receive defectors themselves.</p>
+pure demographic/flow model would predict, so the model refuses to write them off on projected
+swing alone). Tier 2 is 5–10 points back. Tier 3 is 10–15 points back. Beyond 15 points, a
+party isn't a valid tactical <em>destination</em> at all, though it can still be a <em>donor</em>: its own
+supporters can still be talked into defecting elsewhere, they just can't receive defectors of
+their own.</p>
 <p>Two damping tables scale how much actually moves. <code>TIER_STRENGTH</code> discounts votes <em>arriving</em>
-at a longer-shot destination (100% / 50% / 25% for tier 1/2/3 — a vote nominally willing to go
-tactical is still less likely to actually convert into a paper vote for a distant third
-place). <code>DONOR_TVPCT_MULT</code> discounts how much a <em>semi-viable</em> donor is willing to send away at
-all (40% / 80% for a tier-2 / tier-3 donor, full rate for a fully non-viable one) — the
-intuition being that a donor still in realistic contention itself has less reason to lend its
-vote elsewhere than a donor with nothing left to lose.</p>
+at a longer-shot destination (100% / 50% / 25% for tier 1/2/3, on the sensible grounds that a
+vote nominally willing to go tactical is still less likely to actually convert into a paper
+vote for a distant third place). <code>DONOR_TVPCT_MULT</code> discounts how much a <em>semi-viable</em> donor
+is willing to send away at all (40% / 80% for a tier-2 / tier-3 donor, full rate for a fully
+non-viable one), on the intuition that a donor still in realistic contention has less reason
+to lend its vote elsewhere than a donor with nothing left to lose.</p>
 <h3>The numbers behind it: calibrated against YouGov's tracker</h3>
 <p>The actual per-party numbers come from <code>Tactical.xlsx</code>'s <code>TVPCT</code> sheet: each party's overall
 willingness to consider a tactical vote at all (<code>TVPct</code>), and its personal appeal to each
 possible destination (independent percentages, not a forced 100%-split), set to track
 <a href="https://yougov.com/en-gb/articles/54117-what-is-the-tactical-voting-landscape-in-february-2026">YouGov's Feb 2026 tactical voting tracker</a>
-cited above — e.g. Labour voters' 70% appeal toward Lib Dem/Green as the anti-Reform option
-(YouGov: 76–77%), and Reform voters' 40% appeal toward Conservative (YouGov: 43–45%):</p>
+cited above, and it tracks closely: Labour voters' 70% appeal toward Lib Dem/Green as the
+anti-Reform option (YouGov: 76–77%), and Reform voters' 40% appeal toward Conservative
+(YouGov: 43–45%):</p>
 
 <div class="nb-code"><pre><code>tvpct = pd.read_excel(PIPELINE / &quot;data/raw/Tactical.xlsx&quot;, sheet_name=&quot;TVPCT&quot;)
 tvpct = tvpct.rename(columns={tvpct.columns[0]: &quot;Donor&quot;}).set_index(&quot;Donor&quot;)
@@ -717,7 +810,7 @@ tvpct[[&quot;TVPct&quot;, &quot;Labour&quot;, &quot;Conservative&quot;, &quot;Re
 </table>
 </div></div>
 
-<h3>Does it actually change any outcomes?</h3>
+<h3>Right, but does it actually change any outcomes?</h3>
 
 <div class="nb-code"><pre><code>tactical = pd.read_csv(PIPELINE / &quot;data/intermediate/projected_results_tactical.csv&quot;)
 
@@ -928,11 +1021,11 @@ flipped</code></pre></div>
 </table>
 </div></div>
 
-<p>33 of 632 seats — not a rounding error, a genuinely material adjustment concentrated, as
-you'd expect, in seats that were already close multi-way races before tactical voting was
-applied at all.</p>
-<h3>A worked example — and a real limitation the winnability framing runs into</h3>
-<p>Eastleigh is a good illustration precisely because it's a four-way marginal already:</p>
+<p>33 of 632 seats. Not a rounding error: a genuinely material adjustment, concentrated, as you'd
+expect, in seats that were already close multi-way races before tactical voting got anywhere
+near them.</p>
+<h3>A worked example, and a real limitation the winnability framing runs into</h3>
+<p>Eastleigh is a good illustration precisely because it's an intresting seat - a very close Lib Dem - Conservative marginal, with a significant Labour vote and strong Reform potetial.</p>
 
 <div class="nb-code"><pre><code>for label, df in [(&quot;Pre-tactical&quot;, projected), (&quot;Post-tactical&quot;, tactical)]:
     row = df[df[&quot;Seat&quot;] == &quot;Eastleigh&quot;][seat_parties].iloc[0]
@@ -941,41 +1034,29 @@ applied at all.</p>
 Post-tactical - {&#x27;Labour&#x27;: np.float64(8.1), &#x27;Conservative&#x27;: np.float64(18.5), &#x27;Reform&#x27;: np.float64(30.6), &#x27;LibDem&#x27;: np.float64(31.3), &#x27;Green&#x27;: np.float64(7.4), &#x27;Oth&#x27;: np.float64(0.7), &#x27;SNP&#x27;: np.float64(0.0), &#x27;Plaid&#x27;: np.float64(0.0), &#x27;Restore&#x27;: np.float64(3.4)}
 </pre></div>
 
-<p>Lib Dem overtakes Reform for the lead here (26.0% → 31.3%, against Reform's 28.9% → 30.6%) —
+<p>Lib Dem overtakes Reform for the lead here (26.0% → 31.3%, against Reform's 28.9% → 30.6%):
 the model correctly identifies Lib Dem as the natural tactical home for anti-Reform sentiment
-in a seat where Labour (11.9%, an untiered donor) has little chance itself.</p>
-<p>Notice, though, that <strong>Reform's own share also rises</strong> here, not falls — from 28.9% to 30.6%.
-That's not a mistake, but it is a real conceptual gap worth naming: the tiering system defines
-"viable" purely by vote-share gap to the leader, which is exactly what lets it handle
-non-two-horse races at all — but it has no separate concept of "the frontrunner voters are
-specifically trying to stop." If the leader happens to sit at a reasonable spot on a donor's
-own ranked preference list (Reform is Labour's rank-6 destination here — last, but still
-above the <code>-1</code> "never" entries), some of that donor's transfer still reaches the leader,
-because the leader is, definitionally, always tier 1 and therefore always an eligible
-destination. Classic tactical voting is usually framed as <em>anti</em>-frontrunner coordination;
-this implementation is better described as "vote consolidation toward whoever's viable, by
-your own preference order" — which produces the right answer most of the time (leaders rarely
-sit near the top of hostile donors' preference lists) but not by construction. Worth flagging
-as a modelling choice rather than a bug — but a choice, not an inevitability.</p>
+in a seat where Labour (11.9%, an untiered donor) never had much of a chance itself.</p>
 
 <h2>5. Stage 4: turning percentages back into a map</h2>
-<p>The final step (<code>05_export_svg_output.py</code>) does two things. First, four specific seats —
-<strong>Great Yarmouth, Makerfield, Aberdeen South, Gorton and Denton</strong> — get a bespoke flow matrix
+<p>The final step (<code>05_export_svg_output.py</code>) does two things. First, four specific seats,
+<strong>Great Yarmouth, Makerfield, Aberdeen South, Gorton and Denton</strong>, get a bespoke flow matrix
 from <code>LocalFlows.xlsx</code> instead of the generic group-based projection, applied with exactly the
 same row-stochastic mechanism as Section 2. Every other seat passes through unchanged from the
 tactical-adjusted file.</p>
-<p>These four aren't a guess dressed up as a matrix. Each of them had a by-election during the
-current parliament, which is about as good as evidence gets for a single seat: a real, recent
-vote, not a demographic inference about how a seat <em>should</em> behave. Each seat's override is
-calibrated from the gap between what actually happened in that by-election and what the
-general model — built from that seat's group composition and the polling at the time — would
-have projected for it. That gap becomes the seat's own flow matrix: a direct, local correction
-where direct, local evidence exists, rather than an extrapolation from national or regional
-patterns. It's a small number of seats for the obvious reason that by-elections are rare; every
-other seat still runs on the general model because no seat-specific evidence like this exists
-for it yet.</p>
-<p>Second, projected <strong>percentages</strong> become projected <strong>raw vote counts</strong> by multiplying against
-<code>prev_TOTAL</code> — that seat's total valid votes at the <em>previous</em> election:</p>
+<p>These four aren't a guess dressed up as a matrix, which feels worth stating plainly, since
+it's precisely the sort of thing I'd otherwise be accused of. Each of them (bar Great Yarnmouth, where the Reform MP created a new party Restore, local elections results suggest would handily win Great Yarnmouth) had a by-election
+during the current parliament, which is about as good as evidence gets for a single seat: a
+real, recent vote, not a demographic inference about how a seat <em>should</em> behave. Each seat's
+override is calibrated from the gap between what actually happened in that by-election and
+what the general model, built from that seat's group composition and the polling at the time,
+would have projected for it. That gap becomes the seat's own flow matrix: a direct, local
+correction where direct, local evidence exists, rather than an extrapolation from national or
+regional patterns. It's a small number of seats for the entirely mundane reason that
+by-elections are rare; every other seat still runs on the general model because no
+seat-specific evidence like this exists for it yet.</p>
+<p>Second, projected <strong>percentages</strong> become projected <strong>raw vote counts</strong>, by multiplying against
+<code>prev_TOTAL</code>, that seat's total valid votes at the <em>previous</em> election:</p>
 
 <div class="nb-code"><pre><code>vote_totals = pd.read_excel(PIPELINE / &quot;data/raw/Tactical.xlsx&quot;, sheet_name=&quot;VoteTotals&quot;)
 vote_totals[vote_totals[&quot;Seat&quot;] == &quot;Eastleigh&quot;][[&quot;Seat&quot;, &quot;prev_Electorate&quot;, &quot;prev_TOTAL&quot;]]</code></pre></div>
@@ -1013,44 +1094,26 @@ vote_totals[vote_totals[&quot;Seat&quot;] == &quot;Eastleigh&quot;][[&quot;Seat&
 </table>
 </div></div>
 
-<p>There's no separate turnout model here at all — turnout is implicitly assumed identical to
-last time, seat by seat. That's a defensible simplification (turnout is genuinely hard to
-project, and errors here are usually smaller in seat-share terms than errors in who those
-voters pick), but it is a real, load-bearing assumption: a seat with an unusually mobilised or
-demobilised electorate next time around — plausible for exactly the kind of Muslim-vote and
-Reform-curious seats Part 2 spent most of its time on — would have its vote counts (though not
-its <em>shares</em>) systematically off by however much turnout actually moved.</p>
+<p>There's no separate turnout model here at all. Turnout is implicitly assumed identical to last time, seat by seat. That's a
+defensible simplification (turnout is genuinely hard to project, and errors here are usually
+smaller in seat-share terms than errors in who those voters actually pick), but it's a real,
+load-bearing assumption all the same: a seat with an unusually mobilised or demobilised
+electorate next time around, plausible for exactly the kind of Muslim-vote and Reform-curious
+seats Part 2 spent most of its time on, would have its vote counts (though not its <em>shares</em>)
+systematically off by however much turnout actually moved.</p>
 
 <h2>6. Where this leaves things</h2>
-<p>None of Sections 2–5 needed to change to accommodate Part 2's revised groups — the pipeline's
-actual machinery (row-stochastic flow matrices, gap-based winnability tiers, percentage→count
-conversion) is agnostic to where the groups themselves came from. What's left to do, in
-roughly the order it'd pay off:</p>
-<ol>
-<li><strong>Re-derive the flow matrices</strong> from the evidence-based group structure in Part 2, the same
-   shape as the existing group sheets, estimated from real 2019→2024 transitions in each
-   group's dominant seats.</li>
-<li><strong>Wire <code>03_monte_carlo.py</code> into <code>run_all.py</code></strong>, now that it's vectorised — Section 3 measured
-   a 30x+ speedup, turning a run that took over a minute into one comfortably inside a web
-   request's budget.</li>
-<li><strong>Extend the by-election calibration approach</strong> in Section 5 to every seat that gets one
-   during this parliament, rather than the four it currently covers — more direct local
-   evidence, whenever it exists, is strictly better than the general model.</li>
-</ol>
-<p>That's the honest state of the prediction side of this project: a mechanically sound pipeline,
-with one un-modelled assumption (static turnout) and one genuine conceptual limitation
-(winnability isn't quite the same thing as tactical voting) — both now specific and checkable
-rather than implicit.</p>
+<p>It's hard to test the accuracy of the model given that it would require a general election, the event of which would make the model redundant. But since the electoral segments used to model each constituency can be calculated using census data, there is a way to test all this via council by elections (which happen quite frequently). We can calculate the segment breakdown of any given ward, run it through the model, and test its validity against the council by election result. Though it should be said not all of these wards are having a by election with a baseline of the 2024 national mood, and of course, as local by elections, national politics may not be the definining feature of them. Nonetheless it's something to consider, and the topic of a future blog. </p>
 </article>
 
 <nav class="post-nav">
-  <a class="btn btn-ghost" href="predicting-house-prices-and-london.html">&larr; What a house is worth, and why London breaks the curve</a>
+  <a class="btn btn-ghost" href="house_prices.html">&larr; A more 'objective' value of a house in the UK (sans London)</a>
   <a class="btn btn-ghost" href="index.html">All posts &rarr;</a>
 </nav>
 
 <footer class="site-footer">
   <p><a href="../index.html">home</a> &middot; <a href="index.html">blog</a> &middot;
-     <a href="../app/index.html">election map</a></p>
+     <a href="../projects.html">projects</a></p>
 </footer>
 </body>
 </html>

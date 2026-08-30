@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home</title>
-<meta name="description" content="Personal site and blog - notes on whatever I'm currently building, from a UK election model to a house-price dissertation.">
+<meta name="description" content="Personal site and blog: notes on whatever I've most recently convinced myself is worth building, from a UK election model to a house-price dissertation with opinions about London.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto+Condensed:wght@400;500;700&display=swap" rel="stylesheet">
@@ -13,18 +13,17 @@
 <body>
 
 <nav class="site-nav">
-  <!-- TODO: swap this for your own name -->
-  <a class="brand" href="index.html">MY SITE</a>
+  <a class="brand" href="index.html">UniverseWang</a>
   <a class="nav-link active" href="index.html">Home</a>
-  <a class="nav-link" href="blog/index.html">Blog</a>
-  <a class="nav-link app-link" href="app/index.html">UK Election Map</a>
+  <a class="nav-link " href="blog/index.html">Blog</a>
+  <a class="nav-link projects-link " href="projects.html">Projects</a>
 </nav>
 
 <header class="page-header">
   <div class="page-header-inner">
-    <h1>Hi, I'm building things and writing about them</h1>
-    <p class="lede">This is where I keep notes on whatever I'm currently working on &mdash; a UK
-      general election model, a dissertation project, and whatever comes next.</p>
+    <h1>Hello. Welcome to my website.</h1>
+    <p class="lede">This is where I keep notes on whatever I'm working on - from data and modelling projects to research questions of increasingly questionable academic interest. </p>
+
   </div>
 </header>
 
@@ -32,18 +31,18 @@
   <h2>Latest posts</h2>
   <ul class="post-list">
     <li>
-      <a class="post-list-title" href="blog/the-prediction-pipeline.html">From groups to seats</a>
-      <p class="post-list-dek">Flows, uncertainty, and tactical voting &mdash; opening up the pipeline that turns any group structure into seat-by-seat forecasts.</p>
+      <a class="post-list-title" href="blog/prediction.html">How the model predicts a seat</a>
+      <p class="post-list-dek">Here we detail the actual electoral predictor itself: vote flows, simulated  uncertainty, and a tactical-voting system, all to produce some hopefully-defensible seat-by-seat forecasts </p>
       <div class="post-list-meta"><span>August 2026</span><span>Part 3 &middot; Prediction</span><span>18 min read</span></div>
     </li>
     <li>
-      <a class="post-list-title" href="blog/predicting-house-prices-and-london.html">What a house is worth, and why London breaks the curve</a>
-      <p class="post-list-dek">A dissertation project's baseline house-price model finds sensible, well-behaved relationships everywhere &mdash; until it hits the one UK housing market that isn't behaving like the rest of the country.</p>
+      <a class="post-list-title" href="blog/house_prices.html">A more 'objective' value of a house in the UK (sans London)</a>
+      <p class="post-list-dek">As a country, we do tend to obsess over how downtrodden or genteel a neighbourhood, town or city is. Here, we try to quantify that obsession, to gauge the value of a house by its objectively measured 'affluence'. And as per the timeless national joke, London does its own thing </p>
       <div class="post-list-meta"><span>June 2026</span><span>Research note</span><span>10 min read</span></div>
     </li>
     <li>
-      <a class="post-list-title" href="blog/political-fragmentation-and-latent-groups.html">One seat, many voters</a>
-      <p class="post-list-dek">Why single-category constituency models are running out of road, and what unmixing 632 seats&rsquo; census composition into a handful of shared archetypes gets us instead.</p>
+      <a class="post-list-title" href="blog/nmf_con.html">The trouble with giving a seat one label</a>
+      <p class="post-list-dek">With Uniform National Swing (UNS) as dead as a dodo, every UK election model eventually has to decide what a constituency &lsquo;is,&rsquo; part 1 found that doing so with a single label was about as accurate as describing a person by their star sign. Here we stop doing that, and start letting each of Britain's 632 seats be several different kinds of place at once.</p>
       <div class="post-list-meta"><span>April 2026</span><span>Part 2 &middot; Latent groups</span><span>24 min read</span></div>
     </li>
   </ul>
@@ -55,17 +54,18 @@
   <ul class="post-list">
     <li>
       <a class="post-list-title" href="app/index.html">UK election map</a>
-      <p class="post-list-dek">An interactive constituency map built alongside the blog posts above &mdash; every UK general election since 2005, a 2029 prediction, and a custom what-if predictor.</p>
+      <p class="post-list-dek">Originally built to make the research above easier to explore and work with; now that I've finally got around to the frontend, it can pass as an app. Includes every UK general election since 2005, a 2029 prediction, and a what-if predictor for anyone who fancies rigging an election from the comfort of their own browser.</p>
     </li>
     <li>
       <a class="post-list-title" href="https://socioeconomichousevaluationweb.uk/">House price predictor</a>
-      <p class="post-list-dek">A live Random Forest model, from the house-price dissertation post, that estimates a sale price from a property's characteristics and its LSOA's socioeconomic profile.</p>
+      <p class="post-list-dek">A model which will happily estimate what a property is worth from its characteristics and its neighbourhood's socioeconomic profile, and, if it's a London postcode, quietly disagree with you about it.</p>
     </li>
   </ul>
+  <p style="margin-top:16px;"><a href="projects.html">See all projects &rarr;</a></p>
 </section>
 
 <footer class="site-footer">
-  <p><a href="blog/index.html">blog</a> &middot; <a href="app/index.html">election map</a></p>
+  <p><a href="blog/index.html">blog</a> &middot; <a href="projects.html">projects</a></p>
 </footer>
 
 </body>

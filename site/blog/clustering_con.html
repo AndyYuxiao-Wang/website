@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trying to sort 632 seats into types</title>
-<meta name="description" content="A full PCA/UMAP x clustering-algorithm x validation-metric sweep on UK constituency demographics, and what its limits reveal.">
+<title>clustering_con</title>
+<meta name="description" content="An attempt to sort Britain's 632 constituencies into clean, tidy types using every clustering method going, and an honest account of how badly they agreed with each other.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto+Condensed:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -12,51 +12,52 @@
 </head>
 <body>
 <nav class="site-nav">
-  <!-- TODO: swap this for your own name -->
-  <a class="brand" href="../index.html">MY SITE</a>
+  <a class="brand" href="../index.html">UniverseWang</a>
   <a class="nav-link " href="../index.html">Home</a>
   <a class="nav-link active" href="index.html">Blog</a>
-  <a class="nav-link app-link" href="../app/index.html">UK Election Map</a>
+  <a class="nav-link projects-link " href="../projects.html">Projects</a>
 </nav>
 
 <header class="post-header" style="--accent: var(--bbc-blue);">
   <span class="series-tag">Part 1 &middot; Clustering</span>
-  <h1>Trying to sort 632 seats into types</h1>
-  <p class="dek">Running the full standard toolkit &mdash; K-means, HAC, DBSCAN and GMM, across PCA and UMAP, scored on four metrics &mdash; on Britain's constituencies, and reporting honestly on where it falls short.</p>
+  <h1>Do Britain's 632 constituencies fall into clean types?</h1>
+  <p class="dek">I threw the kitchen sink of clustering methods at Britain's constituencies: K-means, hierarchical clustering, DBSCAN, GMM, run across two different embeddings and scored four different ways, in the hope that at least one of them would tell me something definite. None of them quite did, and this is the post where I admit that in some detail.</p>
   <p class="byline">October 2025 &middot; 14 min read</p>
-  <p class="series-crosslinks">Part of a series on the UK election model: <span class="series-crosslink-current">Part 1</span> &middot; <a href="political-fragmentation-and-latent-groups.html">Part 2</a> &middot; <a href="the-prediction-pipeline.html">Part 3</a></p>
+  <p class="series-crosslinks">Part of a series on the UK election model: <span class="series-crosslink-current">Part 1</span> &middot; <a href="nmf_con.html">Part 2</a> &middot; <a href="prediction.html">Part 3</a></p>
 </header>
 
 <article class="post-body" style="--accent: var(--bbc-blue);">
 <h2>1. Setting up the experiment</h2>
-<p>The input is 632 GB constituencies (England, Scotland, Wales pooled into one clustering run,
-not fit separately) described by 34 <strong>2021 Census</strong> variables per seat — ethnicity, religion,
-age bands, education, NS-SEC occupation class, housing tenure, plus a non-dom-derived
-<code>Superwealthy</code> proxy. Deliberately <strong>no vote share or swing</strong> goes into the features at this
-stage: the whole point is to ask whether demographics alone separate seats into discrete types,
-independently of how they happen to vote. Feeding vote data in here would answer a
-circular question — "do seats that vote alike get clustered together" is trivially yes if
-votes are one of the clustering inputs.</p>
-<p>Four algorithms, two ways of reducing 34 dimensions down to something clustering can work with,
-and four ways of scoring the result — a full grid, not a single best-guess run:</p>
+<p>The input is 632 GB constituencies (England, Scotland, and Wales pooled into one clustering
+run, not fit separately) described by 34 variables per seat: ethnicity,
+religion, age bands, education, NS-SEC occupation class, housing tenure (mostly derived from ONS data and other government sources). Deliberately <strong>no vote share or swing</strong> goes into the
+features at this stage, because the whole point is to ask whether demographics alone separate
+seats into discrete types, independently of how they happen to vote. Feeding vote data in here
+would answer a circular question: "do seats that vote alike get clustered together" is
+trivially yes if votes are one of the clustering inputs, and I'd rather not spend a blog post
+proving something I already knew going in.</p>
+<p>Four algorithms, two ways of reducing 34 dimensions down to something clustering can actually
+work with, and four ways of scoring the result: a full grid, not a single best-guess run,
+because a single best-guess run is how you end up confidently wrong.</p>
 <ul>
-<li><strong>K-means</strong> — assigns every seat to whichever of <em>k</em> centroids is nearest, then recomputes
+<li><strong>K-means</strong> - assigns every seat to whichever of <em>k</em> centroids is nearest, then recomputes
   centroids as the mean of their assigned seats, and repeats. Assumes round, evenly-sized
-  clusters.</li>
-<li><strong>Hierarchical agglomerative clustering (HAC)</strong>, Ward linkage — merges the two closest seats
+  clusters, whether or not the data agrees to cooperate.</li>
+<li><strong>Hierarchical agglomerative clustering (HAC)</strong>, Ward linkage - merges the two closest seats
   (or clusters) repeatedly until everything's in one tree, which can then be cut at any <em>k</em>.</li>
-<li><strong>Gaussian Mixture Models (GMM)</strong> — a softer K-means: every seat gets a probability of
+<li><strong>Gaussian Mixture Models (GMM)</strong>, a softer K-means: every seat gets a probability of
   belonging to each cluster, fitted as a mixture of overlapping bell-curve-shaped clumps. Still
-  a <em>hard-clustering</em> technique in the sense that matters here — see the closing section.</li>
-<li><strong>DBSCAN</strong> — needs no <em>k</em> at all. Grows clusters from dense regions and labels anything
-  outside a dense region as noise; useful both for flagging genuine outlier seats and for
-  revealing when there's no dense, separated structure to find in the first place.</li>
+  a <em>hard-clustering</em> technique in the sense that matters here (more on that in the closing
+  section).</li>
+<li><strong>DBSCAN</strong> needs no <em>k</em> at all. It grows clusters from dense regions and labels anything
+  outside a dense region as noise, which is useful both for flagging genuine outlier seats and
+  for admitting honestly when there's no dense, separated structure to find in the first place.</li>
 </ul>
 <p>And two ways of getting 34 census variables down to a workable number of dimensions before any
 of the above runs: <strong>PCA</strong> (a linear projection onto the directions of greatest variance) and
 <strong>UMAP</strong> (a nonlinear technique that explicitly reshapes distances to preserve which points are
-each other's near neighbours). Both get carried through the entire grid below, since — as
-Section 3 shows — the choice between them turns out to matter a lot.</p>
+each other's near neighbours). Both get carried through the entire grid below, since the choice
+between them turns out to matter rather more than it should, as Section 3 shows.</p>
 
 <div class="nb-code"><pre><code>import json
 import numpy as np
@@ -177,11 +178,12 @@ k searched from 2 to 20
 </table>
 </div></div>
 
-<h2>2. The sweep: does anything here agree on how many types there are?</h2>
+<h2>2. Does anything here agree on how many types there are?</h2>
 <p>Every (embedding, algorithm) pair gets its own recommended <em>k</em> from each of the four requested
-metrics — Distortion (elbow), Silhouette (max), Davies-Bouldin (min), Calinski-Harabasz (max) —
-plus a consensus taken as their median, since the four routinely disagree and picking one
-silently would hide that disagreement rather than report it.</p>
+metrics: Distortion (elbow), Silhouette (max), Davies-Bouldin (min), and Calinski-Harabasz
+(max), plus a consensus taken as their median. The four routinely disagree with each other,
+and picking just one and quietly moving on would hide that disagreement rather than report it,
+which felt like cheating.</p>
 
 <div class="nb-code"><pre><code>def find_elbow(xs, ys):
     xs, ys = np.array(xs, dtype=float), np.array(ys, dtype=float)
@@ -296,20 +298,21 @@ pd.DataFrame(rows).sort_values([&quot;Embedding&quot;, &quot;Algorithm&quot;])</
 </table>
 </div></div>
 
-<p>Two things jump out immediately. First, <strong>within a single (embedding, algorithm) pair, the
-four metrics themselves often disagree wildly</strong> — PCA + GMM gets told <em>k</em>=10 by Distortion,
-<em>k</em>=2 by Silhouette, <em>k</em>=13 by Davies-Bouldin and <em>k</em>=2 by Calinski-Harabasz, a spread of
-11 across four metrics measuring the same partition. Second, <strong>PCA and UMAP disagree
-systematically with each other</strong>, not just noisily: PCA's consensus recommendations cluster in
-the 4–6 range, UMAP's sit at 7 almost everywhere. That's not four algorithms independently
-converging on a different answer — it's the same four algorithms, run on the same underlying
-data, reduced to the same number of dimensions, giving a different answer purely because of
-<em>which</em> dimensionality-reduction method sits upstream of them.</p>
+<p>Two things jump out immediately, neither of them reassuring. First, <strong>within a single
+(embedding, algorithm) pair, the four metrics themselves often disagree wildly</strong>: PCA + GMM
+gets told <em>k</em>=10 by Distortion, <em>k</em>=2 by Silhouette, <em>k</em>=13 by Davies-Bouldin, and <em>k</em>=2 by
+Calinski-Harabasz, a spread of 11 across four metrics supposedly measuring the same partition.
+Second, <strong>PCA and UMAP disagree systematically with each other</strong>, not just noisily: PCA's
+consensus recommendations cluster in the 4 to 6 range, while UMAP's sit at 7 almost everywhere.
+This isn't four algorithms independently arriving at different answers by chance. It's the
+same four algorithms, run on the same underlying data, reduced to the same number of
+dimensions, giving a different answer purely because of <em>which</em> dimensionality-reduction
+method happens to sit upstream of them.</p>
 
 <h2>3. Why that split isn't a coin flip: PCA vs. UMAP on the exact same partition</h2>
-<p>The gap above is worth pinning down precisely rather than shrugging at, because it decides
-which numbers in the rest of this post can be trusted. Take the <em>identical</em> clustering — GMM,
-<em>k</em>=6 — and score it once on each embedding:</p>
+<p>The gap above is worth pinning down properly rather than shrugging at, because it decides
+which numbers in the rest of this post are actually trustworthy. Take the <em>identical</em>
+clustering, GMM at <em>k</em>=6, and score it once on each embedding:</p>
 
 <div class="nb-code"><pre><code>same_k6 = selection[(selection[&quot;algorithm&quot;] == &quot;GMM&quot;) &amp; (selection[&quot;k&quot;] == 6)]
 same_k6[[&quot;embedding&quot;, &quot;silhouette&quot;, &quot;davies_bouldin&quot;, &quot;calinski_harabasz&quot;, &quot;distortion&quot;]]</code></pre></div>
@@ -359,26 +362,26 @@ same_k6[[&quot;embedding&quot;, &quot;silhouette&quot;, &quot;davies_bouldin&quo
 </table>
 </div></div>
 
-<p>Same seats, same algorithm, same <em>k</em> — and the Silhouette score jumps from <strong>0.058 on PCA to
-0.455 on UMAP</strong>, nearly an eightfold difference, on a metric that's supposed to be measuring
-one fixed property of one fixed partition. That's not GMM finding a better split on UMAP's
-coordinates; it's UMAP's coordinates lying about how well-separated the points already were.
+<p>With the same seats, the same algorithm, and the same <em>k</em>, the Silhouette score jumps from
+<strong>0.058 on PCA to 0.455 on UMAP</strong>, nearly an eightfold difference, on a metric that's supposed
+to measure one fixed property of one fixed partition. GMM didn't find a better split on UMAP's
+coordinates; UMAP's coordinates simply lied about how well-separated the points already were.
 UMAP is explicitly built to warp distances so that points which were near-neighbours in the
-original 34-dimensional space stay near each other in the low-dimensional output — a design
-choice that's genuinely useful for visualization, but it means the distances UMAP hands back
-are no longer a faithful measure of separation in the original data. Silhouette,
-Davies-Bouldin and Calinski-Harabasz all assume the coordinates they're given <em>are</em> a faithful
-distance measure. Feed them UMAP's warped ones and they report a rosier picture than the
-underlying census data actually supports. PCA's projection is linear — it can only rotate and
-rescale, never selectively stretch some neighbourhoods and compress others — so its distances
-stay an honest (if lower-dimensional) read of the real thing. Every result from here on uses
+original 34-dimensional space stay near each other in the low-dimensional output. That's a
+design choice that's genuinely useful for visualization, but it means the distances UMAP hands
+back are no longer a faithful measure of separation in the original data. Silhouette,
+Davies-Bouldin, and Calinski-Harabasz all assume the coordinates they're given <em>are</em> a faithful
+distance measure, and given UMAP's warped ones, they duly report a rosier picture than the
+underlying census data actually supports. PCA's projection is linear, so it can only rotate and
+rescale, never selectively stretch some neighbourhoods and compress others, and its distances
+stay an honest, if lower-dimensional, read of the real thing. Every result from here on uses
 PCA for exactly that reason.</p>
 
-<h2>4. DBSCAN: does GB even have dense, separated clusters at all?</h2>
-<p>DBSCAN needs no <em>k</em> — it grows clusters from dense regions and calls everything else noise —
-which makes it a useful honesty check on the other three: if there genuinely isn't
-dense, separated structure in this data, DBSCAN is the algorithm that will say so instead of
-forcing an answer.</p>
+<h2>4. DBSCAN: does Great Britain even have dense, separated clusters at all?</h2>
+<p>DBSCAN doesn't need a <em>k</em>. It grows clusters from dense regions and calls everything else
+noise, which makes it a useful honesty check on the other three algorithms: if there genuinely
+isn't dense, separated structure in this data, DBSCAN is the one that will actually say so,
+rather than forcing an answer just because an answer was requested.</p>
 
 <div class="nb-code"><pre><code>dbscan = selection[selection[&quot;algorithm&quot;] == &quot;DBSCAN&quot;][
     [&quot;embedding&quot;, &quot;eps_percentile&quot;, &quot;k&quot;, &quot;n_noise&quot;, &quot;degenerate&quot;, &quot;silhouette&quot;]
@@ -487,20 +490,23 @@ dbscan</code></pre></div>
 </table>
 </div></div>
 
-<p>On PCA, three of the four density thresholds tried come back <strong>degenerate</strong> — DBSCAN finds
-only one real cluster plus a pile of noise points, not a genuine multi-way split — and the one
+<p>On PCA, three of the four density thresholds tried come back <strong>degenerate</strong>: DBSCAN finds
+only one real cluster plus a pile of noise points, not a genuine multi-way split, and the one
 PCA threshold that <em>does</em> produce two clusters splits off a fairly small dense core (53 seats
 flagged as noise) rather than partitioning the full 632. UMAP's warped geometry, true to
-Section 3's finding, manufactures a cleaner-looking multi-cluster split at every threshold —
-which is the same artifact showing up a second way, not a second, independent piece of
+Section 3's finding, manufactures a cleaner-looking multi-cluster split at every threshold,
+which is the same artifact turning up a second time, not a second, independent piece of
 evidence. Read honestly, DBSCAN's verdict on the real (PCA) geometry is that Great Britain's
-632 constituencies mostly form one dense mass with a soft, fuzzy edge, not a small number of
-crisply separated islands.</p>
+632 constituencies mostly form one dense mass with a soft, fuzzy edge, rather than a small
+number of crisply separated islands, which is a less satisfying sentence to have to write than
+I'd have liked.</p>
 
 <h2>5. Picking a working configuration anyway, and checking it against judgement</h2>
-<p>Every metric disagreeing is itself the finding, but a concrete partition is still worth
-building and inspecting — averaging out four disagreeing per-metric picks with a median gives
-<strong>PCA + GMM, k=6</strong> as a working consensus (Section 2), so that's what gets fit and profiled.</p>
+<p>Every metric disagreeing with every other metric is itself the finding, but a concrete
+partition is still worth building and inspecting properly rather than just waving at the
+disagreement and walking off. Averaging out four disagreeing per-metric picks with a median
+gives <strong>PCA + GMM, k=6</strong> as a working consensus (Section 2), so that's what gets fit and
+profiled below.</p>
 
 <div class="nb-code"><pre><code>profiles = json.load(open(OUTPUT / &quot;whole_seat_clusters_profiles.json&quot;, encoding=&quot;utf-8&quot;))
 
@@ -580,10 +586,11 @@ pd.DataFrame([{
 </table>
 </div></div>
 
-<p>That's a genuinely legible six-way split — a young/graduate/urban segment, a white-British
-working-class segment, a young-families/routine-occupation segment, an owner-occupier
-professional segment, an older/veteran/intermediate-occupation segment, and a low-White-British,
-high-Muslim/Asian segment — each with a distinct implied vote. Real structure is in here.</p>
+<p>That's a genuinely legible six-way split: a young, graduate, urban segment; a white-British
+working-class segment; a young-families, routine-occupation segment; an owner-occupier
+professional segment; an older, veteran, intermediate-occupation segment; and a
+low-White-British, high-Muslim/Asian segment, each with a distinct implied vote. There's real
+structure in here, whatever the metrics spent the last two sections arguing about.</p>
 
 <div class="nb-code"><pre><code>tribe_comparison = json.load(open(OUTPUT / &quot;whole_seat_tribe_comparison.json&quot;, encoding=&quot;utf-8&quot;))
 print(f&quot;Adjusted Rand Index vs. this project&#x27;s own hand-assessed dominant category per seat: &quot;
@@ -595,41 +602,45 @@ print(f&quot;Seats where the hard cluster&#x27;s majority category disagrees wit
 Seats where the hard cluster&#x27;s majority category disagrees with the hand assessment: 266 of 632 (42%)
 </pre></div>
 
-<p>An Adjusted Rand Index of 0.125 is weak agreement — far above the 0 you'd get from random
-labels, so the clustering isn't picking up nothing, but nowhere near the 1.0 that would mean
-"this hard partition and hand judgement are describing the same categories." <strong>42% of seats</strong>
-get a different dominant category from the two approaches. Combined with Section 2's internal
-metric disagreement and Section 4's DBSCAN read of one soft, fuzzy mass rather than crisp
-islands, three independent checks are converging on the same honest answer: there's real,
-recoverable structure in how British constituencies differ demographically, but a <strong>hard</strong>
-partition — one seat, one label — isn't the right shape of answer for it.</p>
+<p>An Adjusted Rand Index of 0.125 is weak agreement: far above the 0 you'd get from random
+labels, so the clustering isn't picking up on nothing, but nowhere near the 1.0 that would
+mean "this hard partition and hand judgement are describing the same categories." <strong>42% of
+seats</strong> get a different dominant category from the two approaches, which is not a rounding
+error. Combined with Section 2's internal metric disagreement and Section 4's DBSCAN read of
+one soft, fuzzy mass rather than crisp islands, three independent checks are converging on the
+same honest answer: there's real, recoverable structure in how British constituencies differ
+demographically, but a <strong>hard</strong> partition, where one seat is assigned exactly one label,
+simply isn't the right shape of answer for it.</p>
 
 <h2>6. Why segments, not clusters</h2>
-<p>Every algorithm tried here, GMM's "soft" probabilities included, still answers the same
-question underneath: <em>which single cluster does this seat most plausibly belong to, and how
-confident are we?</em> A seat sitting at 55% Segment 3-ish and 45% Segment 5-ish gets assigned to
-whichever is larger and its GMM confidence reported alongside it — the 45% doesn't survive the
-trip into the output. Section 5's 42% disagreement rate is exactly the visible cost of that:
-a constituency isn't neatly one thing, and forcing it into the label of whichever thing it's
-<em>most</em> like throws away the part of the picture explaining why judgement and the algorithm
-often land on different labels for the same seat.</p>
-<p>The fix isn't a better <em>k</em>, a better algorithm, or a better embedding — Section 2 through 4
-already ran the full available grid of all three. It's dropping the assumption that "seat →
-single type" is even the right question. What's needed instead is a technique that answers a
-different one: not <em>which</em> type a seat belongs to, but <em>how much of each</em> recurring type is
-present in it — a genuine compositional breakdown, in percentages that sum to 100%, the same
-way a census breakdown of age or ethnicity already does for the underlying population. That's
-where the next post picks up.</p>
+<p>Every algorithm tried in this post, GMM's "soft" probabilities included, still answers the
+same question underneath: <em>which single cluster does this seat most plausibly belong to, and
+how confident are we?</em> A seat sitting at roughly 55% Segment 3 and 45% Segment 5 gets assigned
+to whichever is larger, its GMM confidence dutifully reported alongside it, and the other 45%
+quietly does not survive the trip into the output. Section 5's 42% disagreement rate is
+exactly the visible cost of that small act of data destruction: a constituency isn't neatly
+one thing, and forcing it into the label of whichever thing it's <em>most</em> like throws away
+precisely the part of the picture that explains why judgement and the algorithm keep landing
+on different labels for the same seat.</p>
+<p>I would love to tell you the fix is a better <em>k</em>, a better algorithm, or a better embedding,
+not least because that would have been considerably less work, but Sections 2 through 4
+already ran the full available grid of all three, and none of them was it. The actual fix is
+dropping the assumption that "seat, therefore single type" is even the right question to be
+asking. What's needed instead is a technique that answers a different one entirely: not
+<em>which</em> type a seat belongs to, but <em>how much of each</em> recurring type is present in it, a
+genuine compositional breakdown in percentages that sum to 100%, the same way a census
+breakdown of age or ethnicity already does for the underlying population. That's where the
+next post picks up.</p>
 </article>
 
 <nav class="post-nav">
   <a class="btn btn-ghost" href="index.html">&larr; All posts</a>
-  <a class="btn btn-ghost" href="political-fragmentation-and-latent-groups.html">One seat, many voters &rarr;</a>
+  <a class="btn btn-ghost" href="nmf_con.html">The trouble with giving a seat one label &rarr;</a>
 </nav>
 
 <footer class="site-footer">
   <p><a href="../index.html">home</a> &middot; <a href="index.html">blog</a> &middot;
-     <a href="../app/index.html">election map</a></p>
+     <a href="../projects.html">projects</a></p>
 </footer>
 </body>
 </html>

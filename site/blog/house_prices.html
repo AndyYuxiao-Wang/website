@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What a house is worth, and why London breaks the curve</title>
-<meta name="description" content="A machine-learning house-price model built from census and deprivation data, and what its errors reveal about London's outlier prices.">
+<title>house_prices</title>
+<meta name="description" content="Five machine-learning models built to price UK houses get steadily better across England as they get smarter, then all hit the same wall in London, the one place that appears to be playing an entirely different game.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto+Condensed:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -12,55 +12,59 @@
 </head>
 <body>
 <nav class="site-nav">
-  <!-- TODO: swap this for your own name -->
-  <a class="brand" href="../index.html">MY SITE</a>
+  <a class="brand" href="../index.html">UniverseWang</a>
   <a class="nav-link " href="../index.html">Home</a>
   <a class="nav-link active" href="index.html">Blog</a>
-  <a class="nav-link app-link" href="../app/index.html">UK Election Map</a>
+  <a class="nav-link projects-link " href="../projects.html">Projects</a>
 </nav>
 
 <header class="post-header" style="--accent: var(--bbc-blue-dark);">
   <span class="series-tag">Research note</span>
-  <h1>What a house is worth, and why London breaks the curve</h1>
-  <p class="dek">A dissertation project's baseline house-price model finds sensible, well-behaved relationships everywhere &mdash; until it hits the one UK housing market that isn't behaving like the rest of the country.</p>
+  <h1>A more 'objective' value of a house in the UK (sans London)</h1>
+  <p class="dek">As a country, we do tend to obsess over how downtrodden or genteel a neighbourhood, town or city is. Here, we try to quantify that obsession, to gauge the value of a house by its objectively measured 'affluence'. And as per the timeless national joke, London does its own thing </p>
   <p class="byline">June 2026 &middot; 10 min read</p>
   
 </header>
 
 <article class="post-body" style="--accent: var(--bbc-blue-dark);">
-<h2>The gap the project is trying to close</h2>
-<p>Property listing sites are data-rich about the property itself &mdash; square footage, photos,
-floor plans, asking price &mdash; and comparatively thin on everything around it. Rightmove
-shows a map of nearby schools without saying whether they're any good; Zoopla's valuation tool
-leans almost entirely on nearby sold prices. Neither tells a buyer relocating to an unfamiliar
-area much about the deprivation, crime, or income profile of the neighbourhood they're about to
-move into, and asking a local forum tends to return anecdote rather than anything comparable
-across the country.</p>
-<p>The project's response is to build a house-price model that takes socioeconomic geography
-seriously as an input in its own right, not just an afterthought to square footage and property
-type &mdash; and to see how much of a house's price that geography actually explains.</p>
+<h2>What listings sites don't tell you</h2>
+<p>Property sites are generous with the property itself: square footage, photos, floor plans,
+asking price, the lot. They're considerably shyer about everything around it. Rightmove will
+show you a map of nearby schools without the faintest hint of whether any of them are good;
+Zoopla's valuation tool leans almost entirely on what the house next door recently sold for.
+Neither tells someone moving to an unfamiliar area much about the deprivation, crime or income
+levels of the neighbourhood they're about to commit several hundred thousand pounds to, and a
+local forum mostly offers anecdote, which is not, strictly speaking, data.</p>
+<p>This project's answer is a house-price model that takes the surrounding neighbourhood
+seriously as an input in its own right, rather than an afterthought bolted onto square footage
+and property type, and that actually measures how much of a house's price that neighbourhood
+explains.</p>
 
-<h2>Data: property records, meet the census</h2>
-<p>England was the target (Scotland and Northern Ireland record small-area socioeconomic data
-under different systems, so pooling all three would mean reconciling incompatible geographies
-for comparatively little benefit — the great majority of the UK's internal relocators and new
-arrivals move to England anyway). Two datasets, joined at LSOA/MSOA level:</p>
+<h2>The data: property records meet the census</h2>
+<p>England was the target, and not out of any lack of ambition. Scotland and Northern Ireland
+record small-area socioeconomic data under entirely different systems, so pooling all three
+would have meant reconciling incompatible geographies for comparatively little payoff, given
+that the great majority of the UK's internal relocators and new arrivals move within England
+anyway. Two datasets, joined at LSOA/MSOA level:</p>
 <ul>
-<li><strong>HM Land Registry Price Paid Data</strong>, November 2025: residential sale transactions, each
-  with property type, sale price and postcode.</li>
-<li><strong>The English Indices of Deprivation (2024–25)</strong>, plus targeted replacements for two of its
-  seven domains. The IoD's own Income domain only measures the <em>proportion of people on a low
-  income</em> — an area with one very poor resident and everyone else wealthy would register as
-  more deprived than one where everybody earns exactly the national average, which is the
-  wrong shape of variable for pricing a house. Actual small-area income estimates were used
-  instead. The Education domain has the mirror problem (it measures the share <em>lacking</em>
-  qualifications, not the presence of good schools), so it's replaced with Attainment 8 — the
-  average GCSE score by Local Authority, weighted to pupil residence rather than school
-  location, so it reflects catchment rather than which school happens to sit inside a boundary.</li>
+<li><strong>HM Land Registry Price Paid Data</strong>, November 2025: every residential sale, with property
+  type, price and postcode.</li>
+<li><strong>The English Indices of Deprivation (2024–25)</strong>, with two of its seven domains swapped out,
+  because both were quietly measuring the wrong thing. The IoD's own Income domain only
+  measures the <em>share of people on a low income</em>, so a neighbourhood with one very poor
+  resident and everyone else wealthy would register as more deprived than one where everyone
+  earns exactly the national average: the wrong shape of variable for pricing a house. Actual
+  small-area income estimates were used instead. Education has the mirror problem (it measures
+  the share <em>lacking</em> qualifications, not the presence of good schools), so it's replaced with
+  Attainment 8: average GCSE score by Local Authority, weighted to pupil residence rather than
+  school location, so it reflects the catchment area rather than whatever happens to sit inside
+  the boundary on a map.</li>
 </ul>
-<p>Land Registry doesn't record floor area, so each sale was matched to its Energy Performance
-Certificate for that figure instead. The code and the final merged dataset behind every table
-in this post are the dissertation's own:</p>
+<p>Land Registry doesn't record floor area, unhelpfully, so each sale was matched to its Energy
+Performance Certificate for that figure instead. </p>
+<p>This was a lengthy process that consumed many afternoons.</p>
+<p>The EPC register holds ~25 million certificates, and took distributed computing to match, with a bit of NLP to address inconsistent flat addressing rules, all just to add a floor area to some property sales. </p>
+<p>The code and the merged dataset behind every table below are the dissertation's own</p>
 
 <div class="nb-code"><pre><code>import pandas as pd
 import numpy as np
@@ -183,11 +187,11 @@ X_train.head()</code></pre></div>
 </table>
 </div></div>
 
-<h2>Five models, the same dataset</h2>
-<p>Every model below is trained and tested on the identical 80/20 split of that dataset, so the
-comparison is clean. Two are linear (a straight line through the features, one with a
-regularisation penalty added); three are built to capture the kind of non-linear, interacting
-relationships a straight line structurally can't:</p>
+<h2>Five models, one dataset</h2>
+<p>Every model below trains and tests on an 80/20 split. Two are linear: a straight line through the features, and the
+same line with a penalty added to stop the coefficients running wild with enthusiasm. Three
+are built to catch the kind of non-linear, interacting relationships a straight line simply
+can't:</p>
 
 <div class="nb-code"><pre><code>def rmse(y_true, y_pred):
     return np.sqrt(mean_squared_error(y_true, y_pred))
@@ -287,23 +291,22 @@ results</code></pre></div>
 </table>
 </div></div>
 
-<p>Linear and Ridge Regression land almost identically (unsurprising — Ridge is Linear Regression
-with large coefficients penalised, and here that penalty barely moves the needle). All three
-non-linear models improve on both by a wide margin. Random Forest and the Neural Network come
-out close to tied — Random Forest wins on MAE (a lower <em>typical</em> error), the Neural Network
-wins on RMSE and R² (fewer really large misses) — with Gradient Boosting a clear step behind
-both but still well ahead of the two linear models. Random Forest is the one actually wired
-into the project's web application, on the strength of that MAE and its faster, more robust
-training.</p>
-<p>That's the full model comparison, and it's the last time this post treats the five as
-competitors. What's more interesting than which one wins is a failure they share.</p>
+<p>Linear and Ridge Regression land in almost the same place, which isn't much of a surprise:
+Ridge is just Linear Regression with a penalty on large coefficients, and here that penalty
+barely lifts a finger. All three non-linear models beat both by a wide margin. Random Forest
+and the Neural Network come out close to tied: Random Forest wins on MAE (a lower <em>typical</em>
+error), the Neural Network wins on RMSE and R² (fewer really big misses), and Gradient
+Boosting trails a clear step behind both while still leaving the two linear models for dust.
+Random Forest is the one actually running the live web app, on the grounds that it wins on MAE.</p>
+<p>That's the full model comparison, and also the last time this post treats the five as rivals.
+What's more interesting than which one wins is a mistake every single one of them makes.</p>
 
-<h2>Where the straight line breaks first: the opposite end of England</h2>
-<p>Before getting to London, it's worth seeing what the <em>linear</em> models get wrong, because it's
-the mirror image of what's coming. A straight line fitted to minimise overall error inevitably
-extrapolates past the point where the relationship it learned still makes sense — and pushed
-far enough into deprived, low-income, high-crime territory, that extrapolation crosses zero
-entirely:</p>
+<h2>Where the straight line breaks first: the opposite end of the country</h2>
+<p>Before getting to London, it's worth seeing what the <em>linear</em> models get wrong first, since it
+turns out to be a mirror image of what's coming. A straight line fitted to minimise overall
+error will always extrapolate past the point where the relationship it learned still makes any
+sense, and pushed far enough into deprived, low-income, high-crime territory, that
+extrapolation cheerfully crosses zero altogether:</p>
 
 <div class="nb-code"><pre><code>linear_check = pd.DataFrame({
     &quot;Address&quot;: addr_test.values,
@@ -397,33 +400,28 @@ linear_check</code></pre></div>
 </table>
 </div></div>
 
-<p>Every one of the most-underpredicted properties by Linear Regression is a cheap flat or
-terrace outside the South East, and the postcodes are a tour of England's post-industrial and
-seaside towns: <strong>FY1</strong> and <strong>FY4</strong> are Blackpool; <strong>BB9</strong> is Nelson, in Lancashire's old
-cotton-mill belt; <strong>WA9</strong> is St Helens, a former glass-and-chemicals town in Merseyside;
-<strong>L36</strong> is Huyton, on Liverpool's eastern edge; further down the same list sit <strong>ST2</strong>
-(Stoke-on-Trent) and <strong>HU4</strong> (Hull). Blackpool in particular isn't a borderline case: on the
-2025 Indices of Deprivation it's ranked as <strong>the single most deprived local authority in
-England</strong> — first nationally on the employment and health domains, second on crime
+<p>Every one of Linear Regression's worst underpredictions is a cheap flat or terrace in the North of England: <strong>FY1</strong> and <strong>FY4</strong> are Blackpool; <strong>BB9</strong> is Nelson, in Lancashire's old
+cotton-mill belt; <strong>WA9</strong> is St Helens, a former glass-and-chemicals town in Merseyside; <strong>L36</strong>
+is Huyton, on Liverpool's eastern edge; further down the list sit <strong>ST2</strong> (Stoke-on-Trent) and
+<strong>HU4</strong> (Hull). Blackpool is not, it turns out, a borderline case: on the 2025 Indices of
+Deprivation it's ranked <strong>the single most deprived local authority in England</strong>, first
+nationally on employment and health, second on crime
 (<a href="https://www.gov.uk/government/statistics/english-indices-of-deprivation-2025/english-indices-of-deprivation-2025-statistical-release">GOV.UK Indices of Deprivation 2025</a>;
-<a href="https://deprivation.communities.gov.uk/">Local Deprivation Explorer</a>) — the exact dataset this
-model was trained on.</p>
-<p>The model isn't wrong to associate that profile with a low house price — it's wrong about <em>how</em>
-low, because it's still trying to draw one straight line all the way from Kensington's income
-and school figures down to Blackpool's, and a line steep enough to capture the top of that
-range overshoots badly at the bottom. A model with no concept of a floor at zero, minimising
-squared error, will happily predict a house is worth minus a quarter of a million pounds if
-that's what the slope says at that end of the data — the same structural inflexibility that,
-at the other end of the income and price distribution entirely, is about to show up again in a
-different shape.</p>
+<a href="https://deprivation.communities.gov.uk/">Local Deprivation Explorer</a>), which happens to be the
+exact dataset this model trained on.</p>
+<p>The model isn't wrong to price that profile low; it's wrong about <em>how</em> low, because it's
+still drawing one straight line all the way from Kensington's income and school figures down to
+Blackpool's, and a line steep enough to fit the top of that range overshoots badly at the
+bottom. A model with no concept of a floor at zero will happily inform you that a house is
+worth minus a quarter of a million pounds, if that's what the slope demands at that end of the
+data. Rather humorously, it does suggest that the regression models consider these parts of England so undesirable you should only move to them if you were paid to do so, though on a more serious note, it is a nonsense suggestion. The other 3 models do not have such folly, although a problem of a similar ilk (but different magnitude) does arise</p>
 
-<h2>The one mistake every model makes, in the same handful of postcodes</h2>
-<p>Moving from a straight line to Random Forest, Gradient Boosting or a Neural Network fixes that
-specific problem: none of the three non-linear models ever predicts a negative house price,
-because tree-based splits and a network's learned function aren't forced through one global
-slope the way a straight line is. But all three independently converge on a <em>different</em>
-failure, in exactly the same postcodes — and this time it's the opposite end of the country
-entirely:</p>
+<h2>The mistake every model makes, in the same handful of postcodes</h2>
+<p>Moving from a straight line to Random Forest, Gradient Boosting or a Neural Network does fix
+that specific problem: none of the three ever predicts a negative price, since tree splits and
+a learned network function aren't forced through one global slope the way a straight line is.
+But all three independently land on a <em>different</em> failure, in exactly the same postcodes, and
+this time it's the opposite end of the country entirely:</p>
 
 <div class="nb-code"><pre><code>def most_underpredicted(name, n=8):
     resid = predictions[name] - y_test.values
@@ -537,22 +535,22 @@ shared_underpredicted</code></pre></div>
 </table>
 </div></div>
 
-<p>Every one of these addresses is in inner or well-to-do outer London — <strong>NW8</strong> is St John's
-Wood, <strong>W11</strong> is Notting Hill, <strong>SW7</strong> is South Kensington, <strong>TW9</strong> is Richmond upon Thames —
-and every one of the three flexible models independently placed it among its own worst
-underpredictions, without being told to look for London specifically. 73 Marlborough Place,
-NW8, sold for £8.6 million; every model's best estimate, built from that property's actual
-crime, income, education, employment and health figures, lands somewhere between £2.7 and £3.8
-million — a multi-million-pound gap that has nothing to do with the model being
-unsophisticated, since these are precisely the models built to catch exactly this kind of
-non-linear, location-driven effect.</p>
-<p>There's a mechanical reason a Random Forest in particular converges on this pattern: it
-predicts by averaging many decision trees, each trained on a bootstrap sample, which
-structurally pulls extreme, rare values back toward the mean of whatever similar-looking
-properties it <em>has</em> seen plenty of. But that mechanical explanation only pushes the real
-question back a step — <em>why</em> is a handful of London addresses so rare and so extreme, relative
-to everywhere else with a similar income, school and crime profile, that every flexible model
-independently treats them as the same kind of outlier?</p>
+<p>Every one of these addresses sits in inner or well-to-do outer London: <strong>NW8</strong> is St John's
+Wood, <strong>W11</strong> is Notting Hill, <strong>SW7</strong> is South Kensington, <strong>TW9</strong> is Richmond upon Thames.
+All three flexible models independently put it among their own worst underpredictions, without
+ever once being told to go looking for London specifically. 73 Marlborough Place, NW8, sold for
+£8.6 million; every model's best guess, built from that property's actual crime, income,
+education, employment and health figures, lands somewhere between £2.7 and £3.8 million, which
+is a multi-million-pound gap that has nothing to do with the models being unsophisticated,
+since these are precisely the models built to catch this kind of non-linear, location-driven
+effect.</p>
+<p>There's a perfectly mechanical reason Random Forest in particular does this: it predicts by
+averaging a lot of decision trees, each trained on a bootstrap sample, which structurally drags
+extreme, rare values back toward the mean of whatever similar-looking properties it's actually
+seen plenty of. But that only pushes the real question back a step: <em>why</em> is a handful of
+London addresses so rare and so extreme, relative to everywhere else with a similar income,
+school and crime profile, that every flexible model quietly files them under the same kind of
+outlier?</p>
 
 <div class="nb-code"><pre><code>worst = shared_underpredicted.iloc[0]
 gap = worst[&quot;Actual (£)&quot;] - worst[&quot;Random Forest&quot;]
@@ -564,53 +562,52 @@ print(f&quot;Shortfall: £{gap:,.0f} — equivalent to {gap / income_coefficient
 Shortfall: £5,904,594 — equivalent to 786,231 separate £1-of-local-income increases
 </pre></div>
 
-<p>Random Forest's own shortfall on that one property is the equivalent of over three-quarters of
-a million separate £1-of-local-income increases, stacked on a single street. Income, schools,
-crime and employment explain a genuinely large share of what a house is worth almost everywhere
-in England — and then this specific handful of addresses carries a premium that isn't made of
-any of those things, at a scale no amount of model sophistication closes.</p>
+<p>Random Forest's shortfall on that one property alone works out to the equivalent of over
+three-quarters of a million separate £1-of-local-income increases, all stacked on a single
+street. Income, schools, crime and employment explain a genuinely large share of what a house
+is worth almost everywhere in England, and then this one handful of addresses carries a
+premium built out of none of those things, at a scale no amount of model sophistication ever
+quite closes.</p>
 
 <h2>London isn't an expensive version of England. It's a different market.</h2>
-<p>Officially, in December 2025, the average house in England sold for <strong>£292,000</strong>
+<p>In December 2025, the average house in England sold for <strong>£292,000</strong>
 (<a href="https://www.gov.uk/government/statistics/uk-house-price-index-for-december-2025/uk-house-price-index-england-december-2025">GOV.UK: UK House Price Index, England,
 December 2025</a>).
-London's own average, the same release series two months earlier, was <strong>£547,000</strong> — nearly
-double the England-wide figure. That gap isn't just "London vs. everywhere else" either — it
-holds up <em>inside</em> London. Kensington and Chelsea, the most expensive local authority in the
+London's own average, from the same release two months earlier, was <strong>£547,000</strong>, nearly
+double the England-wide figure. That gap isn't simply "London vs. everywhere else," either; it
+holds up <em>inside</em> London too. Kensington and Chelsea, the most expensive local authority in the
 December 2025 release, averaged <strong>£1,178,497</strong>. Barking and Dagenham, London's <em>cheapest</em>
-borough, averaged <strong>£353,512</strong> — still above the England-wide average of £292,000. The
-cheapest borough in the most expensive city in the country is still pricier than the national
-average. For comparison, Kingston upon Hull — one of the cheapest areas in England, and the
-same HU postcode area that showed up in Linear Regression's worst underpredictions above —
-averaged £131,323 in the same release: <strong>roughly a ninefold gap between Hull and Kensington
-and Chelsea</strong>, inside one country, one currency, one housing market on paper.</p>
-<p>That scale of gap — England's cheapest and most expensive local authorities sitting roughly
-nine times apart — is exactly what sends a straight line into negative numbers at Blackpool's
-end of the distribution, and exactly what three structurally different flexible models still
-can't close at the other end, however sophisticated they get.</p>
+borough, averaged <strong>£353,512</strong>, which is still above the England-wide average of £292,000, but somewhat less of an arbitrarily large number. For comparison, Kingston upon Hull
+(one of the cheapest areas in England, and the same HU postcode area that showed up among
+Linear Regression's worst underpredictions above) averaged £131,323 in the same release,
+roughly a ninefold gap between Hull and Kensington and Chelsea.</p>
+<p>That scale of gap, England's cheapest and most expensive local authorities sitting roughly nine
+times apart, is exactly what sends a straight line into negative numbers at Blackpool's end of
+the distribution, and exactly what three structurally different flexible models still can't
+close at the other end, no matter how clever they get. Indeed, the magnitude in errors seen when evaluating the models can mostly be explained by how wrong they are about London. </p>
 
-<p>The dissertation's own conclusion reaches the same place from the results rather than
-assuming it going in: every model, however flexible, systematically underprices the same
-prime London properties, and the proposed fix isn't a sixth algorithm — it's treating London
-as its own market rather than a more-expensive tail of the national one, for instance by
-adding distance to central London as its own feature, or fitting a separate model for the
-capital entirely. Sophistication bought real accuracy almost everywhere else in the country;
-in St John's Wood, Notting Hill and South Kensington, it bought a <em>smaller</em> wrong answer, not
-a right one.</p>
+<p>The dissertation arrives at the same conclusion from the results themselves, rather than
+assuming it going in: every model, however flexible, systematically underprices the same prime
+London properties, and the fix isn't a sixth algorithm, however tempting that always feels.
+It's treating London as its own market, not a pricier tail of the national one. That could
+mean adding distance to central London as its own feature, or simply giving the capital a model
+of its own and letting the rest of England get on with things separately. Sophistication
+bought real accuracy almost everywhere else in the country. In St John's Wood, Notting Hill and
+South Kensington, all it bought was a smaller wrong answer.</p>
 <p>The Random Forest model itself is live at
-<a href="https://socioeconomichousevaluationweb.uk/">socioeconomichousevaluationweb.uk</a> — enter an
-LSOA code, property type and floor area (or click the map) for a real prediction from the
-model this post is about.</p>
+<a href="https://socioeconomichousevaluationweb.uk/">socioeconomichousevaluationweb.uk</a>: enter an LSOA
+code, property type and floor area, or just click the map, for an actual prediction from the
+model this whole post has been about. Though if you're to move to St John's Wood, it's probably not your best tool. </p>
 </article>
 
 <nav class="post-nav">
-  <a class="btn btn-ghost" href="political-fragmentation-and-latent-groups.html">&larr; One seat, many voters</a>
-  <a class="btn btn-ghost" href="the-prediction-pipeline.html">From groups to seats &rarr;</a>
+  <a class="btn btn-ghost" href="nmf_con.html">&larr; The trouble with giving a seat one label</a>
+  <a class="btn btn-ghost" href="prediction.html">How the model predicts a seat &rarr;</a>
 </nav>
 
 <footer class="site-footer">
   <p><a href="../index.html">home</a> &middot; <a href="index.html">blog</a> &middot;
-     <a href="../app/index.html">election map</a></p>
+     <a href="../projects.html">projects</a></p>
 </footer>
 </body>
 </html>
