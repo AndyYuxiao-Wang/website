@@ -18,9 +18,9 @@ data/modelling projects and the writing behind them.
 
 ## Adding posts
 
-To add a post, put the new post in blog/notebook for a notebook or blog/posts for a markdown
+To add a post, put the new post in `blog/notebooks` for a notebook or `blog/posts` for a markdown file.
 
-To rebuild the blog after editing or add a post a post:
+To rebuild the blog after editing or adding a post:
 
 ```
 py site/build_blog.py
