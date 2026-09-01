@@ -57,7 +57,7 @@ PROJECTS = [
         "dek": "A model which will happily estimate what a property is worth from its "
                "characteristics and its neighbourhood's socioeconomic profile, and, if it's a "
                "London postcode, quietly disagree with you about it. "
-               '<a href="https://github.com/AndyYuxiao-Wang/test">Source &rarr;</a>',
+               '<a href="https://github.com/AndyYuxiao-Wang/socioeconomic-house-valuer">Source &rarr;</a>',
     },
 ]
 
