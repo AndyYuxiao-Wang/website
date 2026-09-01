@@ -16,25 +16,12 @@ data/modelling projects and the writing behind them.
   - `build_blog.py` - builds `blog/` pages from the markdown posts
   - `serve.py` - a small local dev server
 
-## Running locally
+## Adding posts
 
-```
-py site/serve.py
-```
+To add a post, put the new post in blog/notebook for a notebook or blog/posts for a markdown
 
-Then open `http://localhost:8000` (or whatever port it prints).
-
-To rebuild the blog after editing a post:
+To rebuild the blog after editing or add a post a post:
 
 ```
 py site/build_blog.py
 ```
-
-## Other projects
-
-- [UK election model](https://github.com/AndyYuxiao-Wang/uk-election-modelling) -
-  the data pipeline and clustering research behind `site/app/`. That repo owns
-  the methodology; this repo's `app/` just displays its pre-generated output.
-- [House price predictor](https://socioeconomichousevaluationweb.uk/)
-  ([source](https://github.com/AndyYuxiao-Wang/test)) - a separately deployed
-  model estimating property value from socioeconomic profile.
