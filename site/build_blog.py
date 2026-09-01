@@ -49,7 +49,7 @@ PROJECTS = [
         "dek": "Originally built to make the research above easier to explore and work with; now that I've finally got around to the frontend, it can pass as an app. Includes every UK general election since 2005, a 2029 prediction, and a "
                "what-if predictor for anyone who fancies rigging an election from the comfort "
                "of their own browser. "
-               '<a href="https://github.com/AndyYuxiao-Wang/uk-election-model">Model source &rarr;</a>',
+               '<a href="https://github.com/AndyYuxiao-Wang/uk-election-modelling">Model source &rarr;</a>',
     },
     {
         "href": "https://socioeconomichousevaluationweb.uk/",

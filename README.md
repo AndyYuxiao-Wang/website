@@ -32,7 +32,7 @@ py site/build_blog.py
 
 ## Other projects
 
-- [UK election model](https://github.com/AndyYuxiao-Wang/uk-election-model) -
+- [UK election model](https://github.com/AndyYuxiao-Wang/uk-election-modelling) -
   the data pipeline and clustering research behind `site/app/`. That repo owns
   the methodology; this repo's `app/` just displays its pre-generated output.
 - [House price predictor](https://socioeconomichousevaluationweb.uk/)
