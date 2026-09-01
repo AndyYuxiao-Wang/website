@@ -19,7 +19,6 @@ import markdown as md
 import yaml
 
 SITE_DIR = Path(__file__).resolve().parent
-ROOT = SITE_DIR.parent
 BLOG_DIR = SITE_DIR / "blog"
 POSTS_DIR = BLOG_DIR / "posts"
 
@@ -49,14 +48,16 @@ PROJECTS = [
         "title": "UK election map",
         "dek": "Originally built to make the research above easier to explore and work with; now that I've finally got around to the frontend, it can pass as an app. Includes every UK general election since 2005, a 2029 prediction, and a "
                "what-if predictor for anyone who fancies rigging an election from the comfort "
-               "of their own browser.",
+               "of their own browser. "
+               '<a href="https://github.com/AndyYuxiao-Wang/uk-election-model">Model source &rarr;</a>',
     },
     {
         "href": "https://socioeconomichousevaluationweb.uk/",
         "title": "House price predictor",
         "dek": "A model which will happily estimate what a property is worth from its "
                "characteristics and its neighbourhood's socioeconomic profile, and, if it's a "
-               "London postcode, quietly disagree with you about it.",
+               "London postcode, quietly disagree with you about it. "
+               '<a href="https://github.com/AndyYuxiao-Wang/test">Source &rarr;</a>',
     },
 ]
 
@@ -131,7 +132,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 
 NOTEBOOK_POSTS = [
     {
-        "notebook": "clustering/notebooks/sorting_632_seats.ipynb",
+        "notebook": "blog/notebooks/sorting_632_seats.ipynb",
         "slug": "clustering_con.html",
         "tab_title": "clustering_con",
         "series_tag": "Part 1 &middot; Clustering",
@@ -149,7 +150,7 @@ NOTEBOOK_POSTS = [
         "read_time": "14 min read",
     },
     {
-        "notebook": "clustering/notebooks/political_fragmentation_and_latent_groups.ipynb",
+        "notebook": "blog/notebooks/political_fragmentation_and_latent_groups.ipynb",
         "slug": "nmf_con.html",
         "tab_title": "nmf_con",
         "series_tag": "Part 2 &middot; Latent groups",
@@ -167,7 +168,7 @@ NOTEBOOK_POSTS = [
         "read_time": "24 min read",
     },
     {
-        "notebook": "notebooks/predicting_house_prices_and_london.ipynb",
+        "notebook": "blog/notebooks/predicting_house_prices_and_london.ipynb",
         "slug": "house_prices.html",
         "tab_title": "house_prices",
         "series_tag": "Research note",
@@ -182,7 +183,7 @@ NOTEBOOK_POSTS = [
         "read_time": "10 min read",
     },
     {
-        "notebook": "clustering/notebooks/the_prediction_pipeline.ipynb",
+        "notebook": "blog/notebooks/the_prediction_pipeline.ipynb",
         "slug": "prediction.html",
         "tab_title": "prediction",
         "series_tag": "Part 3 &middot; Prediction",
@@ -246,7 +247,7 @@ def notebook_to_body_html(nb):
 
 
 def load_notebook_post(post):
-    nb = json.load(open(ROOT / post["notebook"], encoding="utf-8"))
+    nb = json.load(open(SITE_DIR / post["notebook"], encoding="utf-8"))
     return {
         **post,
         "accent": ACCENTS[post["accent"]],
